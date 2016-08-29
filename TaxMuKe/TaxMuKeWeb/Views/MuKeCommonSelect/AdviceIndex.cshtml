@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "资讯";
+    ViewBag.SearchAction = "MuKeCommonSelect/Advice";
+    ViewBag.ItemsView = "_AdviceIndexItems";
+}
+
+<script type="text/javascript">
+   
+</script>
+
+@section SearchCondition
+{
+<input type="hidden" name="viewName" value="_AdviceIndexItems" />
+<input type="hidden" name="PageSize" value="10" />
+    <input type="hidden" name="ControlID" id="ControlID" value='@Request.QueryString["ControlID"]'/>
+
+    <tr>
+
+        <th><label>资讯标题</label></th>
+        <td><input type="text" name="Title" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+    </tr>
+}
+
+

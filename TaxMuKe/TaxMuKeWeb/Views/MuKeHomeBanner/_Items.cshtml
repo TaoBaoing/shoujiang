@@ -1,0 +1,53 @@
+﻿@model IPagedList<MuKeHomeBanner>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+<script language="javascript" type="text/javascript">
+    function cursor(imgUrl) {
+        var id = document.getElementById(imgUrl);
+        id.style.display = "block";
+        id.style.position = "absolute";
+        id.style.left = event.clientX + "px";
+        id.style.top = event.clientY + "px";
+    }
+
+    function hidecursor(imgUrl) {
+        var id = document.getElementById(imgUrl);
+        id.style.display = "none";
+    }
+</script>
+
+@section Head
+{
+    <th>ID</th>
+    <th>名称</th>
+    <th>图片地址</th>
+    <th>链接类型</th>
+    <th>链接单号</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            @*            <td>@item.ImageUrl</td>*@
+            <td><div id="divImg" onmouseover="cursor('@item.ImageUrl');" onmouseout="hidecursor('@item.ImageUrl');" class="menu"><img style="height:150px;width:250px;display: none;" id="@item.ImageUrl" src="@item.ImageUrl" />@item.ImageUrl</div></td>
+            <td>@Html.EnumDescription(item.MuKeHomeBannerType)</td>
+            <td>@item.ObjectId</td>
+            <td>@Html.EnumDescription(item.Status)</td>
+            <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            <td class="w270 align-center">
+
+                <a class="edit" href="/MuKeHomeBanner/FormForUpdate?id=@item.Id">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('/MuKeHomeBanner/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+    }
+}

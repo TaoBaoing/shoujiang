@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "案例";
+    ViewBag.SearchAction = "MuKeCommonSelect/MuKeCase";
+    ViewBag.ItemsView = "_CaseIndexItems";
+}
+
+<script type="text/javascript">
+   
+</script>
+
+@section SearchCondition
+{
+<input type="hidden" name="viewName" value="_CaseIndexItems" />
+<input type="hidden" name="PageSize" value="10" />
+    <input type="hidden" name="ControlID" id="ControlID" value='@Request.QueryString["ControlID"]'/>
+
+    <tr>
+
+        <th><label>案例标题</label></th>
+        <td><input type="text" name="Title" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+    </tr>
+}
+
+

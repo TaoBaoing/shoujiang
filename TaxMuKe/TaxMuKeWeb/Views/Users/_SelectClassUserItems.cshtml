@@ -1,0 +1,80 @@
+﻿@model IPagedList<MuKeUsers>
+
+<form id="selectForm" action="/ExamManager/ArrangeUser/">
+    <input type="hidden" name="ClassId" value="@ViewBag.ClassId" />
+    <input type="hidden" name="ExamType" value="@ViewBag.ExamType" />
+    <input type="submit" onclick="return handleChecked()" class="btn-search tooltip" value="保存" />
+    <table class="table tb-type2">
+        <thead>
+            <tr class="space">
+                <th colspan="15" class="nobg">列表</th>
+            </tr>
+            <tr class="thead">
+                <th><input type="checkbox" id="ckall" name="ckall" onclick="checkAll()" /></th>
+                <th>ID</th>
+                <th>昵称</th>
+                <th>姓名</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody id="itemsContainer">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr class="hover">
+                    <td>
+                        <input type="checkbox" id="ckb@(i)" name="ckb(@i)]" />
+                    </td>
+                    <td>
+                        @Model[i].Id
+                        <input type="hidden" name="request[@i].PaperId" value="@ViewBag.PaperId" />
+                        <input type="hidden" name="request[@i].ExamId" value="@ViewBag.ExamId" />
+                        <input type="hidden" id="requestuser@(i)" name="request[@i].UserId" vl="@Model[i].Id" />
+                    </td>
+                    <td>@Model[i].LoginName</td>
+                    <td>@Model[i].Name</td>
+                    <td>@Html.EnumDescription(Model[i].Status)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="tfoot">
+                <td colspan="16">
+                    <div class="cpage">
+                        <span class="fl">共找到 @Model.TotalItemCount 条记录</span>
+                        <div id="pagerContainer" class="fr pagination" page_size="@Model.PageSize" total_count="@Model.TotalItemCount">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>
+<script type="text/javascript">
+
+    function checkAll() {
+        if ($("#ckall").prop("checked")) {
+            $("#itemsContainer").find(":checkbox").prop("checked", true);
+        }
+        else {
+            $("#itemsContainer").find(":checkbox").prop("checked", false);
+        }
+
+    }
+    function handleChecked() {
+
+        var count = 0;
+        $("#itemsContainer").find(":checkbox").each(function () {
+            if ($(this).prop("checked")) {
+                var user = $("#requestuser" + $(this).attr("id").replace("ckb", ""));
+                user.attr("value", user.attr("vl"));
+                count = count + 1;
+            }
+        })
+        if (count > 0) {
+            return true;
+        }
+        alert("您还没有选择用户!");
+        return false;
+    }
+</script>

@@ -1,0 +1,61 @@
+﻿@model MuKeAnswerQuestionTag
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "标签管理";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeAnswerQuestionTag/Index';";
+    ViewBag.EditAction = "/MuKeAnswerQuestionTag/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>标签名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name"  value="@Model.Name">
+        </td>
+        <td>*</td>
+    </tr>
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeAnswerQuestionTag/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

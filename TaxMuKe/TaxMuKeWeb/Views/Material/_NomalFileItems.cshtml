@@ -1,0 +1,47 @@
+﻿@model IPagedList<MuKeMaterial>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>上传时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.CreateTime.ToDateTime()</td>
+            <td class="w150 align-center">
+                <a class="edit" href="/Material/DownFile?fileName=@item.LinkUrl">下载</a> |
+                <a class="edit" href="javascript:showDataFormModalDialog('Material/FormForUpdate?id=@item.Id','修改')">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('Material/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+    }
+}
+<br />
+<br>
+<div id="theUploadDiv" style="display:none;">
+    <div id="uploader" class="wu-example">
+        <!--用来存放文件信息-->
+        <div id="thelist" class="uploader-list"></div>
+        <div class="btns">
+            <div id="picker" style="float:left; padding-right:20px;">选择文件</div>
+            <button id="ctlBtn" class="btn btn-default">开始上传</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+    p_listContainerId = "listTD";
+</script>

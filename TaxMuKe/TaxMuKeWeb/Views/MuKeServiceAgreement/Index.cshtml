@@ -1,0 +1,26 @@
+﻿@model BasicData.Domain.MuKeGlobalSet
+@{
+    ViewBag.Title = "服务协议";
+    Layout = null;
+}
+
+<h2>服务协议</h2>
+
+
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+<link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+<script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+<script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+<script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+<script src="~/Assets/Js/Core/SelectFile.js"></script>
+
+@using (Html.BeginForm("Save", "MuKeServiceAgreement", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Content)
+    <script type="text/plain" id="myEditor" style="width:800px;height:400px">
+        @Html.Raw(Html.MvcHtmlDecode(Model.Content))
+</script>
+
+    <div style="height: 20px"></div>
+    <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+}

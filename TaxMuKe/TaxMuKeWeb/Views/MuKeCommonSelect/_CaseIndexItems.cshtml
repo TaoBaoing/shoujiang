@@ -1,0 +1,54 @@
+﻿@model IPagedList<MuKeCase>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>案例标题</th>
+    <th>选择</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td class="w12">@item.Id</td>
+            <td class="w300">
+                @item.Title
+            </td>
+            <td class="w12">
+                <button onclick="selectFile('@item.Id')">选择</button>
+            </td>
+        </tr>
+    }
+}
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+
+    @*function selectFile(linkurl) {
+        var imgid = '@Request.QueryString["ControlID"]';
+        window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+        dialog.getCurrent().close().remove();
+    }*@
+
+    function selectFile(linkurl) {
+        if (window.frames['workspace'].selectFileCallback) {
+            window.frames['workspace'].selectFileCallback(linkurl);
+            window.frames['workspace'].selectFileCallback = null;
+        } else {
+            @*alert('@Request.QueryString["ControlID"]');*@
+           // debugger;
+//            var imgid = '@Request.QueryString["ControlID"]';
+
+            var imgid = document.getElementById("ControlID").value;
+            //alert(imgid);
+            window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+        }
+        dialog.getCurrent().close().remove();
+    }
+</script>

@@ -1,0 +1,57 @@
+﻿@model IPagedList<MuKeCourseCapterTestPagperManager>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+
+@section Head
+{
+    <th>ID</th>
+    <th>第几套题</th>
+    <th>状态</th>
+
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.TestId</td>
+            <td>@Html.EnumDescription(item.Status)</td>
+         
+            <td style="white-space:nowrap;" class="w150 align-center">
+         
+@*                <a class="edit" href="FormForUpdate?viewName=CourseForm&id=@item.Id">查看</a> |*@
+@*                <a class="edit" href="javascript:confirmDelete('Course/Remove','id=@item.Id',showSubmitResult)">删除</a>*@
+                   <a class="edit" href="/CourseCapterTestPagperManager/TestPagerManageView?manageId=@item.Id">查看</a> |
+                <a class="edit" href="/CourseCapterTestPagperManager/Remove?courseId=@item.CourseId&manageId=@item.Id">删除</a>
+            </td>
+        </tr>
+    }
+}
+@using (@Html.BeginForm("UploadTestPagper", "CourseCapterTestPagperManager", FormMethod.Post, htmlAttributes: new Dictionary<string, object>() { { "id", "uploadtestpagper" }, { "enctype", "multipart/form-data" } }))
+{
+    <input type="hidden" name="CourseId" value="@ViewBag.CourseId"/>
+    <input type="hidden" name="PageIndex" value="@ViewBag.PageIndex"/>
+    <input type="hidden" name="PageSize" value="@ViewBag.PageSize"/>
+
+    <input id="file1" name="file1" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/><input id="btnImport" type="button" onclick="btnImportClick()" value="导入试题"/>
+
+    <script type="text/javascript">
+        function btnImportClick() {
+            document.getElementById("uploadtestpagper").submit();
+        }
+    </script>
+     
+}
+
+<div style="margin-top: 20px">
+    <a  href="/CourseCapterTestPagperManager/DownLoadMuBan">下载试题模板</a>
+</div>
+
+
+
+

@@ -1,0 +1,23 @@
+﻿@model IPagedList<BasicData.Domain.Course.MuKeRecordCourse>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>课程名称</th>
+        <th>浏览时间</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>@item.Course.Title</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    }

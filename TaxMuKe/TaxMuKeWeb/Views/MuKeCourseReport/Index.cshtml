@@ -1,0 +1,29 @@
+﻿@model IPagedList<BasicUPMS.Models.ViewModels.MuKeRecordCourseReport>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "课程浏览报表";
+    }
+    @section SearchCondition
+    {
+
+        <tr>
+            <th><label></label></th>
+            <td><input type="hidden" name="Name" /></td>
+            <td>
+@*                <input type="submit" class="btn-search" value="查询"/>*@
+            </td>
+      
+          </tr>
+
+    }
+
+<div style="margin-top: 5px; margin-bottom: 10px;">
+    <input  type="button" onclick="exportexcel()" value="导出EXCEL" />
+    <script type="text/javascript">
+    function exportexcel() {
+        window.location.href = "/MuKeCourseReport/CreateExcel";
+    }
+    </script>
+</div>
+
+

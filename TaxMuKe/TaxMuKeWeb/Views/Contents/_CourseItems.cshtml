@@ -1,0 +1,46 @@
+﻿@model IPagedList<Contents>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>状态</th>
+    <th>推荐</th>
+    <th>星级</th>
+    <th>序号</th>
+    <th>创建时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@Html.EnumDescription(item.Status)</td>
+            <td>@Html.EnumDescription(item.RecommendStatus)</td>
+            <td>@item.Rating</td>
+            <td>@item.Sort</td>
+            <td class="align-center">@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            <td class="w150 align-center">
+                @if (ViewBag.ContentType == ContentTypes.News)
+                {
+                    <a class="edit" href="/Banner/Index?BannerType=News&ObjectId=@item.Id">轮播图|</a>
+                }
+                <a class="edit" href="FormForUpdate?viewName=@(ViewBag.ContentType+"Form")&id=@item.Id">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('Contents/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+    }
+}
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+    p_listContainerId = "listTD";
+</script>

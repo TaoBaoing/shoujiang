@@ -1,0 +1,23 @@
+﻿@model IPagedList<MuKeUsers>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "选择用户";
+    ViewBag.ItemsView = "_SelectItems";
+    ViewBag.SearchAction = "SelectForBatchAddToClass";
+}
+@section SearchCondition
+{
+    <tr>
+        <th>
+            <label>姓名</label>
+        </th>
+        <td>
+            <input type="text" name="Name" class="txt" />
+            <input type="hidden" name="ClassId" value="@ViewBag.ClassId" />
+        </td>
+        <td>
+            <input type="submit" class="btn-search tooltip" value="查询" />
+        </td>
+
+    </tr>
+}

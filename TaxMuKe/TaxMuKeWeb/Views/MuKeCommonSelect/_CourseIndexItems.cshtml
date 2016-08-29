@@ -1,0 +1,58 @@
+﻿@model IPagedList<MuKeCourse>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>课程名称</th>
+    <th>选择</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td class="w12">@item.Id</td>
+            <td class="w300">
+                @item.Title
+            </td>
+            <td class="w12">
+                <button onclick="selectFile('@item.Id','@item.Title')">选择</button>
+            </td>
+        </tr>
+    }
+}
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+
+    @*function selectFile(linkurl) {
+        var imgid = '@Request.QueryString["ControlID"]';
+        window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+        dialog.getCurrent().close().remove();
+    }*@
+
+    function selectFile(linkurl, displayvalue) {
+        if (window.frames['workspace'].selectFileCallback) {
+            window.frames['workspace'].selectFileCallback(linkurl);
+            window.frames['workspace'].selectFileCallback = null;
+        } else {
+            @*alert('@Request.QueryString["ControlID"]');*@
+             debugger;
+             var displayfield = document.getElementById("DisplayField").value;
+
+            var imgid = document.getElementById("ControlID").value;
+            //alert(imgid);
+            window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+            var dd = 3;
+            if (displayfield != null && displayfield != '' && displayfield != undefined) {
+                window.frames['workspace'].document.getElementById(displayfield).value = displayvalue;
+            }
+        }
+        dialog.getCurrent().close().remove();
+    }
+</script>

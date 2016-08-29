@@ -1,0 +1,32 @@
+﻿@model IPagedList<BasicData.Domain.Course.MuKeCourseSearchKeyWord>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>关键词</th>
+        <th>搜索次数</th>
+        <th>手动调节次数</th>
+        <th class="align-center">操作</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>@item.KeyWord</td>
+                <td>@item.SearchCount</td>
+                <td>@item.ManualCount</td>
+       
+            <td class="w270 align-center">
+
+                <a class="edit" href="/MuKeCourseSearchKeyWord/FormForUpdate?id=@item.Id">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('/MuKeCourseSearchKeyWord/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+        }
+    }

@@ -1,0 +1,43 @@
+﻿@model IPagedList<MuKeNotice>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>发送人</th>
+    <th>手机号码</th>
+    <th>创建时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            @if (item.SendToUser != null)
+            {
+                <td>@item.SendToUser.LoginName</td>
+                <td>@item.SendToUser.Phone</td>
+            }
+            else
+            {
+                <td>全部</td>
+                <td></td>
+            }
+
+@*            <td>@item.Content</td>*@
+@*            <td>@item.CreateUser.LoginName</td>*@
+            <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            <td class="w270 align-center">
+                <a class="edit" href="/MuKeManualNotice/FormForUpdate?id=@item.Id">查看</a> |
+                <a class="edit" href="javascript:confirmDelete('/MuKeManualNotice/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+    }
+}

@@ -1,0 +1,231 @@
+﻿@model VersionManage
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link href="~/Assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/Plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script src="~/Assets/Plugins/jquery/jquery.form.js"></script>
+    <script src="~/Assets/Js/Core/Tools.js"></script>
+    <script src="~/Assets/Js/Core/ToolsAdapterForCrossFrame.js"></script>
+    <script src="~/Assets/Plugins/jquery/json2.js"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="fixed-bar">
+            <div class="item-title"><span>首页>APP版本管理</span></div>
+        </div>
+        <div class="fixed-empty"></div>
+        <form id="frmAddFile" action="AddOrUpdate" method="post" enctype="multipart/form-data">
+            <div>
+                <input type="hidden" name="ApkUrl" id="ApkUrl" />
+                @if (Model == null)
+                {
+                    <table style="width:500px;" class="table tb-type2">
+                        <tr class="hover">
+                            <td style="width:200px;">安卓客户端版本：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="AndroidVersion" value="">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">安卓客户端版本名称：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="AndroidVersionName" value="">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">IPhone客户端版本：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="IosVersion" value="">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width: 200px;">IPhone客户端版本名称：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="IosVersionName" value="">
+                            </td>
+                            <td></td>
+                        </tr>
+               
+
+                        <tr class="hover">
+                            <td style="width:200px;">版本描述说明：</td>
+                            <td class="vatop rowform">
+                                <textarea name="UpdateInfo" onkeyup="autoAppendRowInTextarea(this)" rows="6" cols="3"></textarea>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width: 200px;">安卓新版客户端apk：</td>
+                            <td class="vatop rowform">
+                                <input type="file" name="file" id="fileAvatar" value="" style="width: 90%;">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">苹果新版客户端ipa：</td>
+                            <td class="vatop rowform">
+                                <input type="file" name="fileIpa" id="fileAvatarIpa" value="@Model.IpaUrl" style="width: 90%;">
+                                <input id="txtIpa" class="txt" type="text" onclick='SetFileAvatar()' value="@Model.IpaUrl">
+                            </td>
+                            <td></td>
+                        </tr>
+@*                        <tr class="hover">*@
+@*                            <td style="width:200px;">安卓文件地址：</td>*@
+@*                            <td class="vatop rowform">*@
+@*                                <input type="text" class="txt" name="AndroidUpdateUrl" value="">*@
+@*                            </td>*@
+@*                            <td></td>*@
+@*                        </tr>*@
+@*                        <tr class="hover">*@
+@*                            <td style="width: 200px;">IPhone文件地址：</td>*@
+@*                            <td class="vatop rowform">*@
+@*                                <input type="text" class="txt" name="IosUpdateUrl" value="">*@
+@*                            </td>*@
+@*                            <td></td>*@
+@*                        </tr>*@
+                        <tr class="hover">
+                            <td style="width:200px;">更新选项：</td>
+                            <td class="vatop rowform">
+                                <ul>
+                                    @foreach (var item in Html.SelectListItems(Model.UpdaeType, false))
+                {
+                                        <li>
+                                            <label><input type="radio" name="UpdaeType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                                        </li>
+                                    }
+                                </ul>
+@*                                <input type="text" class="txt" name="IosUpdateUrl" value="">*@
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr><td colspan="3"><hr /></td></tr>
+                        <tr class="hover">
+                            <td colspan="3"><input type="submit" class="btn" value="更新a" /></td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table class="table tb-type2">
+                        <tr class="hover">
+                            <td style="width:200px;">安卓客户端版本：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="AndroidVersion" value="@Model.AndroidVersion"><input id="id" name="id" type="hidden" value="@Model.Id" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">安卓客户端版本名称：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="AndroidVersionName" value="@Model.AndroidVersionName">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">IPhone客户端版本：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="IosVersion" value="@Model.IosVersion">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width: 200px;">IPhone客户端版本名称：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="IosVersionName" value="@Model.IosVersionName">
+                            </td>
+                            <td></td>
+                        </tr>
+
+        
+
+
+                        <tr class="hover">
+                            <td style="width:200px;">版本描述说明：</td>
+                            <td class="vatop rowform">
+                                <textarea name="UpdateInfo" onkeyup="autoAppendRowInTextarea(this)" rows="6" cols="3" >@Model.UpdateInfo</textarea>
+
+@*                                <input type="text" onkeyup="autoAppendRowInTextarea(this)" rows="5" class="txt" name="UpdateInfo" value="">*@
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width: 200px;">安卓新版客户端apk：</td>
+                            <td class="vatop rowform">
+                                <input type="file" name="fileApk" id="fileAvatarApk" value="@Model.ApkUrl" style="width: 90%;">
+                                <input id="txtApk" class="txt" type="text" onclick='SetFileAvatar()' value="@Model.ApkUrl">
+                            </td>
+                            <td></td>
+                        </tr>
+@*                         <tr class="hover">*@
+@*                            <td style="width:200px;">苹果新版客户端ipa：</td>*@
+@*                            <td class="vatop rowform">*@
+@*                                <input type="file" name="fileIpa" id="fileAvatarIpa" value="@Model.IpaUrl" style="width: 90%;">*@
+@*                                <input id="txtIpa" class="txt" type="text" onclick='SetFileAvatar()' value="@Model.IpaUrl">*@
+@*                            </td>*@
+@*                            <td></td>*@
+@*                        </tr>*@
+@*                        <tr class="hover">*@
+@*                            <td style="width:200px;">安卓文件地址：</td>*@
+@*                            <td class="vatop rowform">*@
+@*                                <input type="text" class="txt" name="AndroidUpdateUrl" value="@Model.AndroidUpdateUrl">*@
+@*                            </td>*@
+@*                            <td></td>*@
+@*                        </tr>*@
+                        <tr class="hover">
+                            <td style="width: 200px;">IPhone文件地址：</td>
+                            <td class="vatop rowform">
+                                <input type="text" class="txt" name="IosUpdateUrl" value="@Model.IosUpdateUrl">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="hover">
+                            <td style="width:200px;">更新选项：</td>
+                            <td class="vatop rowform">
+                                <ul>
+                                    @foreach (var item in Html.SelectListItems(Model.UpdaeType, false))
+                {
+                                        <li>
+                                            <label><input type="radio" name="UpdaeType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                                        </li>
+                                    }
+                                </ul>
+                                @*                                <input type="text" class="txt" name="IosUpdateUrl" value="">*@
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr><td colspan="3"><hr /></td></tr>
+                        <tr class="hover">
+                            <td colspan="3"><input type="submit" class="btn" value="保存" /></td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+    function autoAppendRowInTextarea(obj, e) {
+        ////富文本框自动增加行
+        var ev = e || event;
+        if (ev.keyCode == 13) {
+            obj.rows += 1;
+        }
+    }
+
+    // 触发事件
+    $("#fileAvatar").click(function () {
+        // 显示
+        $("#txtApk").css("display", "none");
+    });
+</script>

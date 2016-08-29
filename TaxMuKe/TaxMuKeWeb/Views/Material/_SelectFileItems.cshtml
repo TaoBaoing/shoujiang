@@ -1,0 +1,82 @@
+﻿@using ThirdApi.qiniu.api
+@model IPagedList<MuKeMaterial>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+<script language="javascript" type="text/javascript">
+    function cursor(imgUrl) {
+        var id = document.getElementById(imgUrl);
+        id.style.display = "block";
+        id.style.position = "absolute";
+        id.style.left = event.clientX - 280 + "px";
+        id.style.top = event.clientY - 65 + "px";
+    }
+
+    function hidecursor(imgUrl) {
+        var id = document.getElementById(imgUrl);
+        id.style.display = "none";
+    }
+</script>
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>选择</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td class="w12">@item.Id</td>
+            <td class="w300">
+                @if ((MaterialTypes) ViewBag.MaterialType == MaterialTypes.Images)
+                {
+                    <div id="divImg" onmouseover="cursor('@item.LinkUrl');" onmouseout="hidecursor('@item.LinkUrl');" class="menu"><img style="height: 150px; width: 250px; display: none;" id="@item.LinkUrl" src="@QiNiuApi.GetQiNiuUrlByKey(@item.LinkUrl) "/>@item.Name</div>
+                }
+                else
+                {
+                    @item.Name
+                }
+
+
+            </td>
+            <td class="w12">
+                <button onclick="selectFile('@item.LinkUrl','@item.RealLinkUrl')">选择</button>
+            </td>
+        </tr>
+    }
+}
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+
+    @*function selectFile(linkurl) {
+        var imgid = '@Request.QueryString["ControlID"]';
+        window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+        dialog.getCurrent().close().remove();
+    }*@
+
+    function selectFile(linkurl,imgdisplayurl) {
+        if (window.frames['workspace'].selectFileCallback) {
+            window.frames['workspace'].selectFileCallback(linkurl);
+            window.frames['workspace'].selectFileCallback = null;
+        }
+        else {
+            @*alert('@Request.QueryString["ControlID"]');
+            var imgid = '@Request.QueryString["ControlID"]';*@
+            
+            var imgdisplay = '@Request.QueryString["ImgDisplay"]'; 
+            var imgid = document.getElementById("ControlID").value;
+            //alert(imgid);
+            window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+            if (imgdisplay != null && imgdisplay != '' && imgdisplay!=undefined)
+            {
+                window.frames['workspace'].document.getElementById(imgdisplay).src= imgdisplayurl;
+            }
+        }
+        dialog.getCurrent().close().remove();
+    }
+</script>

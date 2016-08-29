@@ -1,0 +1,42 @@
+﻿@model IPagedList<MuKeAnswerQuestion>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>回答用户</th>
+        <th>是否最佳</th>
+        <th>点赞数量</th>
+        <th>回答描述</th>
+        <th>回答时间</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>
+                    @if (item.User != null)
+                    {
+                        @item.User.LoginName
+                    }
+                </td>
+                @if (item.IsBestAnswer > 0)
+                {
+                    <td>是</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+               <td>@item.ZanCount</td>
+                <td>@item.AnswerDesc</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    }

@@ -1,0 +1,107 @@
+﻿@model MaterialTypes
+
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><span>@Html.EnumDescription(Model) </span></div>
+    </div>
+    <div class="fixed-empty"></div>
+
+    <div id="conditionDiv">
+        <form type="hidden" id="searchForm" action="List?materialType=@Model">
+            <input type="hidden" id="taxonomy" name="taxonomy" value="0" />
+        </form>
+    </div>
+    <div class="treeDiv" style="float:left; padding-right:30px;"></div>
+    <div>
+        <label>类型</label>
+        <select id="myselect" name="TaxonomyId"></select>
+        &nbsp;&nbsp;&nbsp;<label id="lblName">标题</label>
+        <input name="Name" id="txtName" type="text" />
+        <input type="hidden" name="MaterialType" value="@Model" />
+        <button id="searchBtn" type="button" value="" onclick="GetList();">查询</button>
+        <button id="btnAdd" onclick="showArea()">添加视频</button>
+        <button id="btnUpload" style="display:none;" onclick="showUploadArea();">上传文件到此类</button>
+        <button id="btnBack" style="display:none;" onclick="javascript: location.href = '/Material/Index?materialType=@Model'">返回</button>
+
+    </div>
+    <div id="listTD" style="float:left; width:80%;">
+    </div>
+</div>
+@section Styles{
+    <link href="~/Assets/Plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+     <link href="~/Assets/Plugins/webuploader/webuploader.css" rel="stylesheet" />
+    <link href="~/Assets/Plugins/webuploader/style.css" rel="stylesheet" />
+}
+@section Scripts{
+<script src="http://qzonestyle.gtimg.cn/open/qcloud/js/vod/sdk/uploaderh5.js" charset="utf-8"></script>
+    <script src="~/Assets/Plugins/jstree/dist/jstree.min.js"></script>
+
+    <script src="~/Assets/Js/Core/TreeType.js"></script>
+
+    <script type="text/javascript">
+
+        // 绑定类型下拉列表
+        DropBind(@Html.Raw(Json.Encode(ViewBag.taxonomyTypes)), "myselect", 0);
+
+        function showUploadArea() {
+            if ($("#myselect").val() === '0') {
+                alert('必须选择分类');
+                return;
+            }
+
+          //  var formData = $.parseJSON('{"taxonomy":' + $("#myselect").val() + '}');
+            //InitWebUploader("FileUpload", formData);
+//            accountDone('picker');
+//
+//
+//            //事件绑定
+//            $('#ctlBtn').on('click', function () {
+//                //api 上传
+//                alert('ss');
+//                qcVideo.uploader.startUpload();
+//            });
+//
+//            $('#ctlCancleBtn').on('click', function () {
+//                //api 暂停上传
+//                qcVideo.uploader.stopUpload();
+//            });
+
+            $("#listTD").find("table").hide();
+            $("#theUploadDiv").show();
+            $("#uploadBtn").hide();
+        }
+
+        function GetList() {
+            //debugger;
+            // 按照标题/类型查询
+            var name = $("#txtName").val();
+            var obj = document.getElementById("myselect"); //定位id
+            var index = obj.selectedIndex; // 选中索引
+            var value = obj.options[index].value; // 选中值
+            $("#listTD").load("/Material/List?PageSize=@UPMSConfig.DefaultPageSize&PageIndex=1&MaterialType=@Model&Name=" + name + "&TaxonomyId=" + value);
+        }
+
+
+        function showArea() {
+
+            $("#listTD").find("table").hide();
+            $("#btnBack").show();
+            $("#btnUpload").show();
+            // 隐藏不必要的
+            $("#lblName").hide();
+            $("#txtName").hide();
+            $("#searchBtn").hide();
+            $("#btnAdd").hide();
+        }
+
+        //初始化
+        $(function() {
+            //loadTree(0);
+            $("#listTD").load("/Material/List?PageSize=@UPMSConfig.DefaultPageSize&PageIndex=1&MaterialType=@Model&TaxonomyId=0");
+            $("#uploadBtn").show();
+
+        })
+
+    </script>
+
+}

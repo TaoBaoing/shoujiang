@@ -1,0 +1,45 @@
+﻿
+<script src="~/Assets/Plugins/jquery/ajaxfileupload.js"></script>
+<script>
+    function uploadfile_addAtta() {
+        //上传附件 返回文件名称和路径
+        $.ajaxFileUpload(
+            {
+                url: '/File/UploadAPP',
+                secureuri: false,
+                fileElementId: 'fileAvatar',
+                dataType: 'json',
+                success: function (data) {
+                    var AttaName = data.name; //附件名称
+                    var AttaPath = data.filePath; //存放路径
+                    //$tr = $(obj).parent().parent();
+                    var html = '<tr class="data-attaname" data-attaname="' + AttaName + '" data-attapath="' + AttaPath + '">' +
+                        '</tr>';
+                    $("#tbUploadFileCommon").append(html);
+                },
+                error: function (data, status, e) {
+                    showErrorMsg();
+                }
+            }
+        );
+        return false;
+    }
+
+
+
+    // 获取文件名附件
+    function UploadFillGetAtta() {
+        ////获取上传的附件
+        var atta = new Array();
+        $("#tbUploadFileCommon .data-attaname").each(function () {
+            var filename = $(this).attr("data-attaname");
+            var filepath = $(this).attr("data-attapath");
+            atta.push({ FileName: filename, FilePath: filepath });
+        });
+        return atta;
+    }
+</script>
+<input type="file" name="file" id="fileAvatar" value="" class="full-width" style="width: 90%">
+<table id="tbUploadFileCommon" style="width: 50%;"></table>
+<img src='~/images/theme/icons/add.png' onclick="uploadfile_addAtta(this)" title="添加" />
+

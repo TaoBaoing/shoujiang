@@ -1,0 +1,19 @@
+﻿@model IPagedList<Contents>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = @Html.EnumDescription((ContentTypes)ViewBag.ContentType) + "列表";
+}
+@section SearchCondition
+{
+    <tr>
+        <th><label>状态</label></th>
+        <td>
+            @Html.DropDownList("Status", @Html.SelectListItems(MuKeEnabledStatus.None, true))
+        </td>
+        <th><label>名称</label></th>
+        <td><input type="text" name="Title" class="txt" /></td>
+        <td><input type="hidden" name="ContentType" value="@ViewBag.ContentType" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+        <td><a id="roleAdd" href="FormForAdd?viewName=@(ViewBag.ContentType)Form&ObjectId=@ViewBag.ObjectId">添加</a> </td>
+    </tr>
+}

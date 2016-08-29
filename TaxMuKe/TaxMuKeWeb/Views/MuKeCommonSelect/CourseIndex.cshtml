@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "课程";
+    ViewBag.SearchAction = "MuKeCommonSelect/Course";
+    ViewBag.ItemsView = "_CourseIndexItems";
+}
+
+<script type="text/javascript">
+   
+</script>
+
+@section SearchCondition
+{
+<input type="hidden" name="viewName" value="_CourseIndexItems" />
+<input type="hidden" name="PageSize" value="10" />
+    <input type="hidden" name="ControlID" id="ControlID" value='@Request.QueryString["ControlID"]'/>
+    <input type="hidden" name="DisplayField" id="DisplayField" value='@Request.QueryString["DisplayField"]'/>
+
+    <tr>
+
+        <th><label> 课程名称</label></th>
+        <td><input type="text" name="Title" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+    </tr>
+}
+
+

@@ -1,0 +1,57 @@
+﻿@model IPagedList<MuKeSubmitQuestion>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>用户名称</th>
+        <th>问题</th>
+        <th>问题描述</th>
+        <th>标签</th>
+        <th>状态</th>
+        <th>创建时间</th>
+        <th class="align-center">操作</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>
+                    @if (item.User != null)
+                    {
+                        @item.User.Name
+                    }
+                </td>
+
+
+                <td>@item.Title</td>
+                <td>@item.Content</td>
+                <td>
+                    @if (item.Tag != null)
+                    {
+                        @item.Tag.Name
+                    }
+                </td>
+                <td>@Html.EnumDescription(item.Status)</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="w270 align-center">
+
+                    @if (item.Status == MuKeEnabledStatus.Enabled)
+                    {
+                        <a class="edit" href="/MuKeAnswerQuestionList/UpdateSubmitQuestion?id=@item.Id"> 禁用</a>
+                    }
+                    else
+                    {
+                        <a class="edit" href="/MuKeAnswerQuestionList/UpdateSubmitQuestion?id=@item.Id"> 启用</a>
+                    }
+
+                    <a class="edit" href="/MuKeAnswerList/Index?id=@item.Id">| 查看回答</a>
+                </td>
+            </tr>
+        }
+    }

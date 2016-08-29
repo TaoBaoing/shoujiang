@@ -1,0 +1,19 @@
+﻿@model IPagedList<BasicData.Domain.Course.MuKeCourseTestRecord>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "课程考试情况";
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section SearchCondition
+{
+
+    <input type="hidden" name="CourseId" value="@ViewBag.CourseId"/>
+    <tr>
+        
+        <th><label>用户</label></th>
+        <td><input type="text" name="UserName" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+        
+    </tr>
+}

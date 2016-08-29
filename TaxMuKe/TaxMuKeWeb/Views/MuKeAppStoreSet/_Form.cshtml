@@ -1,0 +1,52 @@
+﻿@model AppStoreSet
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "苹果商店设置";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeAppStoreSet/Index';";
+    ViewBag.EditAction = "/MuKeAppStoreSet/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>版本名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="VersionName" maxlength="30" value="@Model.VersionName">
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>是否通过审核: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.PassedAppStore, false))
+                {
+                    <li>
+                        <label><input type="radio" name="PassedAppStore" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    
+    
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeCity/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+
+}

@@ -1,0 +1,36 @@
+﻿@model IPagedList<MuKeAdviceSignup>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>报名用户</th>
+        <th>手机号</th>
+        <th>公司</th>
+        <th>职务</th>
+        <th>报名时间</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Phone</td>
+                <td>@item.Company</td>
+                <td>@item.Job</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    }
+
+<input type="button" class="btn-search" onclick="exportexcel()" value="导出报名" />
+<script type="text/javascript">
+    function exportexcel() {
+        window.location.href = "/AdviceSignUp/CreateExcel?AdviceId=@ViewBag.AdviceId";
+    }
+</script>

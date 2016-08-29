@@ -1,0 +1,32 @@
+﻿@model IPagedList<BasicData.Domain.Course.MuKeCourseCapterComment>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>评论人</th>
+    <th>手机号码</th>
+    <th>评论内容</th>
+    <th>创建时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.User.LoginName</td>
+            <td>@item.User.Phone</td>
+            <td>@item.Comment</td>
+            <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            <td class="w270 align-center">
+             
+@*                <a class="edit" href="javascript:confirmDelete('/MuKeCourseComment/Remove','id=@item.Id',showSubmitResult)">删除</a>*@
+            </td>
+        </tr>
+    }
+}

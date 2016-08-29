@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Description>
+  <Common>
+    <Add Id="1" Message="Common 该团购不存在！"/>
+  </Common>
+
+  <Business Name="FulltextSearch">
+    <Add Id="1" Message="该团购不存在！"/>
+    <Add Id="2" Message="当前尚无任何团购！"/>
+    <Add Id="3" Message="团购订单{0}不能为null或空！"/>
+    <Add Id="4" Message="获取团购场次信息失败，请稍后再试！"/>
+  </Business>
+
+  <Business Name="User">
+    <Add Id="1" Message="该团购不存在！"/>
+    <Add Id="2" Message="当前尚无任何团购！"/>
+    <Add Id="3" Message="团购订单{0}不能为null或空！"/>
+    <Add Id="4" Message="获取团购场次信息失败，请稍后再试！"/>
+  </Business>
+</Description>

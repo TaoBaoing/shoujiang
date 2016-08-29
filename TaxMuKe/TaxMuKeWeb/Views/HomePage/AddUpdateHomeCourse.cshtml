@@ -1,0 +1,266 @@
+﻿@model BasicData.Domain.MuKeHomeCourseSet
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/Plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script src="~/Assets/Plugins/jquery/jquery.form.js"></script>
+    <script src="~/Assets/Js/Core/Tools.js"></script>
+    <script src="~/Assets/Js/Core/ToolsAdapterForCrossFrame.js"></script>
+    <script src="~/Assets/Plugins/jquery/json2.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AddUpdateHomeCourse", "HomePage", FormMethod.Post))
+        {
+            <input type="hidden" name="Id" value="@ViewBag.Id"/>
+           
+            <table style="width: 500px;" class="table tb-type2">
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页推荐课程1：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+
+                        @if (Model.HomeReCourse1Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse1Id" value="@Model.HomeReCourse1.Title">
+                            <input type="hidden" id="HomeReCourse1Id" name="HomeReCourse1Id" value="@Model.HomeReCourse1Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse1Id" value="">
+                            <input type="hidden" id="HomeReCourse1Id" name="HomeReCourse1Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeReCourse1Id&DisplayField=txtHomeReCourse1Id', '选择');">浏览…</button>
+
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页推荐课程2：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeReCourse2Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse2Id" value="@Model.HomeReCourse2.Title">
+                            <input type="hidden" id="HomeReCourse2Id" name="HomeReCourse2Id" value="@Model.HomeReCourse2Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse2Id" value="">
+                            <input type="hidden" id="HomeReCourse2Id" name="HomeReCourse2Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeReCourse2Id&DisplayField=txtHomeReCourse2Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页推荐课程3：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeReCourse3Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse3Id" value="@Model.HomeReCourse3.Title">
+                            <input type="hidden" id="HomeReCourse3Id" name="HomeReCourse3Id" value="@Model.HomeReCourse3Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse3Id" value="">
+                            <input type="hidden" id="HomeReCourse3Id" name="HomeReCourse3Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeReCourse3Id&DisplayField=txtHomeReCourse3Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页推荐课程4：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeReCourse4Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse4Id" value="@Model.HomeReCourse4.Title">
+                            <input type="hidden" id="HomeReCourse4Id" name="HomeReCourse4Id" value="@Model.HomeReCourse4Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeReCourse4Id" value="">
+                            <input type="hidden" id="HomeReCourse4Id" name="HomeReCourse4Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeReCourse4Id&DisplayField=txtHomeReCourse4Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <div style="margin-top: 20px"></div>
+
+            <table style="width: 500px;" class="table tb-type2">
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页热门课程1：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+
+                        @if (Model.HomeHotCourse1Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse1Id" value="@Model.HomeHotCourse1.Title">
+                            <input type="hidden" id="HomeHotCourse1Id" name="HomeHotCourse1Id" value="@Model.HomeHotCourse1Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse1Id" value="">
+                            <input type="hidden" id="HomeHotCourse1Id" name="HomeHotCourse1Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeHotCourse1Id&DisplayField=txtHomeHotCourse1Id', '选择');">浏览…</button>
+
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页热门课程2：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeHotCourse2Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse2Id" value="@Model.HomeHotCourse2.Title">
+                            <input type="hidden" id="HomeHotCourse2Id" name="HomeHotCourse2Id" value="@Model.HomeHotCourse2Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse2Id" value="">
+                            <input type="hidden" id="HomeHotCourse2Id" name="HomeHotCourse2Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeHotCourse2Id&DisplayField=txtHomeHotCourse2Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页热门课程3：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeHotCourse3Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse3Id" value="@Model.HomeHotCourse3.Title">
+                            <input type="hidden" id="HomeHotCourse3Id" name="HomeHotCourse3Id" value="@Model.HomeHotCourse3Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse3Id" value="">
+                            <input type="hidden" id="HomeHotCourse3Id" name="HomeHotCourse3Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeHotCourse3Id&DisplayField=txtHomeHotCourse3Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">首页热门课程4：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.HomeHotCourse4Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse4Id" value="@Model.HomeHotCourse4.Title">
+                            <input type="hidden" id="HomeHotCourse4Id" name="HomeHotCourse4Id" value="@Model.HomeHotCourse4Id"/>
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtHomeHotCourse4Id" value="">
+                            <input type="hidden" id="HomeHotCourse4Id" name="HomeHotCourse4Id" value=""/>
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=HomeHotCourse4Id&DisplayField=txtHomeHotCourse4Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <div style="margin-top: 20px"></div>
+
+            <table style="width: 500px;" class="table tb-type2">
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">个人中心课程1：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+
+                        @if (Model.PersonCourse1Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse1Id" value="@Model.PersonCourse1.Title">
+                            <input type="hidden" id="PersonCourse1Id" name="PersonCourse1Id" value="@Model.PersonCourse1Id" />
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse1Id" value="">
+                            <input type="hidden" id="PersonCourse1Id" name="PersonCourse1Id" value="" />
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=PersonCourse1Id&DisplayField=txtPersonCourse1Id', '选择');">浏览…</button>
+
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">个人中心课程2：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.PersonCourse2Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse2Id" value="@Model.PersonCourse2.Title">
+                            <input type="hidden" id="PersonCourse2Id" name="PersonCourse2Id" value="@Model.PersonCourse2Id" />
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse2Id" value="">
+                            <input type="hidden" id="PersonCourse2Id" name="PersonCourse2Id" value="" />
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=PersonCourse2Id&DisplayField=txtPersonCourse2Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">个人中心课程3：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.PersonCourse3Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse3Id" value="@Model.PersonCourse3.Title">
+                            <input type="hidden" id="PersonCourse3Id" name="PersonCourse3Id" value="@Model.PersonCourse3Id" />
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse3Id" value="">
+                            <input type="hidden" id="PersonCourse3Id" name="PersonCourse3Id" value="" />
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=PersonCourse3Id&DisplayField=txtPersonCourse3Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="hover">
+                    <td align="right" style="width: 100px;">个人中心课程4：</td>
+                    <td class="vatop rowform" style="width: 380px !important">
+                        @if (Model.PersonCourse4Id > 0)
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse4Id" value="@Model.PersonCourse4.Title">
+                            <input type="hidden" id="PersonCourse4Id" name="PersonCourse4Id" value="@Model.PersonCourse4Id" />
+                        }
+                        else
+                        {
+                            <input type="text" class="txt" id="txtPersonCourse4Id" value="">
+                            <input type="hidden" id="PersonCourse4Id" name="PersonCourse4Id" value="" />
+                        }
+                        <button type="button" onclick=" showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=PersonCourse4Id&DisplayField=txtPersonCourse4Id', '选择');">浏览…</button>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <input type="submit" value="保存"/>
+        }
+    </div>
+</body>
+</html>

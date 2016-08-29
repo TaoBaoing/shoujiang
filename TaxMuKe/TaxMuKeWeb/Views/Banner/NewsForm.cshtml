@@ -1,0 +1,68 @@
+﻿@model MuKeBanner
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "资讯>"+Model.ObjectId+">轮播图";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = 'Index?BannerType=News&ObjectId="+Model.ObjectId+"';";
+}
+@section Form
+{
+    <tr class="noborder">
+        <td><em>轮播图片:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl">
+            <button type="button" onclick="showDialog('/Material/Index?materialType=Images&viewName=SelectFiles', '选择')">浏览…</button>
+            <input type="hidden" name="ObjectId" value="@Model.ObjectId" />
+@*            <input type="hidden" name="BannerType" value="News" />*@
+        </td>
+        <td>*</td>
+    </tr>
+@*    <tr>*@
+@*        <td><em>链接地址:</em></td>*@
+@*        <td class="vatop rowform"><input type="text" class="txt" value="@Model.LinkUrl" name="LinkUrl"></td>*@
+@*        <td></td>*@
+@*    </tr>*@
+    <tr>
+        <td><em>序号:</em></td>
+        <td class="vatop rowform"><input type="text" class="txt" value="@Model.Sort" name="Sort"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="Index?BannerType=News&ObjectId=@Model.ObjectId" class="btn">返回</a>
+        </td>
+    </tr>
+
+<script type="text/javascript">
+
+    function showDialog(url, title) {
+
+        var buttons = [
+            {
+                value: '关闭'
+            }
+        ]
+
+        $.get(url, function (content) {
+            var d = parent.dialog({
+                title: title,
+                content: content,
+                button: buttons,
+                width: 800,
+                height: 500
+            });
+
+            d.showModal();
+        });
+    }
+
+
+</script>
+
+}
+
+

@@ -1,0 +1,101 @@
+﻿<script src="~/Scripts/ajaxfileupload.js"></script>
+<script src="~/Assets/Plugins/jquery/jquery-1.10.2.min.js"></script>
+
+<script>
+        function uploadfile_addAtta(obj) {
+            //上传附件 返回文件名称和路径
+            $.ajaxFileUpload(
+                {
+                    url: '/File/UploadPic',
+                    secureuri: false,
+                    fileElementId: 'fileAvatar',
+                    dataType: 'json',
+                    success: function (data, status) {
+                        if (data.result == "1") {
+                            var AttaName = data.oldName; //附件名称
+                            var AttaPath = data.path; //存放路径
+                            var AttaNewName = data.newName; //附件新名称
+                            //$tr = $(obj).parent().parent();
+                            var html = '<tr class="data-attaname" data-attaname="' + AttaName + '" data-attanewname="' + AttaNewName + '" data-attapath="' + AttaPath + '">' +
+                                '</tr>';
+                            $("#tbUploadFileCommon").append(html);
+                        } else {
+                            MessageBox.error(data.error);
+                        }
+                        //$("#btnAddFile").removeAttr("disabled");
+                    },
+                    error: function (data, status, e) {
+                        MessageBox.error(e);
+                    }
+                }
+            );
+            return false;
+        }
+
+        function uploadfile_delAtta(obj) {
+
+            var rowIndex = obj.parentElement.parentElement.rowIndex;
+            obj.parentElement.parentElement.parentElement.deleteRow(rowIndex);
+
+            //todo 后期考虑删除服务器上的资源
+        }
+
+        function UploadFillGetAtta() {
+            ////获取上传的附件
+            var atta = new Array();
+            $("#tbUploadFileCommon .data-attaname").each(function () {
+                var filename = $(this).attr("data-attaname");
+                var filepath = $(this).attr("data-attapath");
+                atta.push({ FileName: filename, FilePath: filepath });
+            });
+            return atta;
+        }
+
+
+        function setImagePreview() {
+            var docObj = document.getElementById("fileAvatar");
+            var imgObjPreview = document.getElementById("preview");
+            if (docObj.files && docObj.files[0]) {
+                //火狐下，直接设img属性
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '300px';
+                imgObjPreview.style.height = '170px';
+                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+
+            } else {
+                //IE下，使用滤镜
+                docObj.select();
+                var imgSrc = document.selection.createRange().text;
+                var localImagId = document.getElementById("localImag");
+                //必须设置初始大小
+                localImagId.style.width = "300px";
+                localImagId.style.height = "170px";
+                //图片异常的捕捉，防止用户修改后缀来伪造图片
+                try {
+                    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                } catch (e) {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                }
+                imgObjPreview.style.display = 'none';
+            }
+            return true;
+        }
+</script>
+<input type="file" name="file" id="fileAvatar" value="" class="full-width" style="width: 90%">
+<img id="imgDisplay" src='~/images/theme/icons/add.png' onclick="setImagePreview();uploadfile_addAtta(this);" title="添加" />
+<br />
+<table id="tbUploadFileCommon" style="width: 50%;"></table>
+<div id="localImag" style="float: left;">
+    <table>
+        <tr>
+            <td style="float: left;">
+                <img style="width: 300px;height: 170px;" id="preview" src="" />
+            </td>
+        </tr>
+    </table>
+</div>
+

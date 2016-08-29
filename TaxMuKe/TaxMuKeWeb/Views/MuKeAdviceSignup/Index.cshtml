@@ -1,0 +1,23 @@
+﻿@model IPagedList<MuKeAdviceSignup>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "资讯报名管理";
+    }
+    <script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#MuKeAdviceSignupExport").click(function () {
+                window.location.href = "/MuKeAdviceSignup/ExportExcel?name=" + $("#signupName").val();
+            })
+        })
+    </script>
+    @section SearchCondition
+{
+        <tr>
+            <th><label>报名用户</label></th>
+            <td><input type="text" name="Name" class="txt" id="signupName" /></td>
+            <td><input type="submit" class="btn-search" value="查询" /></td>
+            @*<td style="margin-left:50px"><a id="MuKeAdviceSignupExport" href="/MuKeAdviceSignup/ExportExcel/">导出Excel</a> </td>*@
+            <td><input type="button" class="btn-search" value="导出Excel" id="MuKeAdviceSignupExport"/></td>
+        </tr>
+    }

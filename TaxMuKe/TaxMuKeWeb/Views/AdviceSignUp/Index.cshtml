@@ -1,0 +1,13 @@
+﻿@model IPagedList<MuKeAdviceSignup>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        
+    }
+    @section SearchCondition
+{
+        <tr>
+            
+            <td><input type="hidden" name="AdviceId" value="@ViewBag.AdviceId" /></td>
+            
+        </tr>
+    }

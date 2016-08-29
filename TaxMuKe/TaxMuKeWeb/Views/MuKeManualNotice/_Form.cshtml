@@ -1,0 +1,86 @@
+﻿@model MuKeNotice
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "手动推送通知";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeManualNotice/Index';";
+    ViewBag.EditAction = "/MuKeManualNotice/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+@Html.HiddenFor(x => x.Content)
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Title" maxlength="30" value="@Model.Title"><span class="fontcolor">*</span>
+        </td>
+    </tr>
+
+<tr class="noborder">
+    <td><em>指定推送人:</em></td>
+    <td class="vatop rowform">
+        @*        @Html.DropDownListFor(x=>x.SendToUserId, (SelectList)ViewBag.SentUsers)*@
+        @Html.HiddenFor(x=>x.SendToUserId)
+        @if (Model.SendToUser != null)
+        {
+            <input type="text" class="txt"   id="SendToUserName" value="@Model.SendToUser.LoginName"/>
+        }
+        else
+        {
+            <input type="text" class="txt"   id="SendToUserName" value=""/>
+        }
+        <button type="button" onclick="showDialog('/MuKeCommonSelect/MuKeUser?viewName=UserIndex&DisplayId=SendToUserId&ControlID=SendToUserName', '选择')">浏览…</button>
+        
+    </td>
+</tr>
+
+    @*<tr class="noborder">*@
+@*    <td><em>内容:</em></td>*@
+@*<td class="vatop rowform">*@
+@*    @Html.TextAreaFor(x=>x.Content,10,5,new Dictionary<string, object>())*@
+@*   *@
+@*$1$            <input type="text" width="600" height="400" class="txt" name="Content" value="@Model.Content">#1#*@
+@*        <span class="fontcolor">*</span>*@
+@*</td>*@
+@*</tr>*@
+
+<tr>
+    @*        <td><em>内容: </em></td>*@
+    <td><em>内容: </em></td>
+    <td class="vatop rowform">
+        <script type="text/plain" id="myEditor" style="width: 800px; height: 260px">@Html.Raw(Html.MvcHtmlDecode(Model.Content))</script>
+    </td>
+<td></td>
+</tr>
+
+
+    <tr>
+        <td>
+            <br/>
+            @if ((bool)ViewBag.IsView)
+            {
+            }
+            else
+            {
+                <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+            }
+           
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeManualNotice/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+   <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+<script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+<script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+<script src="~/Assets/Js/Core/SelectFile.js"></script>
+@*    <link href="~/Assets/Plugins/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />*@
+@*    <script src="~/Assets/Plugins/My97DatePicker/WdatePicker.js"></script>*@
+}

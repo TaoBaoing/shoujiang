@@ -1,0 +1,50 @@
+﻿@model IPagedList<MuKeMaterial>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    MaterialTypes selected = (MaterialTypes)ViewBag.materialType;
+    ViewBag.Title = ((System.ComponentModel.DescriptionAttribute)selected.GetType().GetField(selected.ToString()).GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false).First()).Description;
+}
+@section SearchCondition
+{
+    <tr>
+        <th><label>类型</label></th>
+        <td>
+            <select id="myselect" name="TaxonomyId" onchange="change();"></select>
+        </td>
+        <th><label>名称</label></th>
+        <td>
+            <input type="text" name="Title" class="txt" />
+            <input type="hidden" name="viewName" value="" />
+            <input type="hidden" name="materialType" value="" />
+        </td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+        <td><a id="roleAdd" href="FormForAdd?taxonomyTypes=@(ViewBag.taxonomyTypes)&Teachers=@ViewBag.Teachers">添加</a> </td>
+    </tr>
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="~/Assets/Js/Core/TreeType.js"></script>
+<script type="text/javascript">
+    // 绑定类型下拉列表
+    DropBind(@Html.Raw(Json.Encode(ViewBag.taxonomyTypes)),"myselect",0);
+
+    function change() {
+        var obj = document.getElementById("myselect"); //定位id
+        var index = obj.selectedIndex; // 选中索引
+        var text = obj.options[index].text; // 选中文本
+        var value = obj.options[index].value; // 选中值
+    }
+
+    function showUploadArea() {
+        if ($("#myselect").val() === '0') {
+            alert('必须选择分类');
+            return;
+        }
+        var formData = $.parseJSON('{"taxonomy":' + $("#taxonomy").val() + '}');
+        InitWebUploader("FileUpload", formData);
+        $("#listTD").find("table").hide();
+        $("#theUploadDiv").show();
+        $("#uploadBtn").hide();
+
+    }
+
+</script>

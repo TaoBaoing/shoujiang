@@ -1,0 +1,60 @@
+﻿@model IPagedList<MuKeUsers>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>昵称</th>
+    <th>手机号码</th>
+    <th>选择</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td class="w12">@item.Id</td>
+            <td >
+                @item.LoginName
+            </td>
+             <td >
+                @item.Phone
+            </td>
+            <td class="w12" style="width: 80px !important">
+                <button onclick="selectFile('@item.Id','@item.LoginName')">选择</button>
+            </td>
+        </tr>
+    }
+}
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+
+    @*function selectFile(linkurl) {
+        var imgid = '@Request.QueryString["ControlID"]';
+        window.frames['workspace'].document.getElementById(imgid).value = linkurl;
+        dialog.getCurrent().close().remove();
+    }*@
+
+    function selectFile(hideid,displayname) {
+        if (window.frames['workspace'].selectFileCallback) {
+            window.frames['workspace'].selectFileCallback(hideid);
+            window.frames['workspace'].selectFileCallback = null;
+        } else {
+            @*alert('@Request.QueryString["ControlID"]');*@
+            // debugger;
+
+            var displayid = '@Request.QueryString["DisplayId"]';
+
+            var imgid = document.getElementById("ControlID").value;
+            //alert(imgid);
+            window.frames['workspace'].document.getElementById(displayid).value = hideid;
+            window.frames['workspace'].document.getElementById(imgid).value = displayname;
+        }
+        dialog.getCurrent().close().remove();
+    }
+</script>

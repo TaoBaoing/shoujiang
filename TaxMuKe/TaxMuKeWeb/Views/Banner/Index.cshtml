@@ -1,0 +1,14 @@
+﻿@model IPagedList<MuKeBanner>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = @Html.EnumDescription((MuKeBannerTypes)ViewBag.BannerType) + ">" + ((long)ViewBag.ObjectId == 0 ? "轮播图" : ViewBag.ObjectId + ">轮播图");
+
+}
+@section SearchCondition
+{
+    <tr>
+        <td>
+            <a id="roleAdd" href="FormForAdd?viewName=@(ViewBag.BannerType)Form&ObjectId=@ViewBag.ObjectId">添加</a>
+        </td>
+    </tr>
+}

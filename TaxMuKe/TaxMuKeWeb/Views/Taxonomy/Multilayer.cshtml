@@ -1,0 +1,181 @@
+﻿@{
+    TaxonomyTypes selected = (TaxonomyTypes)ViewBag.Taxonomys;
+    string taxonomys = ((System.ComponentModel.DescriptionAttribute)selected.GetType().GetField(selected.ToString()).GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false).First()).Description;
+}
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><span>@taxonomys</span></div>
+    </div>
+    <div class="fixed-empty"></div>
+    <table class="tb-type1 noborder search">
+        <tbody>
+            <tr>
+                <td>
+                    <div id="conditionDiv">
+                        <input id="openAll" class="btn-search" type="button" value="展开全部" />
+                        <input id="closeAll" class="btn-search" type="button" value="折叠全部" />
+                        <input id="btnInsertRoot" class="btn-search" type="button" value="添加根级" onclick="showDataFormModalDialog('Taxonomy/FormForAdd?TaxonomyType=@ViewBag.Taxonomys&Depth=1', '添加') " />
+                        <input type="text" id="txtSearch">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table tb-type2">
+        <tbody id="listContainer">
+            <tr>
+                <td style="border:none;">
+                    <div class="conditionList"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Styles{
+    <link href="~/Assets/Plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+    <style type="text/css">
+        /*加强一下disabled的样式*/
+        .jstree-default .jstree-disabled {
+            font-style: italic;
+            color: #A2B5CD;
+            text-decoration: line-through;
+        }
+
+        .fa {
+            font-size: 14px;
+        }
+    </style>
+}
+
+@section Scripts{
+
+    <script src="~/Assets/Plugins/jstree/dist/jstree.min.js"></script>
+    <script src="~/Assets/Plugins/jstree/dist/jstreegrid.js"></script>
+    <script type="text/javascript">
+        function loadTree(currentNodeId) {
+
+            $.getJSON("/Taxonomy/GetTreeData?currentNodeId=" + currentNodeId + "&TaxonomyType=@ViewBag.Taxonomys&r=" + Math.random(), function(data) {
+
+                //清空
+                $("div[class^='jstree-grid-wrapper']").remove();
+                $(".conditionList").html("<div id=\"container\"></div>");
+                $("#container").on('ready.jstree', function() {
+                    //$(".jstree-icon").each(function(){
+                    //    $(this).css("color",'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6));
+                    //})
+
+                }).on('open_node.jstree', function(node, status) {
+                    var nodes = status.node.children.slice(0);
+                    nodes.push(status.node.id);
+                    //$.each(nodes,function(index,value){
+                    //    $("li[id="+value+"] a .jstree-icon").each(function(){
+                    //        $(this).css("color",'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6));
+                    //    })
+                    //})
+                }).jstree(
+                {
+                    'core': {
+                        'data': data
+                    },
+                    "plugins": ["search", "grid"],
+                    'grid': {
+                        columns: [
+                            {
+                                header: "名称",
+                                width: 40,
+                                margin: 0
+                            },
+                            {
+                                width: 20,
+                                margin: 0,
+                                header: "序号",
+                                value: "sort"
+                            },
+                            {
+                                width: 20,
+                                margin: 0,
+                                header: "操作",
+                                value: function(node) {
+                                    var buttonsHtml = "";
+                                    var countDepth = @UPMSConfig.CountDepth;
+                                    buttonsHtml += "<a href=javascript:showDataFormModalDialog('Taxonomy/FormForUpdate?TaxonomyType=@ViewBag.Taxonomys&id={0}','编辑') title=\"编辑\"><i class=\"orange fa fa-edit\"/></a>".format(node.id);
+                                    buttonsHtml += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                    buttonsHtml += "<a href=javascript:showDataFormModalDialog('Taxonomy/FormForAdd?TaxonomyType=@ViewBag.Taxonomys&ParentId={0}&Depth={1}','添加') title=\"添加同级\"><i class=\"blue fa fa-plus\"/></a>".format(node.parent, node.depth);
+                                    if (node.depth < countDepth) {
+                                        buttonsHtml += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                        buttonsHtml += "<a href=javascript:showDataFormModalDialog('Taxonomy/FormForAdd?TaxonomyType=@ViewBag.Taxonomys&ParentId={0}&Depth={1}','添加') title=\"添加子级\"><i class=\"fa fa-plus-square-o\"/></a>".format(node.id, node.depth + 1);
+                                    }
+                                    //没有子节点才允许删除
+                                    if (node.is_parent == 0) {
+                                        buttonsHtml += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                        buttonsHtml += "<a href=javascript:removeNode({0},{1}) title=\"删除\"><i class=\"red fa fa-times\"/></a>".format(node.id, node.parent);
+                                    }
+                                    return buttonsHtml;
+                                }
+                            }
+                        ]
+                    }
+                });
+
+
+                //搜索
+                var to = false;
+                $('#txtSearch').keyup(function(e)  {
+                    if (to) {
+                        clearTimeout(to);
+                    }
+                    to = setTimeout(function() {
+                        $('#container').jstree(true).search($(e.target).val());
+                    }, 250);
+                });
+
+                $("#openAll").click(function() {
+                    $('#container').jstree().open_all();
+
+                });
+                $("#closeAll").click(function() {
+
+                    $('#container').jstree().close_all();
+                });
+
+            });
+        }
+
+        //初始化
+        $(function() {
+            //模拟C#的string.format
+            String.prototype.format = function(args) {
+                var result = this;
+                if (arguments.length > 0) {
+                    if (arguments.length == 1 && typeof (args) == "object") {
+                        for (var key in args) {
+                            if (args[key] != undefined) {
+                                var reg = new RegExp("({" + key + "})", "g");
+                                result = result.replace(reg, args[key]);
+                            }
+                        }
+                    } else {
+                        for (var i = 0; i < arguments.length; i++) {
+                            if (arguments[i] != undefined) {
+                                var reg = new RegExp("({)" + i + "(})", "g");
+                                result = result.replace(reg, arguments[i]);
+                            }
+                        }
+                    }
+                }
+                return result;
+            }
+            loadTree(0);
+        });
+
+
+        function removeNode(id, pid) {
+            confirmDelete("Taxonomy/Remove", "id=" + id, function(d) {
+                showSuccessMsg();
+                loadTree(pid);
+            });
+        }
+    </script>
+}

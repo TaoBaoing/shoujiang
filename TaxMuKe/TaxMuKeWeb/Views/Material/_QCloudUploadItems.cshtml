@@ -1,0 +1,192 @@
+﻿@model IPagedList<MuKeMaterial>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@*<script src="http://qzonestyle.gtimg.cn/open/qcloud/js/vod/sdk/uploaderh5.js" charset="utf-8"></script>*@
+@*<script src="/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>*@
+
+
+
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>上传时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.CreateTime.ToDateTime()</td>
+            <td class="w150 align-center">
+                <a class="edit" href="/Material/DownFile?fileName=@item.LinkUrl">下载</a> |
+                <a class="edit" href="javascript:showDataFormModalDialog('Material/FormForUpdate?id=@item.Id','修改')">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('Material/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+    }
+}
+<br />
+<br>
+<div id="theUploadDiv" style="display:none;">
+    <div id="uploader" class="wu-example">
+        <!--用来存放文件信息-->
+        <div id="thelist" class="uploader-list"></div>
+        <br/>
+        <div class="btns">
+            <div id="picker" style="float:left; padding-right:20px;" class="webuploader-container"><div class="webuploader-pick">选择文件</div></div>
+            <button id="ctlBtn" class="btn btn-default">开始上传</button>
+            <button id="ctlCancleBtn" class="btn btn-default">取消上传</button>
+        </div>
+    </div>
+</div>
+    
+
+<script src="~/Assets/Js/Core/PureJsPagination.js"></script>
+<script src="~/Assets/Js/Core/PureJsPaginationInitializer.js"></script>
+<script type="text/javascript">
+    p_listContainerId = "listTD";
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+            var Version = qcVideo.get('Version');
+            if (!qcVideo.uploader.supportBrowser()) {
+                if (Version.IS_MOBILE) {
+                    alert('当前浏览器不支持上传，请升级系统版本或者下载最新的chrome浏览器');
+                } else {
+                    alert('当前浏览器不支持上传，请升级浏览器或者下载最新的chrome浏览器');
+                }
+                return;
+            }
+
+            var accountDone = function (upBtnId) {
+                var $ = qcVideo.get('$')
+                   , ErrorCode = qcVideo.get('ErrorCode')
+                   , Log = qcVideo.get('Log')
+                   , JSON = qcVideo.get('JSON')
+                   , util = qcVideo.get('util')
+                   , Code = qcVideo.get('Code')
+                ;
+
+
+                    qcVideo.uploader.init({
+                        web_upload_url: 'http://vod.qcloud.com/v2/index.php',
+                        upBtnId: upBtnId, //上传按钮ID（任意页面元素ID）
+                        isTranscode: true,//是否转码  
+
+                        //secretId: '', // 云api secretId
+                        secretId: '@ViewBag.QCloudSecretId', // 云api secretId
+                    // secretKey: '',
+                    //secretKey: secretKey, //云api secretKey: <选填参数> （secretKey不能暴露给外部用户，建议只在内部系统使用该参数）
+                    getSignature: function (argStr, done) {
+                        //注意：出于安全考虑， 服务端接收argStr这个参数后，需要校验其中的Action参数是否为 "MultipartUploadVodFile",用来证明该参数标识上传请求
+                        $.ajax({
+                            'dataType': 'json',
+                            'url': '/Material/QCloudSignature?args=' + encodeURIComponent(argStr),
+                            'success': function (d) {
+                                done(d['result']);
+                            }
+                        });
+                    },
+
+                    after_sha_start_upload: false,//sha计算完成后，开始上传 (默认非立即上传)
+                    sha1js_path: 'http://video.qcloud.com/calculator_worker_sha1.js', //计算sha1的位置  ，
+                    disable_multi_selection: true, //禁用文件多选 ，默认不禁用
+
+                    transcodeNotifyUrl: '@ViewBag.transcodeNotifyUrl',
+                    //transcodeNotifyUrl: '/Material/QCloudTransCodeCallBack',//(转码成功后的回调地址)isTranscode==true,时开启； 回调url的返回数据格式参考  https://www.qcloud.com/doc/api/257/视频上传
+
+                    classId: null //视频分类的ID
+
+
+                }, {
+
+                    /**
+            * 更新文件状态和进度
+            * param args { id: 文件ID, size: 文件大小, name: 文件名称, status: 状态, percent: 进度,speed: 速度, errorCode: 错误码 }
+            */
+                    onFileUpdate: function (args) {
+                        //debugger;
+                        var thelist = $("#thelist");
+                        var finalFileId = '';
+
+                        if (args.code == Code.UPLOAD_DONE) {
+                           
+                            //完成的话记录到数据库中
+                            $.get("/Material/UploadSaveQCloud?fileName=" + args.name + "&serverFileId=" + args.serverFileId + "&taxonomy=" + $("#myselect").val(), function (data, status) {
+                                
+                                if (data['result'] !== 'ok') {
+                                    thelist.html(data['result']);
+                                }
+                            });
+                            finalFileId = '文件ID>>' + args.serverFileId
+                        }
+
+                        thelist.html(''
+                               // + 'argsid：' + args.id
+                                + '文件名：' + args.name
+                                + ' >> 大小：' + util.getHStorage(args.size)
+                                + ' >> 状态：' + util.getFileStatusName(args.status) + ''
+                                + (args.percent ? ' >> 进度：' + args.percent + '%' : '')
+                                + (args.speed ? ' >> 速度：' + args.speed + '' : '')
+//                                + '<span data-act="del" class="delete">删除</span>'
+                                //+ finalFileId
+                        );
+
+
+                        console.log(args);
+                    },
+                    /**
+                    * 文件状态发生变化
+                    * param info  { done: 完成数量 , fail: 失败数量 , sha: 计算SHA或者等待计算SHA中的数量 , wait: 等待上传数量 , uploading: 上传中的数量 }
+                    */
+                    onFileStatus: function (info) {
+                        console.log('各状态总数-->', JSON.stringify(info));
+                    },
+                    /**
+                    *  上传时错误文件过滤提示
+                    * param args {code:{-1: 文件类型异常,-2: 文件名异常} , message: 错误原因 ， solution: 解决方法 }
+                    */
+                    onFilterError: function (args) {
+                      
+                        $("#thelist").html('message:' + args.message + (args.solution ? (';solution==' + args.solution) : ''));
+                        console.log('message:' + args.message + (args.solution ? (';solution==' + args.solution) : ''));
+                    }
+                });
+
+            };
+
+
+            accountDone('picker');
+
+
+            //事件绑定
+            $('#ctlBtn').on('click', function () {
+                //api 上传
+                qcVideo.uploader.startUpload();
+            });
+
+            $('#ctlCancleBtn').on('click', function () {
+                //api 暂停上传
+                qcVideo.uploader.stopUpload();
+            });
+
+//            $('#re_upload').on('click', function () {
+//                //api 恢复上传（错误文件重新）
+//                qcVideo.uploader.reUpload();
+//            });
+
+
+
+        });
+
+</script>
+

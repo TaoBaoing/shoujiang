@@ -1,0 +1,44 @@
+﻿@model IPagedList<MuKeAdviceSignup>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>资讯单号</th>
+        <th>用户</th>
+        <th>报名用户</th>
+        <th>手机号</th>
+        <th>公司</th>
+        <th>职位</th>
+        <th>创建时间</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>@item.AdviceId</td>
+                <td>
+                        @if (item.User != null)
+                        {
+                            @item.User.Name
+                        }
+                    </td>
+               
+                <td>@item.Name</td>
+                <td>@item.Phone</td>
+                <td>@item.Company</td>
+                <td>@item.Job</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                @*<td class="w270 align-center">
+
+                        <a class="edit" href="/MuKeAdviceSignup/FormForUpdate?id=@item.Id">修改</a> |
+                        <a class="edit" href="javascript:confirmDelete('/MuKeAdviceSignup/Remove','id=@item.Id',showSubmitResult)">删除</a>
+                    </td>*@
+            </tr>
+        }
+    }

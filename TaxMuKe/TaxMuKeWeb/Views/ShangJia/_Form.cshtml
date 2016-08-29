@@ -1,0 +1,59 @@
+﻿@model BasicData.Domain.ShangJia
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "商家";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/ShangJia/Index';";
+    ViewBag.EditAction = "/ShangJia/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>商家名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@Model.Name">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>登录名:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="UserName" value="@Model.UserName">
+        </td>
+        <td></td>
+    </tr>
+     <tr class="noborder">
+        <td><em>登录密码:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="UserPwd" value="@Model.UserPwd">
+        </td>
+        <td></td>
+    </tr>
+
+<tr>
+    <td><em>LOGO:</em></td>
+    <td class="vatop rowform">
+        <input type="text" class="txt" id="ImageUrl" style="width: 200px !important;" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+        <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&ControlID=ImageUrl', '选择')">浏览…</button>
+    </td>
+    <td></td>
+</tr>
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/ShangJia/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    
+}

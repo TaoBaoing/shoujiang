@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "素材";
+    ViewBag.SearchAction = "Material/List?MaterialType";
+    ViewBag.ItemsView = "_SelectFileItems";
+}
+<script src="~/Assets/Js/Core/TreeType.js"></script>
+<script type="text/javascript">
+    DropBind(@Html.Raw(Json.Encode(ViewBag.taxonomyTypes)),"myselect",0);
+</script>
+
+@section SearchCondition
+{
+    <tr>
+        <th><label>类型</label></th>
+        <td>
+            <input type="hidden" name="MaterialType" value="@ViewBag.MaterialType" />
+            <input type="hidden" name="viewName" value="_SelectFileItems" />
+            <input type="hidden" name="PageSize" value="8" />
+            <input type="hidden" name="ControlID" id="ControlID" value='@Request.QueryString["ControlID"]' />
+            <select id="myselect" name="TaxonomyId" ></select>            
+        </td>
+        <th><label>名称</label></th>
+        <td><input type="text" name="Name" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+    </tr>
+}
+
+

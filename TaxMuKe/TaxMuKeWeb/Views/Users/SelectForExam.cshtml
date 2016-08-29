@@ -1,0 +1,26 @@
+﻿@model IPagedList<MuKeUsers>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "选择用户";
+    ViewBag.ItemsView = "_SelectClassUserItems";
+    ViewBag.SearchAction = "SelectForExam";
+}
+@section SearchCondition
+{
+    <tr>
+        <th>
+            <label>姓名</label>
+        </th>
+        <td>
+            <input type="text" name="Name" class="txt" />
+            <input type="hidden" name="ClassId" value="@ViewBag.ClassId" />
+            <input type="hidden" name="ExamId" value="@ViewBag.ExamId" />
+            <input type="hidden" name="PaperId" value="@ViewBag.PaperId" />
+            <input type="hidden" name="ExamType" value="@ViewBag.ExamType" />
+        </td>
+        <td>
+            <input type="submit" class="btn-search tooltip" value="查询" />
+        </td>
+
+    </tr>
+}

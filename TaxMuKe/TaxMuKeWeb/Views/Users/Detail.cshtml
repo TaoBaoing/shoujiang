@@ -1,0 +1,75 @@
+﻿@model MuKeUsers
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "个人信息";
+    ViewBag.OperateType = "Update";
+}
+@section Form
+{
+    @if (User.IsInRole(UPMSConfig.SystemRole.ToString()))
+    {
+        <tr class="noborder">
+            <td><em>登录名:</em></td>
+            <td class="vatop rowform">
+                @User.Identity.Name
+            </td>
+            <td></td>
+        </tr>
+    }
+    else
+    {
+        <tr class="noborder">
+            <td><em>昵称:</em></td>
+            <td class="vatop rowform">
+                @Model.LoginName
+            </td>
+            <td></td>
+        </tr>
+        @*<tr>
+                <td><em>姓名:</em></td>
+                <td class="vatop rowform">
+                    <input type="text" class="txt" name="RealName" value="@Model.Name">
+                </td>
+                <td> </td>
+            </tr>*@
+
+        <tr>
+            <td><em>手机:</em></td>
+            <td class="vatop rowform">
+                <input type="text" class="txt" name="Phone" value="@Model.Phone">
+            </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td><em>邮箱:</em></td>
+            <td class="vatop rowform">
+                <input type="text" class="txt" name="Email" value="@Model.Email">
+            </td>
+            <td> </td>
+        </tr>
+        @*<tr>
+                <td><em>单位:</em></td>
+                <td class="vatop rowform">
+                    <input type="text" class="txt" name="Company" value="@Model.Company">
+                </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td><em>职务:</em></td>
+                <td class="vatop rowform">
+                    <input type="text" class="txt" name="Job" value="@Model.Job">
+                </td>
+                <td> </td>
+            </tr>*@
+    }
+    @if (!User.IsInRole(UPMSConfig.SystemRole.ToString()))
+    {
+        <tr>
+            <td></td>
+            <td>
+                <br/>
+                <input type="submit" class="btn" value="保存" />
+            </td>
+        </tr>
+    }
+}

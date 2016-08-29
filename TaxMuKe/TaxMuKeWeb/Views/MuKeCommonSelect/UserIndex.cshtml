@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "用户";
+    ViewBag.SearchAction = "MuKeCommonSelect/MuKeUser";
+    ViewBag.ItemsView = "_UserIndexItems";
+}
+
+<script type="text/javascript">
+   
+</script>
+
+@section SearchCondition
+{
+<input type="hidden" name="viewName" value="_UserIndexItems" />
+<input type="hidden" name="PageSize" value="8" />
+    <input type="hidden" name="ControlID" id="ControlID" value='@Request.QueryString["ControlID"]'/>
+    <input type="hidden" name="DisplayId" id="DisplayId" value='@Request.QueryString["DisplayId"]'/>
+
+    <tr>
+
+        <th><label> 昵称</label></th>
+        <td><input type="text" name="UserName" class="txt"/></td>
+         <th><label> 手机</label></th>
+        <td><input type="text" name="Phone" class="txt" /></td>
+        <td><input type="submit" class="btn-search" value="查询" /></td>
+    </tr>
+}
+
+

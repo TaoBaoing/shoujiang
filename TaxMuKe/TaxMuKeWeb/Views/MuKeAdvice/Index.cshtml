@@ -1,0 +1,21 @@
+﻿@model IPagedList<MuKeAdvice>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "资讯管理";
+    }
+    @section SearchCondition
+{
+        <tr>
+            <th><label>状态</label></th>
+            <td>
+                @Html.DropDownList("Status", @Html.SelectListItems(MuKeEnabledStatus.None, true))
+            </td>
+            <th><label>名称</label></th>
+            <td><input type="text" name="Name" class="txt"/></td>
+            
+            <th><label>城市</label></th>
+            <td>@Html.DropDownList("CityId", (SelectList)ViewBag.Citys)</td>
+            <td><input type="submit" class="btn-search" value="查询" /></td>
+            <td><a id="MuKeAdviceAdd" href="/MuKeAdvice/FormForAdd/">添加</a> </td>
+        </tr>
+    }

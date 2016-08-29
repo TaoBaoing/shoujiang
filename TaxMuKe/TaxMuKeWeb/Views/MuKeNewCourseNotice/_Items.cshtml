@@ -1,0 +1,50 @@
+﻿@model IPagedList<MuKeCourse>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+
+@section Head
+{
+    <th>ID</th>
+    <th>标题</th>
+    <th>推送状态</th>
+    <th>状态</th>
+    <th>推荐</th>
+    <th>热门</th>
+@*    <th>类型</th>*@
+
+
+    <th>创建时间</th>
+    <th class="align-center">推送</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@Html.EnumDescription(item.MuKeCourseNewNoticeType)</td>
+            <td>@Html.EnumDescription(item.Status)</td>
+            <td>@Html.EnumDescription(item.RecommendStatus)</td>
+            <td>@Html.EnumDescription(item.HotStatus)</td>
+@*            <td>@Html.EnumDescription(item.CourseType)</td>*@
+
+         
+            <td class="align-center">@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            <td style="white-space:nowrap;" class="w150 align-center">
+              @if (item.MuKeCourseNewNoticeType != MuKeCourseNewNoticeType.AlreadyPush)
+              {
+                <a class="edit" href="/MuKeNewCourseNotice/PushNotice?courseId=@item.Id">推送</a>
+              }
+              else
+              {
+                <a class="edit" href="/MuKeNewCourseNotice/PushNotice?courseId=@item.Id">再次推送</a>
+              }
+               
+            </td>
+        </tr>
+    }
+}
+

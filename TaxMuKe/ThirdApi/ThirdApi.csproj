@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{399AF04E-ECDD-41E3-B88B-5ECAFD17B139}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThirdApi</RootNamespace>
+    <AssemblyName>ThirdApi</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="alipay.api\AlipayApi.cs" />
+    <Compile Include="alipay.api\Source\AlipayConfig.cs" />
+    <Compile Include="alipay.api\Source\AlipayCore.cs" />
+    <Compile Include="alipay.api\Source\AlipayNotify.cs" />
+    <Compile Include="alipay.api\Source\notify_url.cs" />
+    <Compile Include="alipay.api\Source\RSA.cs" />
+    <Compile Include="badword.api\BadWordApi.cs" />
+    <Compile Include="badword.api\BadWordFilter.cs" />
+    <Compile Include="cn.jpush.api\CnJpushApi.cs" />
+    <Compile Include="cn.jpush.api\Source\common\APIRequestException.cs" />
+    <Compile Include="cn.jpush.api\Source\common\AudienceConverter.cs" />
+    <Compile Include="cn.jpush.api\Source\common\BaseHttpClient.cs" />
+    <Compile Include="cn.jpush.api\Source\common\BaseResult.cs" />
+    <Compile Include="cn.jpush.api\Source\common\DeviceType.cs" />
+    <Compile Include="cn.jpush.api\Source\common\PlatformConverter.cs" />
+    <Compile Include="cn.jpush.api\Source\common\ResponseWrapper.cs" />
+    <Compile Include="cn.jpush.api\Source\common\resp\APIConnectionException.cs" />
+    <Compile Include="cn.jpush.api\Source\common\resp\BooleanResult.cs" />
+    <Compile Include="cn.jpush.api\Source\common\resp\DefaultResult.cs" />
+    <Compile Include="cn.jpush.api\Source\common\ServiceHelper.cs" />
+    <Compile Include="cn.jpush.api\Source\common\TimeUnit.cs" />
+    <Compile Include="cn.jpush.api\Source\device\AliasDeviceListResult.cs" />
+    <Compile Include="cn.jpush.api\Source\device\DeviceClient.cs" />
+    <Compile Include="cn.jpush.api\Source\device\TagAliasResult.cs" />
+    <Compile Include="cn.jpush.api\Source\device\TagListResult.cs" />
+    <Compile Include="cn.jpush.api\Source\JPushClient.cs" />
+    <Compile Include="cn.jpush.api\Source\push\audience\AudienceTarget.cs" />
+    <Compile Include="cn.jpush.api\Source\push\audience\AudienceType.cs" />
+    <Compile Include="cn.jpush.api\Source\push\MessageResult.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\Audience.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\Message.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\Notification.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\Options.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\Platform.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\PushPayload.cs" />
+    <Compile Include="cn.jpush.api\Source\push\mode\SmsMessage.cs" />
+    <Compile Include="cn.jpush.api\Source\push\notification\AndroidNotification.cs" />
+    <Compile Include="cn.jpush.api\Source\push\notification\IosNotification.cs" />
+    <Compile Include="cn.jpush.api\Source\push\notification\PlatformNotification.cs" />
+    <Compile Include="cn.jpush.api\Source\push\notification\WinphoneNotification.cs" />
+    <Compile Include="cn.jpush.api\Source\push\PushClient.cs" />
+    <Compile Include="cn.jpush.api\Source\report\MessagesResult.cs" />
+    <Compile Include="cn.jpush.api\Source\report\ReceivedResult.cs" />
+    <Compile Include="cn.jpush.api\Source\report\ReportClient.cs" />
+    <Compile Include="cn.jpush.api\Source\report\UsersResult.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\enabled\Enabled.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\name\Name.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\ScheduleClient.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\ScheduleListResult.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\SchedulePayload.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\trigger\Periodical.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\trigger\Single.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\trigger\Trigger.cs" />
+    <Compile Include="cn.jpush.api\Source\schedule\trigger\TriggerPayload.cs" />
+    <Compile Include="cn.jpush.api\Source\util\Base64.cs" />
+    <Compile Include="cn.jpush.api\Source\util\JsonTool.cs" />
+    <Compile Include="cn.jpush.api\Source\util\Md5.cs" />
+    <Compile Include="cn.jpush.api\Source\util\Preconditions.cs" />
+    <Compile Include="cn.jpush.api\Source\util\StringUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="qcloud.api\QCloudApi.cs" />
+    <Compile Include="qcloud.api\QCloudPlaySet.cs" />
+    <Compile Include="qcloud.api\Source\Center\QCloudAPIModuleCenter.cs" />
+    <Compile Include="qcloud.api\Source\Common\Request.cs" />
+    <Compile Include="qcloud.api\Source\Common\Sign.cs" />
+    <Compile Include="qcloud.api\Source\Module\Account.cs" />
+    <Compile Include="qcloud.api\Source\Module\Base.cs" />
+    <Compile Include="qcloud.api\Source\Module\Bill.cs" />
+    <Compile Include="qcloud.api\Source\Module\Cbs.cs" />
+    <Compile Include="qcloud.api\Source\Module\Cdb.cs" />
+    <Compile Include="qcloud.api\Source\Module\Cdn.cs" />
+    <Compile Include="qcloud.api\Source\Module\Cvm.cs" />
+    <Compile Include="qcloud.api\Source\Module\Eip.cs" />
+    <Compile Include="qcloud.api\Source\Module\Image.cs" />
+    <Compile Include="qcloud.api\Source\Module\Lb.cs" />
+    <Compile Include="qcloud.api\Source\Module\Live.cs" />
+    <Compile Include="qcloud.api\Source\Module\Market.cs" />
+    <Compile Include="qcloud.api\Source\Module\Monitor.cs" />
+    <Compile Include="qcloud.api\Source\Module\Scaling.cs" />
+    <Compile Include="qcloud.api\Source\Module\Sec.cs" />
+    <Compile Include="qcloud.api\Source\Module\Snapshot.cs" />
+    <Compile Include="qcloud.api\Source\Module\Trade.cs" />
+    <Compile Include="qcloud.api\Source\Module\VodApi.cs" />
+    <Compile Include="qcloud.api\Source\Module\Vod.cs" />
+    <Compile Include="qcloud.api\Source\Module\Vpc.cs" />
+    <Compile Include="qcloud.api\Source\Module\Wenzhi.cs" />
+    <Compile Include="qcloud.api\Source\Module\Yunsou.cs" />
+    <Compile Include="qiniu.api\QiNiuApi.cs" />
+    <Compile Include="qiniu.api\Source\Auth\digest\Mac.cs" />
+    <Compile Include="qiniu.api\Source\Auth\PutAuthClient.cs" />
+    <Compile Include="qiniu.api\Source\Auth\QiniuAuthClient.cs" />
+    <Compile Include="qiniu.api\Source\Conf\Config.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\Exif.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ExifRet.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\FileOpClient.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ImageInfo.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ImageInfoRet.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ImageMogrify.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ImageView.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\ImageWaterMarker.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\TextWaterMarker.cs" />
+    <Compile Include="qiniu.api\Source\FileOp\WaterMarker.cs" />
+    <Compile Include="qiniu.api\Source\IO\FileParameter.cs" />
+    <Compile Include="qiniu.api\Source\IO\IOClient.cs" />
+    <Compile Include="qiniu.api\Source\IO\MultiPart.cs" />
+    <Compile Include="qiniu.api\Source\IO\PutExtra.cs" />
+    <Compile Include="qiniu.api\Source\IO\PutRet.cs" />
+    <Compile Include="qiniu.api\Source\IO\Resumable\ResumablePut.cs" />
+    <Compile Include="qiniu.api\Source\IO\Resumable\ResumablePutExtra.cs" />
+    <Compile Include="qiniu.api\Source\IO\Resumable\ResumablePutRet.cs" />
+    <Compile Include="qiniu.api\Source\IO\Resumable\Settings.cs" />
+    <Compile Include="qiniu.api\Source\PFOP\Mkzip.cs" />
+    <Compile Include="qiniu.api\Source\PreFetch\PreFetchClient.cs" />
+    <Compile Include="qiniu.api\Source\RPC\CallRet.cs" />
+    <Compile Include="qiniu.api\Source\RPC\Client.cs" />
+    <Compile Include="qiniu.api\Source\RSF\DumpItem.cs" />
+    <Compile Include="qiniu.api\Source\RSF\RSFClient.cs" />
+    <Compile Include="qiniu.api\Source\RS\BatchRet.cs" />
+    <Compile Include="qiniu.api\Source\RS\Entry.cs" />
+    <Compile Include="qiniu.api\Source\RS\GetPolicy.cs" />
+    <Compile Include="qiniu.api\Source\RS\Pfop.cs" />
+    <Compile Include="qiniu.api\Source\RS\PutPolicy.cs" />
+    <Compile Include="qiniu.api\Source\RS\RSClient.cs" />
+    <Compile Include="qiniu.api\Source\RS\RSPath.cs" />
+    <Compile Include="qiniu.api\Source\Util\Base64UrlSafe.cs" />
+    <Compile Include="qiniu.api\Source\Util\CRC32.cs" />
+    <Compile Include="qiniu.api\Source\Util\IO.cs" />
+    <Compile Include="qiniu.api\Source\Util\QiniuJsonHelper.cs" />
+    <Compile Include="qiniu.api\Source\Util\StreamEx.cs" />
+    <Compile Include="qiniu.api\Source\Util\StringEx.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\AliyunResponse.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\DefaultAliyunClient.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\IAliyunClient.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\IAliyunRequest.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\IAliyunUploadRequest.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\Parser\AliyunJsonParser.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\Parser\AliyunJsonReader.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\Parser\AliyunXmlParser.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\Parser\IAliyunParser.cs" />
+    <Compile Include="topsdk.api\Source\Aliyun\Util\AliyunWebUtils.cs" />
+    <Compile Include="topsdk.api\Source\AutoRetryClusterTopClient.cs" />
+    <Compile Include="topsdk.api\Source\AutoRetryTopClient.cs" />
+    <Compile Include="topsdk.api\Source\BaseTopRequest.cs" />
+    <Compile Include="topsdk.api\Source\BatchTopClient.cs" />
+    <Compile Include="topsdk.api\Source\ClusterTopClient.cs" />
+    <Compile Include="topsdk.api\Source\Cluster\ClusterManager.cs" />
+    <Compile Include="topsdk.api\Source\Cluster\DnsConfig.cs" />
+    <Compile Include="topsdk.api\Source\Constants.cs" />
+    <Compile Include="topsdk.api\Source\DefaultTopClient.cs" />
+    <Compile Include="topsdk.api\Source\DefaultTopLogger.cs" />
+    <Compile Include="topsdk.api\Source\Domain\Area.cs" />
+    <Compile Include="topsdk.api\Source\Domain\BizResult.cs" />
+    <Compile Include="topsdk.api\Source\Domain\KfcSearchResult.cs" />
+    <Compile Include="topsdk.api\Source\Domain\Subtask.cs" />
+    <Compile Include="topsdk.api\Source\Domain\Task.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\dynamic.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\Formatter.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\Getters.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\JSON.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\JsonParser.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\JsonSerializer.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\Reflection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\FastJson\SafeDictionary.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\HTTP\HttpHeader.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\HTTP\HttpProtocolHandle.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\MessageHeader.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\ProtocolStreamHandle.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\TCP\TcpProtocolFlags.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\TCP\TcpProtocolHandle.cs" />
+    <Compile Include="topsdk.api\Source\Generated\Remoting\TCP\TcpTransportHeader.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Checksums\Adler32.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Checksums\CRC32.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Checksums\IChecksum.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Checksums\StrangeCRC.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\FileSystemScanner.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\INameTransform.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\IScanFilter.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\NameFilter.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\PathFilter.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\StreamUtils.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Core\WindowsPathUtils.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Encryption\PkzipClassic.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Encryption\ZipAESStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Encryption\ZipAESTransform.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\SharpZipBaseException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Deflater.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Inflater.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\FastZip.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\IEntryFactory.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\WindowsNameTransform.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipConstants.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipEntry.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipEntryFactory.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipExtraData.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipFile.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipHelperStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipInputStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipNameTransform.cs" />
+    <Compile Include="topsdk.api\Source\Generated\SharpZipLib\Zip\ZipOutputStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\ChannelClosedEventArg.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\ChannelContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\ChannelException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\ClientChannelSharedSelector.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\IChannelSender.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\IClientChannel.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\IClientChannelSelector.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\IServerChannelSender.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\ServerChannel.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\TCP\TcpServerChannel.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\TCP\TcpServerChannelSender.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\WebSocket\WebSocketClient.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\WebSocket\WebSocketClientChannel.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Channel\WebSocket\WebSocketClientHelper.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\AckMessageArgs.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\Endpoint.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\EndpointContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\EndpointHandler.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\EndpointProxy.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\Identity.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\Message.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\MessageIO.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\MessageType.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\SendCallback.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Endpoints\SimpleIdentity.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\LinkException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\ResetableTimer.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Text.cs" />
+    <Compile Include="topsdk.api\Source\Generated\TopLink\Util\GZIPHelper.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\ByteOrder.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\CloseEventArgs.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\ErrorEventArgs.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Ext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\CloseStatusCode.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\Fin.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\Mask.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\Opcode.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\PayloadData.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\Rsv.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Frame\WsFrame.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Handshake.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\MessageEventArgs.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\AuthenticationSchemes.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\AuthenticationSchemeSelector.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\ChunkedInputStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\ChunkStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\Cookie.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\CookieCollection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\CookieException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\EndPointListener.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\EndPointManager.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpConnection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListener.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerPrefixCollection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerRequest.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerResponse.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpListenerWebSocketContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpStatusCode.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpStreamAsyncResult.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpUtility.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\HttpVersion.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\ListenerAsyncResult.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\ListenerPrefix.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\RequestStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\ResponseStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\Security\SslStream.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\Sockets\TcpListenerWebSocketContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\WebHeaderCollection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Net\WebSocketContext.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\RequestHandshake.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\ResponseHandshake.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\HttpServer.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\IServiceHost.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\ResponseEventArgs.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\ServiceManager.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\SessionManager.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\WebSocketServer.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\WebSocketServerBase.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\WebSocketService.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\Server\WebSocketServiceHost.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\SynchronizedCollection.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\WebSocket.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\WsReceivedTooBigMessageException.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\WsState.cs" />
+    <Compile Include="topsdk.api\Source\Generated\WebSocket\WsStream.cs" />
+    <Compile Include="topsdk.api\Source\ITopClient.cs" />
+    <Compile Include="topsdk.api\Source\ITopLogger.cs" />
+    <Compile Include="topsdk.api\Source\ITopRequest.cs" />
+    <Compile Include="topsdk.api\Source\ITopUploadRequest.cs" />
+    <Compile Include="topsdk.api\Source\Parser\ITopParser.cs" />
+    <Compile Include="topsdk.api\Source\Parser\ITopReader.cs" />
+    <Compile Include="topsdk.api\Source\Parser\QimenXmlParser.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopAttribute.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopJsonParser.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopJsonReader.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopSimplifyJsonParser.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopSimplifyJsonReader.cs" />
+    <Compile Include="topsdk.api\Source\Parser\TopXmlParser.cs" />
+    <Compile Include="topsdk.api\Source\Qimen\DefaultQimenClient.cs" />
+    <Compile Include="topsdk.api\Source\Qimen\IQimenClient.cs" />
+    <Compile Include="topsdk.api\Source\Qimen\QimenRequest.cs" />
+    <Compile Include="topsdk.api\Source\Qimen\QimenResponse.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcFlowChargeProvinceRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcFlowChargeRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcFlowGradeRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcFlowQueryRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcSmsNumQueryRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcSmsNumSendRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcTtsNumSinglecallRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcVoiceNumDoublecallRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AlibabaAliqinFcVoiceNumSinglecallRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AppipGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\AreasGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\HttpdnsGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\KfcKeywordSearchRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TimeGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopatsResultGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopatsTaskDeleteRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopAuthTokenCreateRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopAuthTokenRefreshRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopIpoutGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Request\TopSecretGetRequest.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcFlowChargeProvinceResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcFlowChargeResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcFlowGradeResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcFlowQueryResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcSmsNumQueryResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcSmsNumSendResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcTtsNumSinglecallResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcVoiceNumDoublecallResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AlibabaAliqinFcVoiceNumSinglecallResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AppipGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\AreasGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\HttpdnsGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\KfcKeywordSearchResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TimeGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopatsResultGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopatsTaskDeleteResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopAuthTokenCreateResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopAuthTokenRefreshResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopIpoutGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Response\TopSecretGetResponse.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\Message.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\MessageArgs.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\MessageFields.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\MessageKind.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\TmcClient.cs" />
+    <Compile Include="topsdk.api\Source\Tmc\TmcIdentity.cs" />
+    <Compile Include="topsdk.api\Source\TopBatchRequest.cs" />
+    <Compile Include="topsdk.api\Source\TopBatchResponse.cs" />
+    <Compile Include="topsdk.api\Source\TopDictionary.cs" />
+    <Compile Include="topsdk.api\Source\TopException.cs" />
+    <Compile Include="topsdk.api\Source\TopObject.cs" />
+    <Compile Include="topsdk.api\Source\TopResponse.cs" />
+    <Compile Include="topsdk.api\Source\Util\AtsUtils.cs" />
+    <Compile Include="topsdk.api\Source\Util\CountDownLatch.cs" />
+    <Compile Include="topsdk.api\Source\Util\FileItem.cs" />
+    <Compile Include="topsdk.api\Source\Util\RequestValidator.cs" />
+    <Compile Include="topsdk.api\Source\Util\SpiUtils.cs" />
+    <Compile Include="topsdk.api\Source\Util\StringUtil.cs" />
+    <Compile Include="topsdk.api\Source\Util\TopUtils.cs" />
+    <Compile Include="topsdk.api\Source\Util\WebUtils.cs" />
+    <Compile Include="topsdk.api\Source\Util\XmlWriter.cs" />
+    <Compile Include="topsdk.api\TopSdkApi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

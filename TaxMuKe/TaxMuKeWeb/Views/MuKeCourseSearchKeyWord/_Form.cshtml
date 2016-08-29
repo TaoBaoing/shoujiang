@@ -1,0 +1,51 @@
+﻿@model BasicData.Domain.Course.MuKeCourseSearchKeyWord
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "脏词";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeCourseSearchKeyWord/Index';";
+    ViewBag.EditAction = "/MuKeCourseSearchKeyWord/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>关键词:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="KeyWord" value="@Model.KeyWord">
+        </td>
+        <td></td>
+    </tr>
+
+    <tr class="noborder">
+        <td><em>搜索次数:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="SearchCount" value="@Model.SearchCount">
+        </td>
+        <td></td>
+    </tr>
+        <tr class="noborder">
+        <td><em>手动调节次数:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="ManualCount" value="@Model.ManualCount">
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeCourseSearchKeyWord/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    
+}

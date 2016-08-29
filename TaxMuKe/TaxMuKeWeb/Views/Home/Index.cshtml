@@ -1,0 +1,134 @@
+﻿@model List<TreeNodeViewModel>
+@{
+    Layout = null;
+    string actived = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>首页</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon" 　 />
+	<!--[if lt IE 9]>
+<script type="text/javascript" src="~/Assets/Plugins/html5shiv/html5shiv.js"></script>
+<![endif]-->
+    <link href="~/Assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/Plugins/artDialog/css/ui-dialog.css" rel="stylesheet" />
+    <link href="~/Assets/Plugins/pace/themes/blue/pace-theme-center-simple.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <div class="layout-header">
+            <!-- Title/Logo - can use text instead of image -->
+            <div class="fl logo">
+                @*<img title="管理后台" alt="logo" height="68" src="/Assets/images/admin-logo.png">*@
+                <!--<img title="管理后台" alt="logo" src="./Assets/images/logo.png">-->
+                
+                <h1 style="color:white;padding-top:10px;padding-left:20px"><a style="color:white" href="/"></a>  </h1>
+            </div>
+
+            <!-- Main navigation -->
+            <nav id="nav" class="fl main-nav">
+                <ul class="navlist">
+
+
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            actived = "class=\"actived tnc-admin-menufirst\"";
+                        }
+                        else
+                        {
+                            actived = "";
+                        }
+                        <li id="nav_@i" @Html.Raw(actived)><a class="link" hr="@Model[i].data.url" href="JavaScript:"><span>@Model[i].text</span></a></li>
+                    }
+                </ul>
+            </nav>
+
+            <!-- Top navigation -->
+            <div id="topnav" class="top-nav">
+                @*<ul>
+                    <li class="adminid">欢迎您&nbsp;:&nbsp;<strong></strong></li>
+                    <li class="adminid">您登录的身份是&nbsp;:&nbsp;<strong>@ViewBag.RoleName</strong></li>
+                    <li><a href="/Home/Logout">安全退出</a></li>
+                </ul>*@
+
+
+                <div class="tnc-top-menubar">
+                    <ul class="tnc-user-menu" id="spb-user-menu">
+                        <li class="tn-user-name">
+                            <a title="选项" href="javascript:" class="tn-drop-link">选项<span class="tn-icon tn-smallicon-triangle-down"></span></a>
+                            <div class="tn-sub-container tn-single" style="left: 0px; top: 25px; z-index: 1000;">
+                                <ul class="tn-widget-content tn-border-gray spb-set-menu tn-sub" style="display: none;">
+                                    <li><a title="首页" target="_blank" href="/">首页</a></li>
+                                    <li><a title="登出" href="/Home/Logout">登出</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    @*<div class="tnc-var-menu">
+                        <div class="tnc-common">
+                            <a plugin="dialog" href="javascript:">
+                                <span class="tn-icon tn-icon-chart">
+                                </span>功能地图
+                            </a>
+                        </div>
+                    </div>*@
+                </div>
+
+            </div>
+            <!-- End of Top navigation -->
+            
+        </div>
+    </header>
+
+    <aside class="menuside">
+        <div id="mainMenu" class="main-menu">
+            <h3><span>我的工作台</span></h3>
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                if (i == 0)
+                {
+                    actived = "class=\"sortlist\"";
+                }
+                else
+                {
+                    actived = "class=\"hide sortlist\"";
+                }
+                <div id="sort_@i" @Html.Raw(actived)>
+                    @foreach (var second in Model[i].children)
+                    {
+                        <dl>
+                            <dt>@second.text</dt>
+                            <dd>
+                                <ul>
+                                    @foreach (var third in second.children)
+                                    {
+                                        <li vl="menu_@third.id"><a hr="@third.data.url" href="JavaScript:">@third.text<em></em></a></li>
+                                    }
+                                </ul>
+                            </dd>
+                        </dl>
+                    }
+                </div>
+                <div class="clear"></div>
+            }
+        </div>
+    </aside>
+
+    <section class="main">
+        <iframe src="Home/Main" id="workspace" name="workspace" style="overflow: visible;" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
+    </section>
+</body>
+</html>
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="~/Assets/Js/Core/Menu.js"></script>
+<script src="~/Assets/Plugins/artDialog/dist/dialog-plus-min.js"></script>
+<script src="~/Assets/Plugins/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Assets/Js/Core/Tools.js"></script>
+

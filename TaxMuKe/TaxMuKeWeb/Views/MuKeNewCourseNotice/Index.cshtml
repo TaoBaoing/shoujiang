@@ -1,0 +1,37 @@
+﻿@model IPagedList<MuKeCourse>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "课程列表";
+    }
+    <script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+    <script src="~/Assets/Js/Core/TreeType.js"></script>
+    <script type="text/javascript">
+    DropBind(@Html.Raw(Json.Encode(@ViewBag.taxonomyTypes)),"myselect",0);
+    </script>
+    @section SearchCondition
+{
+        <tr>
+            <th><label>推送状态</label></th>
+            <td>
+                @Html.DropDownList("MuKeCourseNewNoticeType", @Html.SelectListItems(MuKeCourseNewNoticeType.None, true))
+            </td>
+            <th><label>是否推荐</label></th>
+            <td>
+                @Html.DropDownList("RecommendStatus", @Html.SelectListItems(MuKeEnabledStatus.None, true))
+            </td>
+            <th><label>是否热门</label></th>
+            <td>
+                @Html.DropDownList("HotStatus", @Html.SelectListItems(MuKeEnabledStatus.None, true))
+            </td>
+            <th><label>类型</label></th>
+            <td>
+                <select id="myselect" name="TaxonomyId" onchange="change()"></select>
+            </td>
+            <th><label>名称</label></th>
+            <td><input type="text" name="Title" class="txt" /></td>
+            <td><input type="hidden" name="ObjectId" value="@ViewBag.ObjectId" /></td>
+            <td><input type="submit" class="btn-search" value="查询" /></td>
+           
+        </tr>
+    }

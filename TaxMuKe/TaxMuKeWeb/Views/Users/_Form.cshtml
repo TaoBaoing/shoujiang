@@ -1,0 +1,120 @@
+﻿@model MuKeUsers
+@{
+    Layout = "~/Views/Shared/_AjaxFormPartialLayout.cshtml";
+}
+@section Form
+{
+    <tr class="noborder">
+        <td><em>昵称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="LoginName" value="@Model.LoginName">
+        </td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td><em>姓名:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@Model.Name">
+        </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td><em>性别:</em></td>
+        <td class="vatop rowform">
+            男<input type="radio" name="Sex" @(Model.Sex ? "checked=checked" : "") value="true">
+            女<input type="radio" name="Sex" @(Model.Sex ? "" : "checked=checked") value="false">
+        </td>
+        <td> </td>
+    </tr>
+
+    <tr>
+        <td><em>用户类型: </em></td>
+        <td class="vatop rowform">
+@*            @Html.EnumDescription(@Model.UserType)*@
+            
+                        <ul>
+                            @foreach (var item in Html.SelectListItems(Model.UserType, false))
+                            {
+                                <li>
+                                    <label><input type="radio" name="UserType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                                </li>
+                            }
+                        </ul>
+        </td>
+        <td></td>
+    </tr>
+
+@*    <tr>*@
+@*        <td><em>角色:</em></td>*@
+@*        <td class="vatop rowform">*@
+@*            @Html.DropDownList("RoleId", (List<SelectListItem>)ViewBag.Roles)*@
+@*        </td>*@
+@*        <td>只有当用户类型为后台管理员时此项才会生效</td>*@
+@*    </tr>*@
+    <tr>
+        <td><em>手机:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Phone" value="@Model.Phone">
+        </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td><em>邮箱:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Email" value="@Model.Email">
+        </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td><em>兴趣方向:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Interest" value="@Model.Interest">
+        </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td><em>财务规模:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="FinancialScale" value="@Model.FinancialScale">
+        </td>
+        <td> </td>
+    </tr>
+
+<tr>
+    <td><em>是否老师: </em></td>
+    <td class="vatop rowform">
+        @Html.CheckBoxFor(x=>x.IsTeacher,@Model.IsTeacher)
+@*        <ul>*@
+@*            @foreach (var item in Html.SelectListItems(Model.Status, false))*@
+@*            {*@
+@*                <li>*@
+@*                    <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>*@
+@*                </li>*@
+@*            }*@
+@*        </ul>*@
+    </td>
+    <td></td>
+</tr>
+
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr id="testbeizhu">
+        <td><em>描述: </em></td>
+        <td colspan="2" class="vatop rowform"><textarea rows="3" class="tarea" name="Comment">@Model.Description</textarea></td>
+    </tr>
+
+}
+

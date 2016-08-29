@@ -1,0 +1,37 @@
+﻿@model IPagedList<BasicUPMS.Models.ViewModels.MuKeRecordCourseItemReport>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>用户</th>
+        <th>用户类型</th>
+        <th>一级分类</th>
+        <th>二级分类</th>
+        <th>课程ID</th>
+        <th>课程名称</th>
+        <th>章节ID</th>
+        <th>章节名称</th>
+        <th>观看比例</th>
+        <th>最后观看时间</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.UserName</td>
+                <td>@item.UserType</td>
+                <td>@item.ClassOneName</td>
+                <td>@item.ClassTwoName</td>
+                <td>@item.CourseId</td>
+                <td>@item.CourseName</td>
+                <td>@item.CourseCapterId</td>
+                <td>@item.CourseCapterName</td>
+                <td>@item.ViewPercent</td>
+                <td>@item.LastModifyTiem</td>
+        </tr>
+        }
+    }

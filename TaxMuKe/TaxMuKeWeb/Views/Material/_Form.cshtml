@@ -1,0 +1,28 @@
+﻿@model MuKeMaterial
+@{
+    Layout = "~/Views/Shared/_AjaxFormPartialLayout.cshtml";
+}
+@section Form
+{
+    <tr class="noborder">
+        <td><em>名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@Model.Name">
+        </td>
+        <td>*</td>
+    </tr>
+    <tr class="noborder">
+        <td><em>上传时间:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@Model.CreateTime">
+        </td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td><em>备注: </em></td>
+        <td colspan="2" class="vatop rowform"><textarea rows="3" class="tarea" name="Description">@Model.Description</textarea></td>
+    </tr>
+
+}
+
+

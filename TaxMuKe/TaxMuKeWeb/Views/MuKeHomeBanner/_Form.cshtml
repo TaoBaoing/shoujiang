@@ -1,0 +1,119 @@
+﻿@model MuKeHomeBanner
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "首页轮播";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeHomeBanner/Index';";
+    ViewBag.EditAction = "/MuKeHomeBanner/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+
+
+    @*    <tr class="noborder">*@
+    @*        <td><em>名称:</em></td>*@
+    @*        <td class="vatop rowform">*@
+    @*            <input type="text" class="txt" name="Name" value="@Model.Name">*@
+    @*        </td>*@
+    @*        <td></td>*@
+    @*    </tr>*@
+
+    <tr>
+        <td><em>图片地址:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="ImageUrl" style="width: 200px !important;" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+            <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ImageUrl', '选择')">浏览…</button>
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td><em>链接类型: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.MuKeHomeBannerType, false))
+                {
+                    <li>
+                        <label><input type="radio" id="bannertype_@item.Value" name="MuKeHomeBannerType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr class="noborder">
+        <td><em>链接单号:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="ObjectId" id="ObjectId" style="width: 200px !important;" value="@Model.ObjectId">
+            <button type="button" onclick="pageShowDialog()">浏览…</button>
+            <script type="text/javascript">
+                function pageShowDialog() {
+                    if($("#bannertype_4").is(":checked"))
+                    {
+                        //案例
+                        showDialog('/MuKeCommonSelect/MuKeCase?viewName=CaseIndex&ControlID=ObjectId', '选择');
+                    }
+                    else if ($("#bannertype_2").is(":checked")) {
+                        //杂志
+                        showDialog('/MuKeCommonSelect/Magazine?viewName=MagazineIndex&ControlID=ObjectId', '选择');
+                    }
+                    else if ($("#bannertype_1").is(":checked")) {
+                        //资讯
+                        showDialog('/MuKeCommonSelect/Advice?viewName=AdviceIndex&ControlID=ObjectId', '选择');
+                    }
+                    else if ($("#bannertype_3").is(":checked")) {
+                        //课程
+                        showDialog('/MuKeCommonSelect/Course?viewName=CourseIndex&ControlID=ObjectId', '选择');
+                    }
+                }
+            </script>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr class="noborder">
+        <td><em>排序:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" style="width: 200px !important;" name="Sort" value="@Model.Sort">
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <br/>
+            <input type="submit" class="btn" id="sub" value="保存"/>
+        </td>
+        <td>
+            <br/>
+            <a href="/MuKeHomeBanner/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

@@ -1,0 +1,126 @@
+﻿@model MuKeCourseCapter
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "课程";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = 'Index?CourseId=" + Request.QueryString["CourseId"] + "&CourseName=" + Request.QueryString["CourseName"] + "';";
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        showCont();
+        $("input[name=ContentType]").click(function () {
+            showCont();
+        });
+    });
+    function showCont() {
+        switch ($("input[name=ContentType]:checked").attr("value")) {
+            case "1":
+                $("#contetr").hide();
+                $("#Playtr").show();
+                $("#Timetr").show();
+                $("#Cycletr").show();
+                break;
+            case "2":
+                $("#Playtr").hide(); 
+                $("#Timetr").hide();
+                $("#Cycletr").hide();
+                $("#contetr").show(); 
+                break;
+            default:
+                break;
+        }
+    }
+</script>
+@section Form
+{
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="hidden" id="CourseId" name="CourseId" value='@Request.QueryString["CourseId"]' />
+            <input type="text" class="txt" name="Title"  maxlength="30" value="@Model.Title">
+        </td>
+        <td>*</td>
+    </tr>
+@*<tr>*@
+@*    <td><em>类型: </em></td>*@
+@*    <td class="vatop rowform">*@
+@*        <ul>*@
+@*            @foreach (var item in Html.SelectListItems(Model.ContentType, false))*@
+@*            {*@
+@*                <li>*@
+@*                    <label><input type="radio" name="ContentType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>*@
+@*                </li>*@
+@*            }*@
+@*        </ul>*@
+@*    </td>*@
+@*    <td></td>*@
+@*</tr>*@
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+@*    <tr class="noborder">*@
+@*        <td><em>缩略图地址:</em></td>*@
+@*        <td class="vatop rowform">*@
+@*            <input type="text" class="txt" id="ItemImage" name="ItemImage" value="@Model.ItemImage"><span class="fontcolor">*</span>*@
+@*            <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ItemImage', '选择')">浏览…</button>*@
+@*        </td>*@
+@*        <td></td>*@
+@*    </tr>*@
+    <tr id="Playtr">
+        <td><em>播放地址:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt"  id="PlayUrl"  name="PlayUrl" value="@Model.PlayUrl">
+            <button type="button" onclick="showDialog('/Material/List?materialType=Video&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=PlayUrl', '选择')">浏览…</button>
+        </td>
+        <td></td>
+    </tr>
+
+
+<tr id="contetr">
+    <td><em>知识点: </em></td>
+    <td class="vatop rowform">
+        <input type="hidden" id="Content" name="Content">
+        <script type="text/plain" id="myEditor" style="width:800px;height:260px">@Html.Raw(Html.MvcHtmlDecode(Model.Content))</script>
+
+    </td>
+    <td></td>
+</tr>
+
+    <tr>
+        <td><em>备注:</em></td>
+        <td class="vatop rowform">
+            <textarea class="txt" name="Remark">@Model.Remark</textarea>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>
+        <br />
+        <input type="submit" onclick="doSubmit()" class="btn" value="保存" />
+    </td>
+    <td>
+        <br />
+        <a href='Index?CourseId=@Request.QueryString["CourseId"]&CourseName=@Request.QueryString["CourseName"]' class="btn">返回</a>
+    </td>
+</tr>
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+}

@@ -1,0 +1,37 @@
+﻿@model IPagedList<MukeMagazine>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+@*        <th>杂志图标路径</th>*@
+        <th>名称</th>
+        <th>实际查看人数</th>
+        <th>调整数</th>
+        <th>状态</th>
+        <th>创建时间</th>
+        <th class="align-center">操作</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+@*                <td>@item.MagazineImageUrl</td>*@
+                <td>@item.MagazineName</td>
+                <td>@item.ViewCount</td>
+                <td>@item.AdjustCount</td>
+                <td>@Html.EnumDescription(item.Status)</td>
+                <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="w270 align-center">
+
+                    <a class="edit" href="/MukeMagazine/FormForUpdate?id=@item.Id">修改</a> |
+                    <a class="edit" href="javascript:confirmDelete('/MukeMagazine/Remove','id=@item.Id',showSubmitResult)">删除</a>
+                </td>
+            </tr>
+        }
+    }

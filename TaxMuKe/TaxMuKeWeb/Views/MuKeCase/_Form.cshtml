@@ -1,0 +1,129 @@
+﻿@model MuKeCase
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "案例";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeCase/Index';";
+    ViewBag.EditAction = "/MuKeCase/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+@Html.HiddenFor(x => x.Content)
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Title"  maxlength="30" value="@Model.Title">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>副标题:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="SecondTitle"  maxlength="300" value="@Model.SecondTitle">
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td><em>Mp3地址:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="Mp3Url" name="Mp3Url" value="@Model.Mp3Url">
+            <button type="button" onclick="showDialog('/Material/List?materialType=Audio&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=Mp3Url', '选择')">浏览…</button>
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+
+
+    <tr>
+        <td><em>列表前图标:</em></td>
+        <td  class="vatop rowform">
+            <input style="margin-bottom: 26px; vertical-align: middle;" type="text" class="txt" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+            <button style="margin-bottom: 26px; vertical-align: middle;" type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ImageUrl&ImgDisplay=img_display', '选择')">浏览…</button>
+
+            <img style="vertical-align: bottom;" src="@ViewBag.ImageUrl" id="img_display" width="120" height="80" />
+        </td>
+        <td>
+           
+        </td>
+    </tr>
+
+    <tr class="noborder">
+        <td><em>点击次数:</em></td>
+        <td class="vatop rowform">
+            @Html.HiddenFor(x=>x.ClickCount)
+            @Model.ClickCount
+        </td>
+        <td></td>
+    </tr>
+<tr class="noborder">
+    <td><em>手动调节次数:</em></td>
+    <td class="vatop rowform">
+        <input type="text" class="txt" name="ManualClickCount"  value="@Model.ManualClickCount">
+    
+    </td>
+    <td></td>
+</tr>
+
+    <tr class="noborder">
+        <td><em>简介:</em></td>
+        <td class="vatop rowform">
+                       @Html.TextAreaFor(x => x.Describe, new Dictionary<string, object>() { { "style", "height: 150px; width: 400px;" } })
+            
+        </td>
+        <td class="fontcolor"></td>
+    </tr>
+    
+    <tr class="noborder">
+        <td><em>内容:</em></td>
+        <td class="vatop rowform">
+@*            @Html.TextAreaFor(x => x.Content, new Dictionary<string, object>() { { "style", "height: 200px; width: 400px;" } })*@
+            <script type="text/plain" id="myEditor" style="width:800px;height:260px">@Html.Raw(Html.MvcHtmlDecode(Model.Content))</script>
+        </td>
+        <td class="fontcolor"></td>
+    </tr>
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeCase/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

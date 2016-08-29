@@ -1,0 +1,81 @@
+﻿@model IPagedList<MuKeUsers>
+@{
+    Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+}
+@section Head
+{
+    <th>ID</th>
+    <th>手机</th>
+    <th>昵称</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>用户类型</th>
+    <th>付费日期</th>
+    <th>到期日期</th>
+    <th>兴趣方向</th>
+    <th>财务规模</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th class="align-center">操作</th>
+}
+
+@section Items
+{
+    @foreach (var item in Model)
+    {
+        <tr class="hover">
+            <td>@item.Id</td>
+            <td>@item.Phone</td>
+            <td>@item.LoginName</td>
+            <td>@item.Name</td>
+            @if (item.Sex)
+            {
+                <td>男</td>
+            }
+            else
+            {
+                <td>女</td>
+            }
+
+            <td>@Html.EnumDescription(item.UserType)</td>
+            @if (item.FirstPayDateTime.HasValue)
+            {
+                <td>
+                    @item.FirstPayDateTime.Value.ToString("yyyy-MM-dd HH:mm")
+                </td>
+            }
+            else
+            {
+                <td>  </td>
+            }
+
+            @if (item.DueDateTime.HasValue)
+                {
+                    <td>
+                        @item.DueDateTime.Value.ToString("yyyy-MM-dd HH:mm")
+                    </td>
+                }
+                else
+                {
+                    <td>  </td>
+                }
+            <td>@item.Interest</td>
+            <td>@item.FinancialScale</td>
+            <td>@Html.EnumDescription(item.Status)</td>
+            <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            @*<td>@item.Financial.CumulativeIntegral</td>
+            <td>@item.Financial.FrozenIntegral</td>*@
+@*            <td>@item.Financial.Integral</td>*@
+            <td class="w300 align-center">
+                <a class="edit" href="javascript:showDataFormModalDialog('Users/FormForUpdate?id=@item.Id','编辑用户')">修改</a> |
+@*                <a class="edit" href="javascript:confirmAfterDoAjax('确定要重置密码吗?','Users/ResetPassword','id=@item.Id',showSubmitResult)">重置密码</a> |*@
+                <a class="edit" href="/Users/ChangePasswordForUser?userId=@item.Id">修改密码</a> |
+                <a class="edit" href="javascript:confirmDelete('Users/Remove','id=@item.Id',showSubmitResult)">删除</a> |
+                <a class="edit" href="/MuKeRecordCourse/Index?userId=@item.Id">课程浏览记录</a> 
+            </td>
+        </tr>
+    }
+}
+<script type=""></script>
+
+

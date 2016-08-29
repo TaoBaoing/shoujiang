@@ -1,0 +1,70 @@
+﻿@model Course
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "资讯";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = 'Index?ContentType=News';";
+}
+@section Form
+{
+
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="hidden" id="ContentType" name="ContentType" value="@ContentTypes.News" />
+            <input type="hidden" id="Content" name="Content">
+            <input type="text" class="txt" name="Title" value="@Model.Title">
+        </td>
+        <td>*</td>
+    </tr>
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><em>列表前图标:</em></td>
+        <td class="vatop rowform"><input type="text" class="txt" value="@Model.ImageUrl" id="ImageUrl" name="ImageUrl"><button type="button" onclick="showDialog('/Material/Index?materialType=Images&viewName=SelectFiles', '选择')">浏览…</button></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><em>内容: </em></td>
+        <td class="vatop rowform">
+            <script type="text/plain" id="myEditor" style="width:800px;height:260px">@Html.Raw(Model.Content)</script>
+            <button type="button" onclick="insetImages()">插入图片</button>
+            <button type="button" onclick="insertAudio()">插入音频</button>
+            <button type="button" onclick="insertVideo()">插入视频</button>
+            <button type="button" onclick="insertOtherFile()">插入附件</button>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit" onclick="doSubmit()" class="btn" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="Index?ContentType=News" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+}

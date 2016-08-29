@@ -1,0 +1,54 @@
+﻿@model Taxonomy
+@{
+    Layout = "~/Views/Shared/_AjaxFormPartialLayout.cshtml";
+    ViewBag.EditAction = "Taxonomy/" + ViewBag.OperateType.ToString() + "/" + Model.Id + "?ParentId=" + Model.ParentId + "&Depth=" + Model.Depth + "&TaxonomyType=" + Model.TaxonomyType;
+    ViewBag.SubmitCallback = "refreshTree";
+}
+@section Form
+{
+    <tr class="noborder">
+        <td><em>名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@(Model.Name)">
+        </td>
+        <td>*</td>
+    </tr>
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><em>排序:</em></td>
+        <td class="vatop rowform"><input type="text" class="txt" value="@Model.Sort" name="Sort"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><em>备注: </em></td>
+        <td colspan="2" class="vatop rowform"><textarea rows="3" class="tarea" name="Description">@Model.Description</textarea></td>
+    </tr>
+
+    <tr>
+        <td><em>深度:</em></td>
+        <td class="vatop rowform">
+            @Model.Depth
+        </td>
+        <td></td>
+    </tr>
+}
+<script type="text/javascript">
+    //刷新树
+    function refreshTree(e) {
+        showSubmitResult(e, null, null, function () { window.frames['workspace'].loadTree(e.Data); });
+    }
+</script>

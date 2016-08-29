@@ -1,0 +1,119 @@
+﻿@model MuKeAdviceSignup
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "资讯报名";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeAdviceSignup/Index';";
+    ViewBag.EditAction = "/MuKeAdviceSignup/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    @Html.HiddenFor(x => x.Content)
+    <tr>
+        <td><em>图片:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="AdviceImageUrl" name="AdviceImageUrl" value="@Model.AdviceImageUrl"><span class="fontcolor">*</span>
+            <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=AdviceImageUrl', '选择')">浏览…</button>
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="AdviceTitle" value="@Model.AdviceTitle">
+        </td>
+        <td>*</td>
+    </tr>
+<tr class="noborder">
+    <td><em>城市:</em></td>
+    <td class="vatop rowform">
+@*        @Html.DropDownList("CityId", (IEnumerable<SelectListItem>)ViewBag.CityId)*@
+        @Html.DropDownListFor(item=>item.CityId, (SelectList)ViewBag.Citys)
+    </td>
+    <td>*</td>
+</tr>
+
+    
+    <tr class="noborder">
+        <td><em>开始时间:</em></td>
+        <td class="vatop rowform">
+            <input type="text" id="txtStartTime" class="txt Wdate" name="StartTime" onclick="WdatePicker({  });" value="@{
+                if (Model.StartTime != null)
+                {
+                    @Model.StartTime.ToDate()
+                }
+            }">
+            <em>结束时间:</em>
+            <input type="text" id="txtEndTime" class="txt Wdate" name="EndTime" onClick="WdatePicker({ });" value="@{
+                 if (Model.EndTime != null)
+                {
+                    @Model.EndTime.ToDate()
+                }
+            }">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>报名人数:</em></td>
+        <td class="vatop rowform">
+@*            @Model.SignUpCount*@
+                        <input type="text" class="txt" name="SignUpCount" value="@Model.SignUpCount">
+        </td>
+        <td></td>
+    </tr>
+        <tr class="noborder">
+        <td><em>手动调节人数:</em></td>
+            <td class="vatop rowform">
+@*                @Html.TextBoxFor(x=>x.ManualCount)*@
+                            <input type="text" class="txt" name="ManualCount" value="@Model.ManualCount">
+            </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+<tr>
+    <td><em>内容: </em></td>
+    <td class="vatop rowform">
+        <script type="text/plain" id="myEditor" style="width:800px;height:260px">
+            @Html.Raw(Html.MvcHtmlDecode(Model.Content))
+    </script>
+
+</td>
+<td></td>
+</tr>
+    <tr>
+        <td>
+            <br />
+            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeAdviceSignup/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script src="~/Assets/Plugins/My97DatePicker/WdatePicker.js"></script>
+    <link href="~/Assets/Plugins/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/My97DatePicker/lang/zh-cn.js"></script>
+}

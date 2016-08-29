@@ -1,0 +1,20 @@
+﻿@model IPagedList<Course>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title =  "课程列表";
+}
+@section SearchCondition
+{
+    @*<tr>
+        <th><label>状态</label></th>
+        <td>
+            @Html.DropDownList("Status", @Html.SelectListItems(EnabledStatus.None, true))
+        </td>
+        <th><label>名称</label></th>
+        <td><input type="text" name="Title" class="txt" /></td>
+        <td><input type="hidden" name="TaxonomyId" value="@ViewBag.TaxonomyId" /></td>
+        @*<td><input type="hidden" name="ObjectId" value="@ViewBag.ObjectId" /></td>*@
+        @*<td><input type="submit" class="btn-search" value="查询" /></td>*@
+        @*<td><a id="roleAdd" href="FormForAdd?viewName=@(ViewBag.ContentType)Form&ObjectId=@ViewBag.ObjectId">添加</a> </td>*@
+    @*</tr>*@
+}

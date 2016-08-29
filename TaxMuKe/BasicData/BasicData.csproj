@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B46A5FA-B754-429C-BD71-AD5891A9A242}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BasicData</RootNamespace>
+    <AssemblyName>BasicData</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>8e9292ee</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Mapping\AlipayAsyncNotifyMap.cs" />
+    <Compile Include="Configuration\Mapping\AppStoreSetMap.cs" />
+    <Compile Include="Configuration\Mapping\CourseItemMap.cs" />
+    <Compile Include="Configuration\Mapping\CourseMap.cs" />
+    <Compile Include="Configuration\Mapping\CourseViewRecordMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeDirtyWordMap.cs" />
+    <Compile Include="Configuration\Mapping\GlobalSetMap.cs" />
+    <Compile Include="Configuration\Mapping\InterfacecalllogMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseBannerMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseCapterCommentMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseCapterTestPagperMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseSearchKeyWordMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseTestRecordMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeHomeBannerMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeHomeCourseSetMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeRecordCapterCourseMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeRecordCourseMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeUserSetMap.cs" />
+    <Compile Include="Configuration\Mapping\SettingsMap.cs" />
+    <Compile Include="Configuration\Mapping\SmsChannelMap.cs" />
+    <Compile Include="Configuration\Mapping\SmsRequestQueueMap.cs" />
+    <Compile Include="Configuration\Mapping\SmsSendRecordMap.cs" />
+    <Compile Include="Configuration\Mapping\UserHistoryMap.cs" />
+    <Compile Include="Configuration\Mapping\UserInteractiveValidationMap.cs" />
+    <Compile Include="Configuration\Mapping\VersionManageMap.cs" />
+    <Compile Include="Configuration\Mapping\MuKeCourseCapterTestPagperManagerMap.cs" />
+    <Compile Include="Configuration\UcfUniversityContext.cs" />
+    <Compile Include="Domain\AlipayNotify\AlipayAsyncNotify.cs" />
+    <Compile Include="Domain\AppStoreSet\AppStoreSet.cs" />
+    <Compile Include="Domain\Banner\MuKeBannerTypes.cs" />
+    <Compile Include="Domain\Banner\MuKeCourseBanner.cs" />
+    <Compile Include="Domain\Banner\MuKeHomeBanner.cs" />
+    <Compile Include="Domain\Common\OsType.cs" />
+    <Compile Include="Domain\Common\PassAppStore.cs" />
+    <Compile Include="Domain\Common\UpdaeTypes.cs" />
+    <Compile Include="Domain\Common\Interfacecalllog.cs" />
+    <Compile Include="Domain\Common\TerminalTypes.cs" />
+    <Compile Include="Domain\Common\VersionManage.cs" />
+    <Compile Include="Domain\Core\Enums\MuKeEnabledStatus.cs" />
+    <Compile Include="Domain\Core\Settings.cs" />
+    <Compile Include="Domain\Course\MuKeCourse.cs" />
+    <Compile Include="Domain\Course\MuKeCourseCapter.cs" />
+    <Compile Include="Domain\Course\CourseTypes.cs" />
+    <Compile Include="Domain\Course\CourseViewRecord.cs" />
+    <Compile Include="Domain\Course\MuKeCourseCapterComment.cs" />
+    <Compile Include="Domain\Course\MuKeCourseCapterTestPagper.cs" />
+    <Compile Include="Domain\Course\MuKeCourseCapterTestPagperManager.cs" />
+    <Compile Include="Domain\Course\MuKeCourseSearchKeyWord.cs" />
+    <Compile Include="Domain\Course\MuKeCourseTestRecord.cs" />
+    <Compile Include="Domain\Course\MuKeRecordCourseCapter.cs" />
+    <Compile Include="Domain\Course\MuKeRecordCourse.cs" />
+    <Compile Include="Domain\MuKeDirtyWord.cs" />
+    <Compile Include="Domain\MuKeGlobalSet.cs" />
+    <Compile Include="Domain\Material\MaterialTypes.cs" />
+    <Compile Include="Domain\MuKeHomeCourseSet.cs" />
+    <Compile Include="Domain\MuKeUserSet.cs" />
+    <Compile Include="Domain\ShangJia.cs" />
+    <Compile Include="Domain\Sms\MuKeSmsChannel.cs" />
+    <Compile Include="Domain\Sms\SmsRequestQueue.cs" />
+    <Compile Include="Domain\Sms\SmsSendRecord.cs" />
+    <Compile Include="Domain\Sms\MuKeSendStatus.cs" />
+    <Compile Include="Domain\Sms\MuKeSmsSourceTypes.cs" />
+    <Compile Include="Domain\Taxonomy\Taxonomys.cs" />
+    <Compile Include="Domain\User\Enums\UserHistoryTypes.cs" />
+    <Compile Include="Domain\User\Enums\InteractiveTypes.cs" />
+    <Compile Include="Domain\User\Enums\MuKeUserTypes.cs" />
+    <Compile Include="Domain\User\UserHistory.cs" />
+    <Compile Include="Domain\User\MuKeUsers.cs" />
+    <Compile Include="Domain\User\UserMeta.cs" />
+    <Compile Include="Domain\Banner\MuKeBanner.cs" />
+    <Compile Include="Configuration\Mapping\UserMetaMap.cs" />
+    <Compile Include="Configuration\Mapping\BannerMap.cs" />
+    <Compile Include="Configuration\Mapping\MaterialMap.cs" />
+    <Compile Include="Configuration\Mapping\TaxonomyRelationshipsMap.cs" />
+    <Compile Include="Configuration\Mapping\TaxonomyMap.cs" />
+    <Compile Include="Domain\Material\MuKeMaterial.cs" />
+    <Compile Include="Domain\Taxonomy\TaxonomyRelationships.cs" />
+    <Compile Include="Domain\Taxonomy\Taxonomy.cs" />
+    <Compile Include="Domain\User\Enums\AuthTypes.cs" />
+    <Compile Include="Domain\Core\Enums\OperateTypes.cs" />
+    <Compile Include="Domain\User\Enums\PermissionTypes.cs" />
+    <Compile Include="Configuration\DbCommandLoggingInterceptor.cs" />
+    <Compile Include="Configuration\Mapping\PermissionResourceMap.cs" />
+    <Compile Include="Configuration\Mapping\PermissionRoleMap.cs" />
+    <Compile Include="Configuration\Mapping\PermissionMap.cs" />
+    <Compile Include="Configuration\Mapping\UsersMap.cs" />
+    <Compile Include="Domain\User\PermissionResource.cs" />
+    <Compile Include="Domain\User\PermissionRole.cs" />
+    <Compile Include="Domain\User\Permission.cs" />
+    <Compile Include="Domain\User\UserInteractiveValidation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\User\Validators\PermissionResourceValidator.cs" />
+    <Compile Include="Domain\User\Validators\PermissionsValidator.cs" />
+    <Compile Include="Domain\User\Validators\PermissionRoleValidator.cs" />
+    <Compile Include="Domain\User\Validators\UsersValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicCommon\BasicCommon.csproj">
+      <Project>{29edd054-31b9-4f8d-8586-be4cd582f6f6}</Project>
+      <Name>BasicCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicFramework\BasicFramework.csproj">
+      <Project>{f16ed8df-4cba-48f4-b320-a9f9a0a8bce5}</Project>
+      <Name>BasicFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,74 @@
+﻿@model IPagedList<MuKeUsers>
+@{
+    Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+    ViewBag.Title = "用户管理";
+}
+@section StylesChild{
+    <link href="~/Assets/Plugins/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />
+}
+@section ScriptsChild
+{
+    <script src="~/Assets/Plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Assets/Plugins/My97DatePicker/lang/zh-cn.js"></script>
+                     <script type="text/javascript">
+                         $(function () {
+                             $("#UserExport").click(function () {
+                                 window.location.href = "/Users/ExportExcel?Name=" + $("#Name").val() + "&Phone=" + $("#Phone").val() + "&txtStartTime=" + $("#txtStartTime").val() + "&txtEndTime=" + $("#txtEndTime").val() + "&UserType=" + $("#UserType").val() + "&Status=" + $("#Status").val();
+                             })
+                         })
+                     </script>
+}
+
+
+@section SearchCondition
+{
+    <tr>
+        <th>
+            <label>用户类型</label>
+        </th>
+        <td>
+            @Html.DropDownList("UserType", Html.SelectListItems(MuKeUserTypes.None, true))
+        </td>
+@*        <th>*@
+@*            <label>角色</label>*@
+@*        </th>*@
+@*        <td>*@
+@*            @Html.DropDownList("RoleId", (List<SelectListItem>)ViewBag.Roles)*@
+@*        </td>*@
+        <th>
+            <label>状态</label>
+        </th>
+        <td>
+            @Html.DropDownList("Status", Html.SelectListItems(MuKeEnabledStatus.None, true))
+        </td>
+        <th>
+            <label>昵称</label>
+        </th>
+        <td>
+            <input type="text" style="width: 80px !important" name="LogicName" class="txt" id="LogicName"/>
+        </td>
+@*        <th>*@
+@*            <label>姓名</label>*@
+@*        </th>*@
+@*        <td>*@
+@*            <input type="text" style="width: 80px !important" name="Name" class="txt" id="Name" />*@
+@*        </td>*@
+        <th>
+            <label>手机</label>
+        </th>
+        <td>
+            <input type="text" style="width: 80px !important"  name="Phone" class="txt" id="Phone"/>
+        </td>
+
+        <th><label>创建日期</label></th>
+        <td><input type="text" id="txtStartTime" style="width: 80px !important" name="txtStartTime" class="txt Wdate" onclick="WdatePicker({  });" /></td>
+        <th><label>-></label></th>
+        <td><input type="text" id="txtEndTime" style="width: 80px !important" name="txtEndTime" class="txt Wdate" onclick="WdatePicker({ });" /></td>
+
+        <td>
+            <input type="submit" class="btn-search tooltip" value="查询" />
+        </td>
+        <td><a href="javascript:showDataFormModalDialog('Users/FormForAdd','添加用户')">添加用户</a> </td>
+        <td><input type="button" class="btn-search" value="导出Excel" id="UserExport" /></td>
+    </tr>
+}

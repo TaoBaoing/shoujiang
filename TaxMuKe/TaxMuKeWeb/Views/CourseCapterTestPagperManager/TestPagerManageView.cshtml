@@ -1,0 +1,79 @@
+﻿@model IList<MuKeCourseCapterTestPagper>
+@{
+    ViewBag.Title = "试题查看";
+}
+
+@foreach (MuKeCourseCapterTestPagper pagper in Model)
+{
+    <table class="table tb-type2">
+        <thead>
+        <tr class="space">
+            <th colspan="15" class="nobg"> 题目:@pagper.PagperId . @pagper.Title</th>
+        </tr>
+        </thead>
+        <tbody id="itemsContainer">
+        @if (!string.IsNullOrEmpty(pagper.AnswerA))
+        {
+            <tr>
+                <td>@pagper.AnswerA</td>
+            </tr>
+        }
+        @if (!string.IsNullOrEmpty(pagper.AnswerB))
+        {
+            <tr>
+                <td>@pagper.AnswerB</td>
+            </tr>
+        }
+        @if (!string.IsNullOrEmpty(pagper.AnswerC))
+        {
+            <tr>
+                <td>@pagper.AnswerC</td>
+            </tr>
+        }
+        @if (!string.IsNullOrEmpty(pagper.AnswerD))
+        {
+            <tr>
+                <td>@pagper.AnswerD</td>
+            </tr>
+        }
+
+        <tr>
+            <td>
+                正确答案：
+                @if (pagper.AnswerAIsRight)
+                {
+                    @Html.Raw(" A ")
+                    ;
+                }
+                @if (pagper.AnswerBIsRight)
+                {
+                    @Html.Raw(" B ")
+                    ;
+                }
+                @if (pagper.AnswerCIsRight)
+                {
+                    @Html.Raw(" C ")
+                    ;
+                }
+                @if (pagper.AnswerDIsRight)
+                {
+                    @Html.Raw(" D ")
+                    ;
+                }
+            </td>
+        </tr>
+        @*        <div>@pagper.AnswerA</div>*@
+        @*        <div>@pagper.AnswerB</div>*@
+        @*        <div>@pagper.AnswerC</div>*@
+        @*        <div>@pagper.AnswerD</div>*@
+
+
+        </tbody>
+
+    </table>
+    <div>
+        <a href="" onclick="javascript: history.go(-1);">返回</a>
+    </div>
+    <div style="margin-bottom: 20px"></div>
+}
+

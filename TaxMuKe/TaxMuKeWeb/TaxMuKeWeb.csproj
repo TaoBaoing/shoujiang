@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{094E7EC9-E699-44E6-8946-B2B1AAB76966}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BasicUPMS</RootNamespace>
+    <AssemblyName>BasicUPMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>efc82173</NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.MVC5.5.6.2.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GemBox.Spreadsheet">
+      <HintPath>ThirdLibs\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.6\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.6\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="qiniu-csharp-sdk">
+      <HintPath>ThirdLibs\qiniu-csharp-sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=3.3.8.20855, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.3.3.8\lib\net40\Senparc.Weixin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=12.1.0.32868, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.12.1.0\lib\net40\Senparc.Weixin.MP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.97.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.97.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.97.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Tracing, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\Base\BaseDataController.cs" />
+    <Compile Include="Controllers\Base\CURDTemplate.cs" />
+    <Compile Include="Controllers\CourseCapterTestPagperManagerController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\CourseItemController.cs" />
+    <Compile Include="Controllers\CourseViewTestController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\MuKeAboutUsController.cs" />
+    <Compile Include="Controllers\MuKeAppStoreSetController.cs" />
+    <Compile Include="Controllers\MuKeCommonSelectController.cs" />
+    <Compile Include="Controllers\MuKeCourseBannerController.cs" />
+    <Compile Include="Controllers\MuKeCourseCommentController.cs" />
+    <Compile Include="Controllers\MuKeCourseFreeController.cs" />
+    <Compile Include="Controllers\MuKeCourseItemReportController.cs" />
+    <Compile Include="Controllers\MuKeCourseReportController.cs" />
+    <Compile Include="Controllers\MuKeCourseSearchKeyWordController.cs" />
+    <Compile Include="Controllers\MuKeDirtyWordController.cs" />
+    <Compile Include="Controllers\MuKeGoldUpgradeWhiteGlodSetController.cs" />
+    <Compile Include="Controllers\MuKeGoldUserSetController.cs" />
+    <Compile Include="Controllers\MuKeHomeBannerController.cs" />
+    <Compile Include="Controllers\MuKeQCloudController.cs" />
+    <Compile Include="Controllers\MuKeRecordCourseController.cs" />
+    <Compile Include="Controllers\MuKeServiceAgreementController.cs" />
+    <Compile Include="Controllers\MuKeUEditorUploadController.cs" />
+    <Compile Include="Controllers\MuKeWhiteGoldUserSetController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\ShangJiaController.cs" />
+    <Compile Include="Controllers\TaxonomyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\PermissionRoleController.cs" />
+    <Compile Include="Controllers\PermissionResourceController.cs" />
+    <Compile Include="Models\Core\AuditValueProvider.cs" />
+    <Compile Include="Models\Core\CustomValueProviderFactory.cs" />
+    <Compile Include="Models\Core\PermissionFilterAttribute.cs" />
+    <Compile Include="Models\Core\RQCodeHelper.cs" />
+    <Compile Include="Models\Core\SessionContext.cs" />
+    <Compile Include="Models\Core\UPMSPrincipal.cs" />
+    <Compile Include="Models\Services\BaseService.cs" />
+    <Compile Include="Models\Services\TermTaxonomyService.cs" />
+    <Compile Include="Models\Services\TreeDataHandleService.cs" />
+    <Compile Include="Models\Services\PermissionService.cs" />
+    <Compile Include="Models\ViewModels\CoursePaperViewModel.cs" />
+    <Compile Include="Models\ViewModels\MuKeRecordCourseItemReport.cs" />
+    <Compile Include="Models\ViewModels\MuKeRecordCourseReport.cs" />
+    <Compile Include="Models\ViewModels\MuKeRecordCourseReportRequest.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeAdviceSignUpRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeCommonSelectAdviceRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeCommonSelectRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeCommonUserSelectRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeCourseSearchKeyWordRequest.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeDirdyWordRequest.cs" />
+    <Compile Include="Models\ViewModels\Requester\MuKeRecordCourseRequest.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchAdviceRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchAdviceSignupRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchAnswerListRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchAnswerQuestionListRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchAnswerQuestionTagRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchCaseRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchCityRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchCourseBannerRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchCourseCommentRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchHomeBannerRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchMagazineRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchMuKeUserOrderRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\TestPagerManagerRequest.cs" />
+    <Compile Include="Models\ViewModels\SurveyReportViewModel.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchBannerRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchContentsRequester.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchMaterialRequester.cs" />
+    <Compile Include="Models\ViewModels\TreeNodeViewModel.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchUserRequester.cs" />
+    <Compile Include="Resources\ErrorMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Core\MVCExtension .cs" />
+    <Compile Include="Models\Core\UpdateableModelBinder.cs" />
+    <Compile Include="Models\ViewModels\Requester\PagedRequesterBase.cs" />
+    <Compile Include="Models\ViewModels\Requester\SearchRoleRequester.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Css\default.css" />
+    <Content Include="Assets\Css\icons\loading.gif" />
+    <Content Include="Assets\Css\layout.css" />
+    <Content Include="Assets\Css\login\signup.css" />
+    <Content Include="Assets\Images\admin-logo.png" />
+    <Content Include="Assets\Images\error.png" />
+    <Content Include="Assets\Images\h3-ico.png" />
+    <Content Include="Assets\Images\l-bg.png" />
+    <Content Include="Assets\Images\li-icon.png" />
+    <Content Include="Assets\Images\login\admin_logo.png" />
+    <Content Include="Assets\Images\login\login.png" />
+    <Content Include="Assets\Images\login\loginBox_shadow.png" />
+    <Content Include="Assets\Images\login\shadow.jpg" />
+    <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\m-bg.png" />
+    <Content Include="Assets\Images\nav-li.png" />
+    <Content Include="Assets\Images\onLoad.gif" />
+    <Content Include="Assets\Images\prompt.gif" />
+    <Content Include="Assets\Images\right.png" />
+    <Content Include="Assets\Images\admin-topbg.png" />
+    <Content Include="Assets\Images\spb-admin-topmenu-icon.png" />
+    <Content Include="Assets\Images\spb-admin-topmenu-line.png" />
+    <Content Include="Assets\Images\spb-admin-topmenubg.png" />
+    <Content Include="Assets\Images\spb-sidebar-bg.png" />
+    <Content Include="Assets\Images\tn-icon-small.png" />
+    <Content Include="Assets\Images\WelcomePicture.jpg" />
+    <Content Include="Assets\Js\Core\Tree.js" />
+    <Content Include="Assets\Js\Core\TreeType.js" />
+    <Content Include="Assets\Js\Core\SelectFile.js" />
+    <Content Include="Assets\Js\Core\Tools.js" />
+    <Content Include="Assets\Js\Core\ToolsAdapterForCrossFrame.js" />
+    <Content Include="Assets\Js\Core\Permission.js" />
+    <Content Include="Assets\Js\Core\PureJsPaginationInitializer.js" />
+    <Content Include="Assets\Js\Core\PureJsPagination.js" />
+    <Content Include="Assets\Plugins\artDialog\css\ui-dialog.css" />
+    <Content Include="Assets\Plugins\artDialog\dist\dialog-min.js" />
+    <Content Include="Assets\Plugins\artDialog\dist\dialog-plus-min.js" />
+    <Content Include="Assets\Plugins\artDialog\dist\dialog-plus.js" />
+    <Content Include="Assets\Plugins\artDialog\dist\dialog.js" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap.css" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Assets\Plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="Assets\Plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\Plugins\bootstrap\js\npm.js" />
+    <Content Include="Assets\Plugins\jquery-qrcode\jquery.qrcode.min.js" />
+    <Content Include="Assets\Plugins\jquery-qrcode\qrcode.min.js" />
+    <Content Include="Assets\Plugins\jquery.unobtrusive-ajax\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Assets\Plugins\jquery\ajaxfileupload.js" />
+    <Content Include="Assets\Plugins\jquery\jquery.form.js" />
+    <Content Include="Assets\Plugins\jquery\json2.js" />
+    <Content Include="Assets\Plugins\jstree\dist\jstreegrid.js" />
+    <Content Include="Assets\Plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="Assets\Plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Assets\Plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\Plugins\html5shiv\html5shiv.js" />
+    <Content Include="Assets\Js\Core\Menu.js" />
+    <Content Include="Assets\Plugins\jquery-cookie\jquery.cookie.js" />
+    <Content Include="Assets\Plugins\jquery.unobtrusive-ajax\jquery.unobtrusive-ajax.js" />
+    <Content Include="Assets\Plugins\jquery\jquery-1.11.1.min.js" />
+    <Content Include="Assets\Plugins\jstree\dist\jstree.js" />
+    <Content Include="Assets\Plugins\jstree\dist\jstree.min.js" />
+    <Content Include="Assets\Plugins\jstree\dist\themes\default\32px.png" />
+    <Content Include="Assets\Plugins\jstree\dist\themes\default\40px.png" />
+    <Content Include="Assets\Plugins\jstree\dist\themes\default\style.css" />
+    <Content Include="Assets\Plugins\jstree\dist\themes\default\style.min.css" />
+    <Content Include="Assets\Plugins\jstree\dist\themes\default\throbber.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\calendar.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\lang\en.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\WdatePicker.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Assets\Plugins\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Assets\Plugins\pace\pace.js" />
+    <Content Include="Assets\Plugins\pace\pace.min.js" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\black\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\blue\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\green\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\orange\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\pink\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\purple\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\red\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\silver\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\white\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-barber-shop.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-big-counter.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-bounce.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-center-atom.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-center-circle.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-center-radar.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-center-simple.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-corner-indicator.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-fill-left.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-flash.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-flat-top.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-loading-bar.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-mac-osx.css" />
+    <Content Include="Assets\Plugins\pace\themes\yellow\pace-theme-minimal.css" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\emotion.css" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\emotion.js" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\0.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\formula\formula.css" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\formula\formula.html" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\formula\formula.js" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\formula\images\formula.png" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\image\image.css" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\image\image.js" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\image\images\close.png" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\image\images\upload1.png" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\image\images\upload2.png" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\link\link.js" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\map\map.html" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\map\map.js" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\video.css" />
+    <Content Include="Assets\Plugins\UMeditor\dialogs\video\video.js" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\en.js" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\addimage.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\background.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\button.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\copy.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\deletedisable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\deleteenable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\imglabel.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\listbackground.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\localimage.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\music.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\en\images\upload.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\images\copy.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\images\imglabel.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\images\music.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\images\upload.png" />
+    <Content Include="Assets\Plugins\UMeditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\css\umeditor.css" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\css\umeditor.min.css" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\caret.png" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\close.png" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\icons.gif" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\icons.png" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\ok.gif" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\pop-bg.png" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\spacer.gif" />
+    <Content Include="Assets\Plugins\UMeditor\themes\default\images\videologo.gif" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\jquery.min.js" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\STIXFontLicense2010.txt" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.svg" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.svg" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.svg" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.svg" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\Symbola.svg" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\mathquill.css" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\mathquill.js" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\mathquill.min.js" />
+    <Content Include="Assets\Plugins\UMeditor\umeditor.config.js" />
+    <Content Include="Assets\Plugins\UMeditor\umeditor.js" />
+    <Content Include="Assets\Plugins\UMeditor\umeditor.min.js" />
+    <Content Include="Assets\Plugins\webuploader\bg.png" />
+    <Content Include="Assets\Plugins\webuploader\expressInstall.swf" />
+    <Content Include="Assets\Plugins\webuploader\icons.png" />
+    <Content Include="Assets\Plugins\webuploader\image.png" />
+    <Content Include="Assets\Plugins\webuploader\progress.png" />
+    <Content Include="Assets\Plugins\webuploader\style.css" />
+    <Content Include="Assets\Plugins\webuploader\success.png" />
+    <Content Include="Assets\Plugins\webuploader\uploadNomalFileInit.js" />
+    <Content Include="Assets\Plugins\webuploader\uploadImagesInit.js" />
+    <Content Include="Assets\Plugins\webuploader\Uploader.swf" />
+    <Content Include="Assets\Plugins\webuploader\webuploader.css" />
+    <Content Include="Assets\Plugins\webuploader\webuploader.js" />
+    <Content Include="Assets\Plugins\webuploader\webuploader.min.js" />
+    <Content Include="Assets\Plugins\webuploader\webuploader.nolog.js" />
+    <Content Include="Assets\Plugins\webuploader\webuploader.nolog.min.js" />
+    <Content Include="Assets\Js\Core\calculator_worker_sha1.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Users\ChangePasswordForUser.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Js\Page\" />
+    <Folder Include="Views\File\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicCommon\BasicCommon.csproj">
+      <Project>{29edd054-31b9-4f8d-8586-be4cd582f6f6}</Project>
+      <Name>BasicCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicData\BasicData.csproj">
+      <Project>{0b46a5fa-b754-429c-bd71-ad5891a9a242}</Project>
+      <Name>BasicData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BasicFramework\BasicFramework.csproj">
+      <Project>{f16ed8df-4cba-48f4-b320-a9f9a0a8bce5}</Project>
+      <Name>BasicFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdApi\ThirdApi.csproj">
+      <Project>{399af04e-ecdd-41e3-b88b-5ecafd17b139}</Project>
+      <Name>ThirdApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionResource\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Main.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionResource\_Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ErrorMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionRole\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionRole\_Items.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionRole\_Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PermissionRole\PermissionSetting.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\_Items.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\_Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\ChangePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Users\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\Plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\Plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Assets\Plugins\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\core.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\fixed-width.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\font-awesome.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\icons.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\larger.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\list.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\mixins.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\path.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\spinning.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\stacked.less" />
+    <Content Include="Assets\Plugins\font-awesome\less\variables.less" />
+    <Content Include="Assets\Plugins\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_core.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_icons.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_larger.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_list.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_mixins.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_path.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_spinning.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_stacked.scss" />
+    <Content Include="Assets\Plugins\font-awesome\scss\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ItemsPartialLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ListPageLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AjaxFormPageLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FormPageLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\basicupms.db3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AjaxFormPartialLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Plugins\webuploader\icons.psd" />
+    <Content Include="Assets\Plugins\webuploader\progress.psd" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.eot" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.ttf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.woff" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.eot" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.ttf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.woff" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.eot" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.ttf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.woff" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.eot" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.ttf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.woff" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\Symbola.eot" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\Symbola.otf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\Symbola.ttf" />
+    <Content Include="Assets\Plugins\UMeditor\third-party\mathquill\font\Symbola.woff" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Assets\Plugins\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Assets\Plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Plugins\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Taxonomy\SingleLayer.cshtml" />
+    <Content Include="Views\Taxonomy\MultiLayer.cshtml" />
+    <Content Include="Views\Taxonomy\_Form.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\Material\_Items.cshtml" />
+    <Content Include="Views\Material\_Form.cshtml" />
+    <Content Include="Views\Material\NomalFile.cshtml" />
+    <Content Include="Views\Material\_NomalFileItems.cshtml" />
+    <Content Include="Views\Contents\Index.cshtml" />
+    <Content Include="Views\Contents\_Items.cshtml" />
+    <Content Include="Views\Contents\NewsForm.cshtml" />
+    <Content Include="Views\Material\_SelectFileItems.cshtml" />
+    <Content Include="Views\Material\SelectFiles.cshtml" />
+    <Content Include="Views\Banner\NewsForm.cshtml" />
+    <Content Include="Views\Banner\_Items.cshtml" />
+    <Content Include="Views\Banner\Index.cshtml" />
+    <Content Include="Views\Users\SelectForBatchAddToClass.cshtml" />
+    <Content Include="Views\Users\_SelectItems.cshtml" />
+    <Content Include="Views\Users\_SelectClassUserItems.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contents\_CourseItems.cshtml" />
+    <Content Include="Views\Contents\TeacherForm.cshtml" />
+    <Content Include="Views\Banner\HomeForm.cshtml" />
+    <Content Include="Views\PartialView\UploadPicture.cshtml" />
+    <Content Include="Views\HomePage\WelcomeImage.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Course\CourseForm.cshtml" />
+    <Content Include="Views\Course\_Items.cshtml" />
+    <Content Include="Views\HomePage\AppUpdate.cshtml" />
+    <Content Include="Views\CourseItem\CourseItemForm.cshtml" />
+    <Content Include="Views\CourseItem\Index.cshtml" />
+    <Content Include="Views\CourseItem\_Items.cshtml" />
+    <Content Include="Views\PartialView\UploadFile.cshtml" />
+    <Content Include="Views\Material\SelectFilesNew.cshtml" />
+    <Content Include="Views\Material\Images.cshtml" />
+    <Content Include="Views\Material\_ImageItems.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\DownLoadFile\上传考试题模板.xlsx" />
+    <None Include="Properties\PublishProfiles\123.56.181.148.pubxml" />
+    <Content Include="Views\CourseCapterTestPagperManager\Index.cshtml" />
+    <Content Include="Views\CourseCapterTestPagperManager\_Items.cshtml" />
+    <Content Include="Views\MuKeCase\Index.cshtml" />
+    <Content Include="Views\MuKeCase\_Items.cshtml" />
+    <Content Include="Views\MuKeCase\_Form.cshtml" />
+    <Content Include="Views\MuKeCity\Index.cshtml" />
+    <Content Include="Views\MuKeCity\_Form.cshtml" />
+    <Content Include="Views\MuKeCity\_Items.cshtml" />
+    <Content Include="Views\MuKeAdvice\_Form.cshtml" />
+    <Content Include="Views\MuKeAdvice\_Items.cshtml" />
+    <Content Include="Views\MuKeAdvice\Index.cshtml" />
+    <Content Include="Views\CourseCapterTestPagperManager\TestPagerManageView.cshtml" />
+    <Content Include="Views\MuKeAboutUs\Index.cshtml" />
+    <Content Include="Views\MuKeServiceAgreement\Index.cshtml" />
+    <Content Include="Views\MuKeProblemFeedBack\Index.cshtml" />
+    <Content Include="Views\MuKeProblemFeedBack\_Form.cshtml" />
+    <Content Include="Views\MuKeProblemFeedBack\_Items.cshtml" />
+    <Content Include="Views\MukeMagazine\_Form.cshtml" />
+    <Content Include="Views\MukeMagazine\_Items.cshtml" />
+    <Content Include="Views\MukeMagazine\Index.cshtml" />
+    <Content Include="Views\MuKeHomeBanner\Index.cshtml" />
+    <Content Include="Views\MuKeHomeBanner\_Items.cshtml" />
+    <Content Include="Views\MuKeHomeBanner\_Form.cshtml" />
+    <Content Include="Views\MuKeCourseBanner\Index.cshtml" />
+    <Content Include="Views\MuKeCourseBanner\_Form.cshtml" />
+    <Content Include="Views\MuKeCourseBanner\_Items.cshtml" />
+    <Content Include="Views\Course\CourseComments.cshtml" />
+    <Content Include="Views\MuKeCourseComment\Index.cshtml" />
+    <Content Include="Views\MuKeCourseComment\_Items.cshtml" />
+    <Content Include="Views\MuKeManualNotice\Index.cshtml" />
+    <Content Include="Views\MuKeManualNotice\_Items.cshtml" />
+    <Content Include="Views\MuKeManualNotice\_Form.cshtml" />
+    <Content Include="Views\MuKeAnswerQuestionTag\_Form.cshtml" />
+    <Content Include="Views\MuKeAnswerQuestionTag\_Items.cshtml" />
+    <Content Include="Views\MuKeAnswerQuestionTag\Index.cshtml" />
+    <Content Include="Views\Home\TestQCloudUpload.cshtml" />
+    <Content Include="Views\Material\QCloudUpload.cshtml" />
+    <Content Include="Views\Material\_QCloudUploadItems.cshtml" />
+    <Content Include="Views\MuKeManualNotice\ViewContent.cshtml" />
+    <None Include="Properties\PublishProfiles\TaxMuKeWeb.pubxml" />
+    <Content Include="Views\MuKeNewCourseNotice\Index.cshtml" />
+    <Content Include="Views\MuKeNewCourseNotice\_Items.cshtml" />
+    <Content Include="Views\CourseViewTest\_Items.cshtml" />
+    <Content Include="Views\CourseViewTest\Index.cshtml" />
+    <Content Include="Views\MuKeDirtyWord\_Form.cshtml" />
+    <Content Include="Views\MuKeDirtyWord\_Items.cshtml" />
+    <Content Include="Views\MuKeDirtyWord\Index.cshtml" />
+    <Content Include="Views\MuKeGoldUserSet\Index.cshtml" />
+    <Content Include="Views\MuKeWhiteGoldUserSet\Index.cshtml" />
+    <Content Include="Views\MuKeGoldUpgradeWhiteGlodSet\Index.cshtml" />
+    <Content Include="Views\MuKeUserOrder\_Items.cshtml" />
+    <Content Include="Views\MuKeUserOrder\Index.cshtml" />
+    <Content Include="Views\MuKeAlipayAsync\Test.cshtml" />
+    <Content Include="Views\Users\ChangePasswordForAdmin.cshtml" />
+    <Content Include="Views\MuKeRecordCourse\Index.cshtml" />
+    <Content Include="Views\MuKeRecordCourse\_Items.cshtml" />
+    <Content Include="Views\MuKeAdviceSignup\_Form.cshtml" />
+    <Content Include="Views\MuKeAdviceSignup\_Items.cshtml" />
+    <Content Include="Views\MuKeAdviceSignup\Index.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\AdviceIndex.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\_AdviceIndexItems.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\_CaseIndexItems.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\CaseIndex.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\_MagazineItems.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\MagazineIndex.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\CourseIndex.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\_CourseIndexItems.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\_UserIndexItems.cshtml" />
+    <Content Include="Views\MuKeCommonSelect\UserIndex.cshtml" />
+    <Content Include="Views\MuKeAnswerQuestionList\Index.cshtml" />
+    <Content Include="Views\MuKeAnswerQuestionList\_Items.cshtml" />
+    <Content Include="Views\MuKeAnswerList\_Items.cshtml" />
+    <Content Include="Views\MuKeAnswerList\Index.cshtml" />
+    <Content Include="Views\AdviceSignUp\_Items.cshtml" />
+    <Content Include="Views\AdviceSignUp\Index.cshtml" />
+    <Content Include="Views\MuKeCourseSearchKeyWord\_Form.cshtml" />
+    <Content Include="Views\MuKeCourseSearchKeyWord\_Items.cshtml" />
+    <Content Include="Views\MuKeCourseSearchKeyWord\Index.cshtml" />
+    <Content Include="Views\HomePage\AddUpdateHomeCourse.cshtml" />
+    <Content Include="Views\MuKeCourseReport\Index.cshtml" />
+    <Content Include="Views\MuKeCourseReport\_Items.cshtml" />
+    <Content Include="Views\MuKeCourseItemReport\_Items.cshtml" />
+    <Content Include="Views\MuKeCourseItemReport\Index.cshtml" />
+    <Content Include="Views\MuKeAppStoreSet\_Form.cshtml" />
+    <Content Include="Views\MuKeAppStoreSet\_Items.cshtml" />
+    <Content Include="Views\MuKeAppStoreSet\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\本地发布.pubxml" />
+    <Content Include="Views\ShangJia\_Form.cshtml" />
+    <Content Include="Views\ShangJia\_Items.cshtml" />
+    <Content Include="Views\ShangJia\Index.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1876</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:26846/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,82 @@
+﻿@model MuKeCourseBanner
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "课程轮播";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeCourseBanner/Index';";
+    ViewBag.EditAction = "/MuKeCourseBanner/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+
+
+    @*    <tr class="noborder">*@
+    @*        <td><em>名称:</em></td>*@
+    @*        <td class="vatop rowform">*@
+    @*            <input type="text" class="txt" name="Name" value="@Model.Name">*@
+    @*        </td>*@
+    @*        <td></td>*@
+    @*    </tr>*@
+
+    <tr>
+        <td><em>图片地址:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+            <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ImageUrl', '选择')">浏览…</button>
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr class="noborder">
+        <td><em>课程单号:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="CourseId" value="@Model.CourseId">
+        </td>
+        <td></td>
+    </tr>
+    
+    <tr class="noborder">
+        <td><em>排序:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Sort" value="@Model.Sort">
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <br />
+            <input type="submit" class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeCourseBanner/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@model MuKeProblemFeedBack
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "问题反馈";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeProblemFeedBack/Index';";
+    ViewBag.EditAction = "/MuKeProblemFeedBack/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    @Html.HiddenFor(x => x.Content)
+    <tr class="noborder">
+        <td><em>反馈标题:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Title" value="@Model.Content">
+        </td>
+        <td></td>
+    </tr>
+        <tr class="noborder">
+        <td><em>反馈内容:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Title" value="@Model.Content">
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td>
+            <br />
+@*            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存" />*@
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeProblemFeedBack/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+

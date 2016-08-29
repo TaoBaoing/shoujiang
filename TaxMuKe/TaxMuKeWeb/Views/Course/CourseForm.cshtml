@@ -1,0 +1,280 @@
+﻿@model MuKeCourse
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "课程";
+    //    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/Course/Index';";
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="~/Assets/Js/Core/TreeType.js"></script>
+<script type="text/javascript">
+    DropBind(@Html.Raw(Json.Encode(@ViewBag.taxonomyTypes)),"myselect",$("#taxId").val());
+</script>
+@section Form
+{
+    @Html.HiddenFor(x => x.Content)
+    <tr class="noborder">
+        <td><em>标题:</em></td>
+        <td class="vatop rowform">
+            <input type="hidden" id="taxId" name="taxId" value="@ViewBag.Taxid">
+            @*            <input type="hidden" id="teacher" name="teacher" value="@Model.TeacherId">*@
+            <input type="text" class="txt" name="Title" value="@Model.Title">
+        </td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td><em>分类: </em></td>
+        <td class="vatop rowform">
+            <select id="myselect" name="TaxonomyId"></select>
+        </td>
+        <td></td>
+    </tr>
+    @*<tr>*@
+    @*    <td><em>讲师: </em></td>*@
+    @*    <td class="vatop rowform">*@
+    @*        @Html.DropDownList("TeacherId", (List<SelectListItem>)ViewBag.Teachers)*@
+    @*    </td>*@
+    @*    <td></td>*@
+    @*</tr>*@
+
+    <tr>
+        <td><em>课程类型: </em></td>
+        <td class="vatop rowform">
+            <div>
+                <div>
+                    @*                <div>@Html.RadioButtonFor(x => x.IsFree) <label for="IsFree">免费</label>*@
+                    @if ((CourseType) ViewBag.CourseType == CourseType.FreeUser)
+                    {
+                        @Html.RadioButtonFor(m => m.CourseType, 1, new {@id = "radioFree", @name = "CourseType", @checked = true,@onclick = "shoufeiclick()" })<label for="radioFree">免费</label>
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(m => m.CourseType, 1, new {@id = "radioFree", @name = "CourseType", @onclick = "shoufeiclick()" })<label for="radioFree">免费</label>
+                    }
+
+                </div>
+                <div style="margin-top: 5px">
+                    <div style="float: left;">
+                        @if ((CourseType) ViewBag.CourseType == CourseType.ChargeUser)
+                        {
+                            @Html.RadioButtonFor(m => m.CourseType, 2, new {@id = "radioCharge", @name = "CourseType", @checked = true, @onclick = "shoufeiclick()"})<label for="radioCharge">收费</label>
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(m => m.CourseType, 2, new {@id = "radioCharge", @name = "CourseType", @onclick = "shoufeiclick()"})<label for="radioCharge">收费</label>
+                        }
+                        <script type="text/javascript">
+                            function shoufeiclick() {
+                                var sfradio = $("#radioCharge");
+                                if (sfradio.is(":checked")) {
+//                                    $("#IsGlod").attr("disabled", "disabled");
+//                                    $("#IsWhiteGlod").attr("disabled", "disabled");
+                                   
+                                } else {
+                                    $("#IsGlod").removeAttr("checked");
+                                    $("#IsWhiteGlod").removeAttr("checked");
+//                                    $("#IsGlod").removeAttr("disabled");
+//                                    $("#IsWhiteGlod").removeAttr("disabled");
+                                    
+                                }
+                                //debugger;
+                            }
+                        </script>
+                    </div>
+                    <div style="margin-left: 60px">
+                        <ul>
+                            <li>
+                                @Html.CheckBoxFor(x => x.IsGlod)<label for="IsGlod">E金</label>
+                            </li>
+                            <li>
+                                @Html.CheckBoxFor(x => x.IsWhiteGlod)<label for="IsWhiteGlod">E尊</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="margin-top: 5px">
+                    @if ((CourseType) ViewBag.CourseType == CourseType.Unknown)
+                    {
+                        @Html.RadioButtonFor(m => m.CourseType, 4, new {@id = "radioUnknown", @name = "CourseType", @checked = true, @onclick = "shoufeiclick()" })<label for="radioUnknown">未配置</label>
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(m => m.CourseType, 4, new {@id = "radioUnknown", @name = "CourseType", @onclick = "shoufeiclick()" })<label for="radioUnknown">未配置</label>
+                    }
+
+                </div>
+                <div>
+                </div>
+            </div>
+
+
+        </td>
+        <td></td>
+    </tr>
+
+    @*    <tr class="noborder">*@
+    @*    <td><em>视频时长:</em></td>*@
+    @*    <td class="vatop rowform">*@
+    @*        <input type="text" class="txt" name="TimeLength" value="@Model.TimeLength">*@
+    @*    </td>*@
+    @*    <td>*</td>*@
+    @*</tr>*@
+    <tr>
+        <td><em>状态: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.Status, false))
+                {
+                    <li>
+                        <label><input type="radio" name="Status" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td><em>允许拖拽播放: </em></td>
+        <td class="vatop rowform">
+
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.MuKeCourseDragType, false))
+                {
+                    <li>
+                        <label><input type="radio" name="MuKeCourseDragType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>允许缓存: </em></td>
+        <td class="vatop rowform">
+
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.MuKeCourseCacheType, false))
+                {
+                    <li>
+                        <label><input type="radio" name="MuKeCourseCacheType" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+
+
+
+
+    <tr>
+        <td><em>推荐: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.RecommendStatus, false))
+                {
+                    <li>
+                        <label><input type="radio" name="RecommendStatus" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>热门: </em></td>
+        <td class="vatop rowform">
+            <ul>
+                @foreach (var item in Html.SelectListItems(Model.HotStatus, false))
+                {
+                    <li>
+                        <label><input type="radio" name="HotStatus" @(item.Selected ? "checked=checked" : "") value="@item.Value">@item.Text</label>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>列表前图标:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+            <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ImageUrl&ImgDisplay=img_display', '选择')">浏览…</button>
+        </td>
+        <td>
+            <img src="@ViewBag.ImageUrl" id="img_display" width="120" height="80" />
+        </td>
+    </tr>
+    <tr>
+        <td><em>手动调整点击次数:</em></td>
+        <td class="vatop rowform">
+            <textarea class="txt" name="ManualClickCount">@Model.ManualClickCount</textarea>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><em>摘要:</em></td>
+        <td class="vatop rowform">
+            <textarea class="txt" name="Excerpt">@Model.Excerpt</textarea>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        @*        <td><em>内容: </em></td>*@
+        <td><em>课程详情: </em></td>
+        <td class="vatop rowform">
+            <script type="text/plain" id="myEditor" style="width: 800px; height: 260px">@Html.Raw(Html.MvcHtmlDecode(Model.Content))</script>
+            @*        <button type="button" onclick="insetImages()">插入图片</button>*@
+            @*        <button type="button" onclick="insertAudio()">插入音频</button>*@
+            @*        <button type="button" onclick="insertVideo()">插入视频</button>*@
+            @*        <button type="button" onclick="insertOtherFile()">插入附件</button>*@
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>
+            <br/>
+            <input type="submit" onclick="GetContent()" class="btn" id="sub" value="保存"/>
+        </td>
+        <td>
+            <br/>
+            @*            <a href="@ViewBag.SearchAction" class="btn">返回</a>*@
+            @if (ViewBag.SearchAction != null)
+            {
+                <a href="@ViewBag.SearchAction" class="btn">返回</a>
+            }
+            
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <link href="~/Assets/Plugins/UMeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <script src="~/Assets/Plugins/UMeditor/umeditor.min.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/umeditor.config.js"></script>
+    <script src="~/Assets/Plugins/UMeditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+            //            if ($("#teacher").val() != "" && $("#teacher").val() != "0")
+            //            { $("#TeacherId").val($("#teacher").val()); }
+            $("#sub").click(function(){
+                if($("#myselect").val()=="0")
+                {
+                    alert('请选择分类');
+                    return false;
+                }
+
+            });
+        })
+    </script>
+}
