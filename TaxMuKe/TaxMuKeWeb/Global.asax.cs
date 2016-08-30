@@ -129,9 +129,9 @@ namespace BasicUPMS
             {
                 return;
             }
-            long roleId = int.Parse(authTicket.UserData.Split('|')[0]);
+            long roleId = long.Parse(authTicket.UserData);
             FormsIdentity identity = new FormsIdentity(authTicket);
-            identity.Label = authTicket.UserData.Split('|')[1];
+            identity.Label = authTicket.UserData;
             UPMSPrincipal principal = new UPMSPrincipal(identity, roleId);
             Context.User = principal;
         }

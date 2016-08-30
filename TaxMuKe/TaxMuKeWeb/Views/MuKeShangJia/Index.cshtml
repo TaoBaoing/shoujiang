@@ -1,0 +1,14 @@
+﻿@model IPagedList<BasicData.Domain.MuKeShangJia>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "上架管理";
+    }
+    @section SearchCondition
+{
+        <tr>
+            <th><label>名称</label></th>
+            <td><input type="text" name="Name" class="txt" /></td>
+            <td><input type="submit" class="btn-search" value="查询" /></td>
+            <td><a id="MuKeShangJiaAdd" href="/MuKeShangJia/FormForAdd/">添加</a> </td>
+        </tr>
+    }

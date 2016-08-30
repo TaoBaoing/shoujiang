@@ -1,7 +1,7 @@
 ﻿@model BasicData.Domain.MuKeDirtyWord
 @{
     Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
-    ViewBag.Title = "脏词";
+    ViewBag.Title = "商家";
     ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeDirtyWord/Index';";
     ViewBag.EditAction = "/MuKeDirtyWord/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
 }
@@ -14,9 +14,32 @@
         <td class="vatop rowform">
             <input type="text" class="txt" name="Name" value="@Model.Name">
         </td>
-        <td>*</td>
+        <td></td>
     </tr>
+    <tr class="noborder">
+        <td><em>用户名:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="UserName" value="@Model.UserName">
+        </td>
+        <td></td>
+    </tr>
+    
+    <tr class="noborder">
+    <td><em>密码:</em></td>
+    <td class="vatop rowform">
+        <input type="text" class="txt" name="UserPwd" value="@Model.UserPwd">
+    </td>
+    <td></td>
+</tr>
 
+<tr>
+    <td><em>LOGO:</em></td>
+    <td class="vatop rowform">
+        <input type="text" class="txt" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl"><span class="fontcolor">*</span>
+        <button type="button" onclick="showDialog('/Material/List?materialType=Images&viewName=SelectFilesNew&loadTaxonomys=true&ControlID=ImageUrl', '选择')">浏览…</button>
+    </td>
+    <td></td>
+</tr>
 
 
     <tr>
@@ -33,5 +56,10 @@
 }
 @section Scripts
 {
-    
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
 }

@@ -197,6 +197,7 @@
     <Compile Include="Controllers\CourseViewTestController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\KaHaoController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\MuKeAboutUsController.cs" />
@@ -215,10 +216,10 @@
     <Compile Include="Controllers\MuKeQCloudController.cs" />
     <Compile Include="Controllers\MuKeRecordCourseController.cs" />
     <Compile Include="Controllers\MuKeServiceAgreementController.cs" />
+    <Compile Include="Controllers\MuKeShangJiaController.cs" />
     <Compile Include="Controllers\MuKeUEditorUploadController.cs" />
     <Compile Include="Controllers\MuKeWhiteGoldUserSetController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
-    <Compile Include="Controllers\ShangJiaController.cs" />
     <Compile Include="Controllers\TaxonomyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -906,9 +907,12 @@
     <Content Include="Views\MuKeAppStoreSet\_Items.cshtml" />
     <Content Include="Views\MuKeAppStoreSet\Index.cshtml" />
     <None Include="Properties\PublishProfiles\本地发布.pubxml" />
-    <Content Include="Views\ShangJia\_Form.cshtml" />
-    <Content Include="Views\ShangJia\_Items.cshtml" />
-    <Content Include="Views\ShangJia\Index.cshtml" />
+    <Content Include="Views\MuKeShangJia\_Form.cshtml" />
+    <Content Include="Views\MuKeShangJia\_Items.cshtml" />
+    <Content Include="Views\MuKeShangJia\Index.cshtml" />
+    <Content Include="Views\KaHao\_Form.cshtml" />
+    <Content Include="Views\KaHao\_Items.cshtml" />
+    <Content Include="Views\KaHao\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

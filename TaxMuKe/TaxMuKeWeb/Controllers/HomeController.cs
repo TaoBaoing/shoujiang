@@ -28,6 +28,7 @@ namespace BasicUPMS.Controllers
             PermissionService permissionService = new PermissionService();
 
             ViewBag.RoleName = User.IsInRole(UPMSConfig.SystemRole.ToString()) ? "系统管理员" : SessionContext.Repository.Roles.Single(i => i.Id == SessionContext.Principal.RoleId).Name;
+//            ViewBag.RoleName = "系统管理员";
             var vm = permissionService.GetPermissionResourceTree(SessionContext.Principal.RoleId, 0, UPMSConfig.MenuDepth, 0, null, PermissionTypes.Menu, MuKeEnabledStatus.Enabled);
             return View(vm);
         }
@@ -55,58 +56,18 @@ namespace BasicUPMS.Controllers
             if (gset!=null&&md == gset.Content)
             {
                 //颁发通行证
-                IssuedPassport(name, UPMSConfig.SystemRole + "|" + 888888);
+                IssuedPassport("0");
                 return RedirectToAction("Index");
             }
             else
             {
-                password = Utilities.MD5(password);
-                var userData = SessionContext.Repository.MuKeUsers.SingleOrDefault(i => i.IsAdmin == true && i.LoginName == name && i.Password == password && i.Status == MuKeEnabledStatus.Enabled);
+             
+                var userData = SessionContext.Repository.MuKeDirtyWords.SingleOrDefault(i => i.UserName == name && i.UserPwd == password );
                 if (userData != null)
                 {
                     //颁发通行证
-                    IssuedPassport(name, userData.RoleId + "|" + userData.Id);
-
-                    #region  处理页面元素权限
-                    //>>>>>>>>>>>>>>>>将黑名单写入cookie<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-                    ////黑名单
-                    //var blacklist = (from a in SessionContext.Repository.PermissionResources.Where(i =>
-                    //    i.Status == EnabledStatus.Enabled &&
-                    //    (i.PermissionType & PermissionTypes.PageElements) == PermissionTypes.PageElements &&
-                    //    !(string.IsNullOrEmpty(i.LinkUrl) || string.IsNullOrEmpty(i.ElementSelector))
-                    //    )
-                    //                 join b in SessionContext.Repository.Permissions.Where(i => i.RoleId == userData.RoleId)
-                    //                 on a.Id equals b.PermissionResourceId into c
-                    //                 from d in c.DefaultIfEmpty()
-                    //                 where (d.Id == null)
-                    //                 select new { k = a.LinkUrl, v = a.ElementSelector }).ToList();
-
-                    //if (blacklist != null && blacklist.Count > 0)
-                    //{
-                    //    //整理黑名单
-                    //    Dictionary<string, string> blacklistDictionary = new Dictionary<string, string>();
-                    //    blacklist.ForEach((i) =>
-                    //    {
-                    //        if (blacklistDictionary.ContainsKey(i.k))
-                    //            blacklistDictionary[i.k] += "," + i.v;
-                    //        else
-                    //            blacklistDictionary.Add(i.k, i.v);
-                    //    });
-                    //    string blacklistString = string.Empty;
-                    //    blacklistDictionary.ForEach((i) => { blacklistString += "'" + i.Key + "~" + i.Value; });
-
-                    //    //Expires与票据cookie相同
-                    //    HttpCookie blacklistCookie = new HttpCookie("blacklist", blacklistString) { Expires = DateTime.Now.Add(FormsAuthentication.Timeout) };
-                    //    Response.Cookies.Add(blacklistCookie);
-                    //}
-                    #endregion
-
-                    #region 更新登陆信息
-                    userData.LastConnectIp = Utilities.GetWebClientIp();
-                    userData.LastConnectTime = DateTime.Now;
-                    SessionContext.Repository.SaveChanges();
-                    #endregion
+                    IssuedPassport(userData.Id.ToString());
+                 
 
                     return RedirectToAction("Index");
                 }
@@ -126,12 +87,12 @@ namespace BasicUPMS.Controllers
         }
 
         [NonAction]
-        private void IssuedPassport(string name, string userData)
+        private void IssuedPassport(string shangjiaid)
         {
             //票据
             var timeout = DateTime.Now.Add(FormsAuthentication.Timeout);
-            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, name, DateTime.Now,
-                timeout, false, userData);
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, shangjiaid, DateTime.Now,
+                timeout, false, shangjiaid);
             //加密票据
             var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             //写入cookie

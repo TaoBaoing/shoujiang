@@ -1,0 +1,15 @@
+﻿@model IPagedList<BasicData.Domain.KaHao>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "客户管理";
+    }
+    @section SearchCondition
+{
+        <tr>
+          
+            <td style="display: none"><input type="text" name="Name" class="txt" /></td>
+            <td style="display: none"><input type="submit" class="btn-search" value="查询" /></td>
+            <td><a id="KaHaoAdd" href="/KaHao/FormForAdd/">添加</a> </td>
+        </tr>
+    }
+

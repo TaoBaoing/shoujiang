@@ -1,0 +1,28 @@
+﻿@model IPagedList<BasicData.Domain.MuKeShangJia>
+    @{
+        Layout = "~/Views/Shared/_ItemsPartialLayout.cshtml";
+    }
+
+    @section Head
+{
+        <th>ID</th>
+        <th>名称</th>
+        <th class="align-center">操作</th>
+    }
+
+    @section Items
+{
+        @foreach (var item in Model)
+    {
+            <tr class="hover">
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+       
+            <td class="w270 align-center">
+
+                <a class="edit" href="/MuKeShangJia/FormForUpdate?id=@item.Id">修改</a> |
+                <a class="edit" href="javascript:confirmDelete('/MuKeShangJia/Remove','id=@item.Id',showSubmitResult)">删除</a>
+            </td>
+        </tr>
+        }
+    }

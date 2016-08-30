@@ -1,7 +1,7 @@
 ﻿@model IPagedList<BasicData.Domain.MuKeDirtyWord>
     @{
         Layout = "~/Views/Shared/_ListPageLayout.cshtml";
-        ViewBag.Title = "脏词管理";
+        ViewBag.Title = "商家管理";
     }
     @section SearchCondition
 {
@@ -12,20 +12,4 @@
             <td><a id="MuKeDirtyWordAdd" href="/MuKeDirtyWord/FormForAdd/">添加</a> </td>
         </tr>
     }
-
-@using (@Html.BeginForm("UploadTxt", "MuKeDirtyWord", FormMethod.Post, htmlAttributes: new Dictionary<string, object>() { {"id","ImportTxt"}, { "enctype", "multipart/form-data" } }))
-{
-   
-    <input type="hidden" name="PageIndex" value="@ViewBag.PageIndex" />
-    <input type="hidden" name="PageSize" value="@ViewBag.PageSize" />
-
-    <input id="file1" name="file1" type="file" accept="text/plain" /><input id="btnImport" type="button" onclick="btnImportClick()" value="导入脏词" />
-    <div style="color: red;margin-top: 5px;">只能从文本文件（txt）导入</div>
-    <script type="text/javascript">
-        function btnImportClick() {
-            document.getElementById("ImportTxt").submit();
-        }
-    </script>
-
-}
 

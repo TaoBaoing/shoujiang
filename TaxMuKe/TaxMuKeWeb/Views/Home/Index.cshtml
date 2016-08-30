@@ -30,24 +30,24 @@
             </div>
 
             <!-- Main navigation -->
-            <nav id="nav" class="fl main-nav">
-                <ul class="navlist">
-
-
-                    @for (int i = 0; i < Model.Count; i++)
-                    {
-                        if (i == 0)
-                        {
-                            actived = "class=\"actived tnc-admin-menufirst\"";
-                        }
-                        else
-                        {
-                            actived = "";
-                        }
-                        <li id="nav_@i" @Html.Raw(actived)><a class="link" hr="@Model[i].data.url" href="JavaScript:"><span>@Model[i].text</span></a></li>
-                    }
-                </ul>
-            </nav>
+@*            <nav id="nav" class="fl main-nav">*@
+@*                <ul class="navlist">*@
+@**@
+@**@
+@*                    @for (int i = 0; i < Model.Count; i++)*@
+@*                    {*@
+@*                        if (i == 0)*@
+@*                        {*@
+@*                            actived = "class=\"actived tnc-admin-menufirst\"";*@
+@*                        }*@
+@*                        else*@
+@*                        {*@
+@*                            actived = "";*@
+@*                        }*@
+@*                        <li id="nav_@i" @Html.Raw(actived)><a class="link" hr="@Model[i].data.url" href="JavaScript:"><span>@Model[i].text</span></a></li>*@
+@*                    }*@
+@*                </ul>*@
+@*            </nav>*@
 
             <!-- Top navigation -->
             <div id="topnav" class="top-nav">

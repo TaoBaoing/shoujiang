@@ -1,0 +1,71 @@
+﻿@model BasicData.Domain.KaHao
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "客户";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/KaHao/Index';";
+    ViewBag.EditAction = "/KaHao/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>卡号:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Code" value="@Model.Code">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>客户姓名:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="XingMing" value="@Model.XingMing">
+        </td>
+        <td></td>
+    </tr>
+
+    <tr class="noborder">
+        <td><em>地址:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Address" value="@Model.Address">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>电话:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Phone" value="@Model.Phone">
+        </td>
+        <td></td>
+    </tr>
+    
+    <tr class="noborder">
+    <td><em>售卡人:</em></td>
+    <td class="vatop rowform">
+        <input type="text" class="txt" name="ShouKaRen" value="@Model.ShouKaRen">
+    </td>
+    <td></td>
+</tr>
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

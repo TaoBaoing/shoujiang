@@ -58,7 +58,7 @@ namespace BasicCommon
         {
             get
             {
-                return 888888;
+                return 0;
             }
         }
         public static int DefaultPageSize

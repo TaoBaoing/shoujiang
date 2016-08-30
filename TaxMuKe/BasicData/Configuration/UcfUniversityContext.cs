@@ -27,7 +27,7 @@ namespace BasicData
             Database.Initialize(false);
         }
         #region DBSet  用于数据的增删改
-        public virtual DbSet<ShangJia> ShangJias { get; set; }
+
         public virtual DbSet<CourseViewRecord> CourseViewRecords { get; set; }
         public virtual DbSet<MuKeBanner> MuKeBanners { get; set; }
 
@@ -79,6 +79,8 @@ namespace BasicData
 
         public virtual DbSet<MuKeUserSet> MuKeUserSets { get; set; }
         public virtual DbSet<MuKeDirtyWord> MuKeDirtyWords { get; set; }
+        public virtual DbSet<KaHao> KaHaos { get; set; }
+        public virtual DbSet<MuKeShangJia> MuKeShangJias { get; set; }
        
         public virtual DbSet<AlipayAsyncNotifyLog> AlipayAsyncNotifys { get; set; }
         public virtual DbSet<MuKeHomeCourseSet> MuKeHomeCourseSets { get; set; }

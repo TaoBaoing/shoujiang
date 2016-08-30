@@ -1,0 +1,37 @@
+﻿@model BasicData.Domain.MuKeShangJia
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "商家";
+    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/MuKeShangJia/Index';";
+    ViewBag.EditAction = "/MuKeShangJia/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>名称:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Name" value="@Model.Name">
+        </td>
+        <td>*</td>
+    </tr>
+
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="/MuKeShangJia/Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    
+}
