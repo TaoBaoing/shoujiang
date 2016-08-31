@@ -1,0 +1,49 @@
+﻿@model BasicData.Domain.KaHaoRecord
+@{
+    Layout = "~/Views/Shared/_AjaxFormPageLayout.cshtml";
+    ViewBag.Title = "";
+//    ViewBag.SubmitCallback = "window.parent.frames['workspace'].location.href = '/KaHaoRecord/Index';";
+    ViewBag.EditAction = "/KaHaoRecord/" + ViewBag.OperateType.ToString() + "/" + Model.Id;
+}
+<script src="~/Assets/Plugins/jquery/jquery-1.11.1.min.js"></script>
+
+@section Form
+{
+    <tr class="noborder">
+        <td><em>卡号:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" name="Code" value="@Model.Code">
+        </td>
+        <td></td>
+    </tr>
+    <tr class="noborder">
+        <td><em>抽奖号:</em></td>
+        <td class="vatop rowform">
+            <input type="text" class="txt" disabled="disabled" value="@ViewBag.Luck">
+            <input type="hidden" value="@ViewBag.Luck" name="Lucky"/>
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td>
+            <br />
+            <input type="submit"  class="btn" id="sub" value="保存" />
+        </td>
+        <td>
+            <br />
+            <a href="Index" class="btn">返回</a>
+        </td>
+    </tr>
+
+}
+@section Scripts
+{
+    <script src="~/Assets/Js/Core/SelectFile.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+}

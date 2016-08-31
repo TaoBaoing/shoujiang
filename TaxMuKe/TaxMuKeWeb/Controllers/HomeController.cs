@@ -27,9 +27,10 @@ namespace BasicUPMS.Controllers
             ViewBag.Name = User.Identity.Name;
             PermissionService permissionService = new PermissionService();
 
-            ViewBag.RoleName = User.IsInRole(UPMSConfig.SystemRole.ToString()) ? "系统管理员" : SessionContext.Repository.Roles.Single(i => i.Id == SessionContext.Principal.RoleId).Name;
-//            ViewBag.RoleName = "系统管理员";
-            var vm = permissionService.GetPermissionResourceTree(SessionContext.Principal.RoleId, 0, UPMSConfig.MenuDepth, 0, null, PermissionTypes.Menu, MuKeEnabledStatus.Enabled);
+//            ViewBag.RoleName = User.IsInRole(UPMSConfig.SystemRole.ToString()) ? "系统管理员" : SessionContext.Repository.Roles.Single(i => i.Id == SessionContext.Principal.RoleId).Name;
+            ViewBag.RoleId = SessionContext.Principal.RoleId;
+            ViewBag.RoleName = "系统管理员";
+            var vm = permissionService.GetPermissionResourceTree(0, 0, UPMSConfig.MenuDepth, 0, null, PermissionTypes.Menu, MuKeEnabledStatus.Enabled);
             return View(vm);
         }
 

@@ -198,6 +198,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\KaHaoController.cs" />
+    <Compile Include="Controllers\KaHaoRecordController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\MuKeAboutUsController.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Models\ViewModels\MuKeRecordCourseItemReport.cs" />
     <Compile Include="Models\ViewModels\MuKeRecordCourseReport.cs" />
     <Compile Include="Models\ViewModels\MuKeRecordCourseReportRequest.cs" />
+    <Compile Include="Models\ViewModels\Requester\KaHaoRecordRequester.cs" />
     <Compile Include="Models\ViewModels\Requester\MuKeAdviceSignUpRequester.cs" />
     <Compile Include="Models\ViewModels\Requester\MuKeCommonSelectAdviceRequester.cs" />
     <Compile Include="Models\ViewModels\Requester\MuKeCommonSelectRequester.cs" />
@@ -913,6 +915,9 @@
     <Content Include="Views\KaHao\_Form.cshtml" />
     <Content Include="Views\KaHao\_Items.cshtml" />
     <Content Include="Views\KaHao\Index.cshtml" />
+    <Content Include="Views\KaHaoRecord\_Form.cshtml" />
+    <Content Include="Views\KaHaoRecord\_Items.cshtml" />
+    <Content Include="Views\KaHaoRecord\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

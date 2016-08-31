@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCommon", "BasicCommon\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdApi", "ThirdApi\ThirdApi.csproj", "{399AF04E-ECDD-41E3-B88B-5ECAFD17B139}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChouJiangWinForm", "ChouJiangWinForm\ChouJiangWinForm.csproj", "{2797D070-4CF4-4A4F-9CE8-911CC8315C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{399AF04E-ECDD-41E3-B88B-5ECAFD17B139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399AF04E-ECDD-41E3-B88B-5ECAFD17B139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399AF04E-ECDD-41E3-B88B-5ECAFD17B139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2797D070-4CF4-4A4F-9CE8-911CC8315C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2797D070-4CF4-4A4F-9CE8-911CC8315C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2797D070-4CF4-4A4F-9CE8-911CC8315C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2797D070-4CF4-4A4F-9CE8-911CC8315C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

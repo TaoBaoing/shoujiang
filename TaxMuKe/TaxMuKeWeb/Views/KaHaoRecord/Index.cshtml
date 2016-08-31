@@ -1,0 +1,15 @@
+﻿@model IPagedList<BasicData.Domain.KaHaoRecord>
+    @{
+        Layout = "~/Views/Shared/_ListPageLayout.cshtml";
+        ViewBag.Title = "抽奖号码设置";
+    }
+    @section SearchCondition
+{
+        <tr>
+            <th><label>卡号</label></th>
+            <td><input type="text" name="Code" class="txt" /></td>
+            <td ><input type="submit" class="btn-search" value="查询" /></td>
+            <td><a id="KaHaoRecordAdd" href="/KaHaoRecord/FormForAdd/">添加</a> </td>
+        </tr>
+    }
+

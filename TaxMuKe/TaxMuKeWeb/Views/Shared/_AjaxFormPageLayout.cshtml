@@ -6,7 +6,8 @@
         <div class="item-title"><span>@ViewBag.Title</span></div>
     </div>
     <div class="fixed-empty"></div>
-    <form action="@(ViewBag.EditAction ??  ViewBag.OperateType.ToString() + "/" + @Model.Id)" data-ajax="true" data-ajax-method="POST" data-ajax-success="@(ViewBag.SubmitCallback ?? "showSubmitResult")" data-ajax-failure="showErrorMsg" id="editForm">
+   
+    <form action="@(ViewBag.EditAction ??  ViewBag.OperateType.ToString() + "/" + @Model.Id)" data-ajax="true" data-ajax-method="POST" data-ajax-success="@(ViewBag.SubmitCallback ?? "showSubmitResult")" data-ajax-failure="showErrorMsg" id="editForm"  >
         <div class="page">
             <table class="table tb-type2 nobdb" style="width:auto">
                 <tbody>
@@ -22,6 +23,13 @@
 @section Scripts
 {
     @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        function docomplete(myrequest, mystatues) {
+            debugger;
+            var ss = myrequest;
+            var dd = mystatues;
+        }
+    </script>
 }
 
 

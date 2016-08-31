@@ -20,8 +20,12 @@ namespace BasicUPMS.Models
 
             var controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
             var actionName = filterContext.ActionDescriptor.ActionName;
-//            SessionContext.Logger.Debug("controllerName:"+ controllerName+ "    actionName:"+ actionName);
-            if (controllerName == "Material" && actionName == "QCloudTransCodeCallBack")
+            if (controllerName == "KaHaoRecord" && actionName == "GetCanUseLucky")
+            {
+                return;
+            }
+            //            SessionContext.Logger.Debug("controllerName:"+ controllerName+ "    actionName:"+ actionName);
+                if (controllerName == "Material" && actionName == "QCloudTransCodeCallBack")
             {
                 //如果是腾讯视频转码回调，则跳过
                 return;

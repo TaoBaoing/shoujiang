@@ -80,6 +80,7 @@ namespace BasicData
         public virtual DbSet<MuKeUserSet> MuKeUserSets { get; set; }
         public virtual DbSet<MuKeDirtyWord> MuKeDirtyWords { get; set; }
         public virtual DbSet<KaHao> KaHaos { get; set; }
+        public virtual DbSet<KaHaoRecord> KaHaoRecords { get; set; }
         public virtual DbSet<MuKeShangJia> MuKeShangJias { get; set; }
        
         public virtual DbSet<AlipayAsyncNotifyLog> AlipayAsyncNotifys { get; set; }
