@@ -60,16 +60,20 @@ namespace ChouJiangWinForm
                 {
                     foreach (var pair in mCanUseLucky)
                     {
-                        if (!isyunxing)
-                        {
-                            break;
-                        }
-
+//                        if (!isyunxing)
+//                        {
+//                            break;
+//                        }
                         Thread.Sleep(5);
                         Application.DoEvents();
                         label1.Text = pair.LuckCode;
                         luckcode = pair.Code;
-                       
+                        if (!isyunxing)
+                        {
+                            mCanUseLucky.Remove(mCanUseLucky.First(x => x.Code == luckcode));
+                            break;
+                        }
+
                     }
                 }
                
@@ -80,9 +84,11 @@ namespace ChouJiangWinForm
                 {
                     isyunxing = false;
                 }
+                Thread.Sleep(100);
+                Application.DoEvents();
                 //luckcode 中奖卡号
                 button1.Text = "开始";
-                mCanUseLucky.Remove(mCanUseLucky.First(x => x.Code == luckcode));
+//                mCanUseLucky.Remove(mCanUseLucky.First(x => x.Code == luckcode));
                 //MessageBox.Show(luckcode);
             }
         }
