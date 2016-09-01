@@ -14,7 +14,7 @@ namespace ChouJiangWinForm
 {
     public partial class Form1 : Form
     {
-        private  readonly string HostAddress = "http://121.42.136.226:8084/";
+        private  readonly string HostAddress = "http://123.56.181.148:8084/";
         private List<LuckyDto> mCanUseLucky; 
         public Form1()
         {
