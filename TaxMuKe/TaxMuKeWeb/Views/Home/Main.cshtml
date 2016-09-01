@@ -1,19 +1,23 @@
 ﻿@{
-    ViewBag.Title = "欢迎";
+    ViewBag.Title = "";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.Logo))
+{
+  
+        <img class="ccc" src="@ViewBag.Logo" />
 
-<h1>欢迎使用</h1>
+}
 
 @section Styles
 {
     <style type="text/css">
-        h1 {
+        .ccc {
             position: absolute;
-            width: 100px;
-            height: 50px;
-            left: 50%;
-            top: 50%;
+            width: 600px;
+            height: 400px;
+            left: 20%;
+            top: 3%;
             margin-left: -50px;
             margin-top: -25px;
         }

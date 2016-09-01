@@ -60,9 +60,15 @@ namespace BasicUPMS.Controllers
                 list = list.Where(x => x.KaHao.Code == requester.Code);
             }
 
+            if (SessionContext.Principal.RoleId > 0)
+            {
+                list = list.Where(x => x.MuKeDirtyWord.Id == SessionContext.Principal.RoleId);
+            }
+
             var data = list.ToPagedList(requester.PageIndex, requester.PageSize);
             ViewBag.PageIndex = requester.PageIndex;
             ViewBag.PageSize = requester.PageSize;
+            ViewBag.RoleId = SessionContext.Principal.RoleId;
             if (Request.IsAjaxRequest())
                 return PartialView("_Items", data);
             return View(data);

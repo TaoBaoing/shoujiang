@@ -198,9 +198,8 @@ namespace BasicUPMS.Controllers
         {
             try
             {
-                var forkey = taxonomy + "/" + DateTime.Now.ToString("yyyyMMdd") + "/";
                 //保存到磁盘
-                var relativeAddress = "/" + UPMSConfig.FilePhysicalPath + "" + forkey;
+                var relativeAddress = "/" + UPMSConfig.FilePhysicalPath;
                 var savePath = Server.MapPath(relativeAddress);
                 if (!Directory.Exists(savePath))
                 {
@@ -212,30 +211,12 @@ namespace BasicUPMS.Controllers
                 var filePath = savePath + newFileName;
                 file.SaveAs(filePath);
 
-                //拼接七牛key
-                var qiniukey = QiNiuApi.Pre_Taxonomy + "/" + forkey + newFileName;
-
-                var ret = QiNiuApi.UpLoadMinFile(UPMSConfig.QiNiuBucket, qiniukey, filePath);
-
-                if (ret == null)
-                {
-                    SessionContext.Logger.Error("上传错误，ret 返回null");
-                    return Content("上传过程中出现错误");
-                }
-                if (!ret.OK)
-                {
-                    SessionContext.Logger.Error(ret.Exception.Message);
-                    return Content(ret.Exception.Message);
-                }
-
-
                 //保存到数据库
                 long createUser = long.Parse(((FormsIdentity)SessionContext.Principal.Identity).Label);
                 var newMaterial = SessionContext.Repository.MuKeMaterials.Add(new MuKeMaterial
                 {
                     CreateUser = createUser,
-                    //                    LinkUrl = "http://"+UPMSConfig.QiNiuDomainName+"/"+ retmes,
-                    LinkUrl = ret.key,
+                     LinkUrl =  newFileName,
                     //LinkUrl = DateTime.Now.ToString("yyyyMMdd") + "/" + newFileName,
                     MimeType = fileExt,
                     Name = file.FileName

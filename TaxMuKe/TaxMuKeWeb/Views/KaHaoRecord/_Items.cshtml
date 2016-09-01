@@ -10,7 +10,7 @@
         <th>商家</th>
         <th>抽奖号</th>
         <th>创建时间</th>
-        <th class="align-center">操作</th>
+@*        <th class="align-center">操作</th>*@
     }
 
     @section Items
@@ -23,11 +23,11 @@
                 <td>@item.MuKeDirtyWord.Name</td>
                 <td>@item.Lucky</td>
                 <td>@item.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
-            <td class="w270 align-center">
+@*            <td class="w270 align-center">*@
 
 @*                <a class="edit" href="/KaHaoRecord/FormForUpdate?id=@item.Id">修改</a> |*@
 @*                <a class="edit" href="javascript:confirmDelete('/KaHaoRecord/Remove','id=@item.Id',showSubmitResult)">删除</a>*@
-            </td>
+@*            </td>*@
         </tr>
         }
     }

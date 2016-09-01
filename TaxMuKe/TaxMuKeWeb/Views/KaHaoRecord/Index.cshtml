@@ -8,8 +8,12 @@
         <tr>
             <th><label>卡号</label></th>
             <td><input type="text" name="Code" class="txt" /></td>
-            <td ><input type="submit" class="btn-search" value="查询" /></td>
-            <td><a id="KaHaoRecordAdd" href="/KaHaoRecord/FormForAdd/">添加</a> </td>
+            <td ><input type="submit" class="btn-search" value="查询"/></td>
+            @if ((long)ViewBag.RoleId > 0)
+            {
+                <td><a id="KaHaoRecordAdd" href="/KaHaoRecord/FormForAdd/">添加</a> </td>
+            }
+           
         </tr>
     }
 

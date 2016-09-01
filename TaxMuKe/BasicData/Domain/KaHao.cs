@@ -16,6 +16,9 @@ namespace BasicData.Domain
         public string Phone { get; set; }
         public string ShouKaRen { get; set; }
 
+        public long? MuKeDirtyWordId { get; set; }
+        public virtual MuKeDirtyWord MuKeDirtyWord { get; set; }
+
         public DateTime CreateTime { get; set; }
     }
 }

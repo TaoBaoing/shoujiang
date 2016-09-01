@@ -44,7 +44,14 @@
                         {
                             actived = "";
                         }
-                        <li id="nav_@i" @Html.Raw(actived)><a class="link" hr="@Model[i].data.url" href="JavaScript:"><span>@Model[i].text</span></a></li>
+                        if ((long)ViewBag.RoleId > 0)
+                        {
+                            if (Model[i].text != "素材" && Model[i].text != "分类")
+                            {
+                                <li id="nav_@i" @Html.Raw(actived)><a class="link" hr="@Model[i].data.url" href="JavaScript:"><span>@Model[i].text</span></a></li>
+                            }
+                        }
+
                     }
                 </ul>
             </nav>
@@ -109,9 +116,13 @@
                                 <ul>
                                     @foreach (var third in second.children)
                                     {
-                                        if ((long)ViewBag.RoleId > 0&& third.text!="商家管理")
+                                        if ((long)ViewBag.RoleId > 0)
                                         {
-                                            <li vl="menu_@third.id"><a hr="@third.data.url" href="JavaScript:">@third.text<em></em></a></li>
+                                            if ( third.text != "商家管理" && third.text != "修改密码")
+                                            {
+                                              <li vl="menu_@third.id"><a hr="@third.data.url" href="JavaScript:">@third.text<em></em></a></li>
+                                            }
+
                                         }
                                         else
                                         {

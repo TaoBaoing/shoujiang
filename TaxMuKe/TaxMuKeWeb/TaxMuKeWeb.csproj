@@ -861,7 +861,6 @@
     <Content Include="Views\Material\QCloudUpload.cshtml" />
     <Content Include="Views\Material\_QCloudUploadItems.cshtml" />
     <Content Include="Views\MuKeManualNotice\ViewContent.cshtml" />
-    <None Include="Properties\PublishProfiles\TaxMuKeWeb.pubxml" />
     <Content Include="Views\MuKeNewCourseNotice\Index.cshtml" />
     <Content Include="Views\MuKeNewCourseNotice\_Items.cshtml" />
     <Content Include="Views\CourseViewTest\_Items.cshtml" />
@@ -908,7 +907,6 @@
     <Content Include="Views\MuKeAppStoreSet\_Form.cshtml" />
     <Content Include="Views\MuKeAppStoreSet\_Items.cshtml" />
     <Content Include="Views\MuKeAppStoreSet\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\本地发布.pubxml" />
     <Content Include="Views\MuKeShangJia\_Form.cshtml" />
     <Content Include="Views\MuKeShangJia\_Items.cshtml" />
     <Content Include="Views\MuKeShangJia\Index.cshtml" />

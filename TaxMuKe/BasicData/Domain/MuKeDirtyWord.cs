@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BasicData.Domain
 {
-   public class MuKeDirtyWord
+   public class MuKeDirtyWord//商家
     {
        public long Id { get; set; }
 

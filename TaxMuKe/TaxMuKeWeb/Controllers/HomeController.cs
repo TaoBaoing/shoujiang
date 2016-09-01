@@ -36,6 +36,15 @@ namespace BasicUPMS.Controllers
 
         public ActionResult Main()
         {
+            var f= SessionContext.Repository.MuKeDirtyWords.FirstOrDefault(x=>x.Id== SessionContext.Principal.RoleId) ;
+            if (f != null)
+            {
+                ViewBag.Logo ="http://"+Request.Url.Authority+ "/" + UPMSConfig.FilePhysicalPath+"" + f.ImageUrl;
+            }
+            else
+            {
+                ViewBag.Logo = "";
+            }
             return View();
         }
 
